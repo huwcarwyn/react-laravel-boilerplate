@@ -1,0 +1,33 @@
+.form {
+	&-line {
+		margin: 15px 0;
+		overflow: hidden;
+
+		label {
+			display: block
+		}
+
+		&:first-child {
+			margin: 0 0 15px 0;
+		}
+
+		&:last-child {
+			margin: 15px 0 0 0;
+		}
+	}
+
+	&-input {
+		width: 100%;
+		min-height: 35px;
+		box-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+		outline: none;
+		border: 1px solid gray;
+		border-radius: 3px;
+		display: block;
+		padding: 0 10px;
+	}
+
+	&-error {
+		color: red;
+	}
+}

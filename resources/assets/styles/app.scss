@@ -1,0 +1,23 @@
+@import "variables";
+@import "buttons";
+@import "forms";
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-size:16px;
+}
+
+body {
+	font-family: 'arial';
+	color: #686868;
+	font-size: 62.5%;
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	margin-top: 0;
+}
