@@ -4,6 +4,7 @@ namespace App\Api\Controllers;
 
 use Illuminate\Contracts\Routing\ResponseFactory as Response,
 		Illuminate\Contracts\Auth\Factory as Auth,
+		App\Services\LoginService,
 		App\Services\OauthService,
 		Illuminate\Http\Request;
 
@@ -29,6 +30,10 @@ class SessionController {
 			$oAuthCredentialsResponse = $this->oAuthService->passwordGrantAuthResponse($request->only('email', 'password'));
 
 			return $oAuthCredentialsResponse;
+		}
+
+		catch (Exception $e) {
+			return false;
 		}
 	}
 

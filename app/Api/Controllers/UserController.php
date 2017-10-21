@@ -3,7 +3,8 @@
 namespace App\Api\Controllers;
 
 use App\Services\SignUpService,
-		Illuminate\Http\Request;
+		Illuminate\Http\Request,
+		Illuminate\Validation\ValidationException;
 
 class UserController
 {
@@ -21,6 +22,9 @@ class UserController
     try {
       $this->signUpService->signUp($data);
     }
+		catch (ValidationException $e) {
+			
+		}
 
     return $this->response->api_success('User successfully signed up.');
   }

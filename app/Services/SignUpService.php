@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Contracts\Validation\Factory as Validator,
-    Illuminate\Validation\ValidationException
+    Illuminate\Validation\ValidationException,
     Illuminate\Contracts\UserRepositoryContract as UserRepository;
 
 class SignUpService {
