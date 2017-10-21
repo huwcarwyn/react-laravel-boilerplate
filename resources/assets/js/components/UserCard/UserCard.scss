@@ -1,0 +1,61 @@
+@import "variables";
+
+.user-card {
+	display: flex;
+	align-items: center;
+}
+
+.user-card.light {
+	color: white;
+
+	a {
+		color: white;
+	}
+}
+
+.user-card.dark {
+	color: $dark-grey;
+
+	a {
+		color: $dark-grey;
+	}
+}
+
+.user-info {
+	margin-left: 10px;
+}
+
+.profile-picture {
+	width: 38px;
+	height: 38px;
+	overflow: hidden;
+	border-radius: 19px;
+		
+	&-image{
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.full-name {
+	padding-bottom: 4px;
+}
+
+.user-actions {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+
+	li {
+		display: inline-block;
+		margin: 0 5px;
+
+		&:first-child {
+			margin: 0 5px 0 0;
+		}
+
+		&:last-child {
+			margin: 0 0 0 5px;
+		}
+	}
+}
