@@ -38,13 +38,13 @@ class OauthService {
   {
     $client = new Client();
 
-    $request = $client->post('/oauth/token', {
+    $request = $client->post('/oauth/token', [
       'grant_type' => 'password',
       'client_id' => env('OAUTH_CLIENT_ID'),
       'client_secret' => env('OAUTH_CLIENT_SECRET'),
       'username' => $email,
       'password' => $hasher->make($password),
-    });
+    ]);
 
     $credentials = json_decode((string) $request->getBody(), true);
 

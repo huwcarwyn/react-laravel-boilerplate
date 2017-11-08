@@ -4,7 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Contracts\Repository\CRUDRepositoryContract;
 
-abstract class CRUDRepository extends CRUDRepositoryContract 
+abstract class CRUDRepository implements CRUDRepositoryContract
 {
 	protected $model;
 
@@ -15,7 +15,7 @@ abstract class CRUDRepository extends CRUDRepositoryContract
 
 	public function create(array $data)
 	{
-		$this->model = $this->model->create($data)
+		$this->model = $this->model->create($data);
 		return $this->model;
 	}
 
