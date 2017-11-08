@@ -3,21 +3,18 @@
 namespace App\Services;
 
 use GuzzleHttp\Client,
-    Illuminate\Contracts\Hashing\Hasher,
     Illuminate\Contracts\Cookie\Factory as Cookie,
     Illuminate\Contracts\Encryption\Encrypter as Crypt,
     Illuminate\Contracts\Routing\ResponseFactory as Response;
 
-class OauthService {
-
-  private $hasher;
+class OauthService 
+{
   private $cookie;
   private $crypt;
   private $response;
 
-  public function __construct(Hasher $hasher, Cookie $cookie, Crypt $crypt, Response $response)
+  public function __construct(Cookie $cookie, Crypt $crypt, Response $response)
   {
-    $this->hasher = $hasher;
     $this->cookie = $cookie;
     $this->crypt = $crypt;
     $this->response = $response;
@@ -38,12 +35,14 @@ class OauthService {
   {
     $client = new Client();
 
-    $request = $client->post('/oauth/token', [
-      'grant_type' => 'password',
-      'client_id' => env('OAUTH_CLIENT_ID'),
-      'client_secret' => env('OAUTH_CLIENT_SECRET'),
-      'username' => $email,
-      'password' => $hasher->make($password),
+    $request = $client->post(env('APP_URL') . '/oauth/token', [
+      'form_params' => [
+        'grant_type' => 'password',
+        'client_id' => env('OAUTH_CLIENT_ID'),
+        'client_secret' => env('OAUTH_CLIENT_SECRET'),
+        'username' => $email,
+        'password' => $password,
+      ]
     ]);
 
     $credentials = json_decode((string) $request->getBody(), true);

@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use Illuminate\Contracts\Validation\Factory as Validator,
-    Illuminate\Validation\ValidationException,
-    Illuminate\Contracts\UserRepositoryContract as UserRepository;
+use App\Contracts\Repository\UserRepositoryContract as UserRepository,
+    Illuminate\Contracts\Validation\Factory as Validator,
+    Illuminate\Validation\ValidationException;
 
 class SignUpService {
   private $validator;
@@ -19,7 +19,7 @@ class SignUpService {
   public function signUp($data)
   {
     $validateSignupData = $this->validator->make($data, [
-      'first_name' => 'required'
+      'first_name' => 'required',
       'last_name' => 'required',
       'email' => 'required|email',
       'password' => 'required'

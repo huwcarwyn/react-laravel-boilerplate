@@ -23,10 +23,9 @@ class ServiceLayerServiceProvider extends ServiceProvider
     $this->app->singleton(
       'App\Services\OauthService', function($app) {
         return new \App\Services\OauthService(
-          $app->make('\Illuminate\Contracts\Hashing\Hasher'),
-          $app->make('\Illuminate\Contracts\Cookie\Factory'),
-          $app->make('\Illuminate\Contracts\Encryption\Encrypter'),
-          $app->make('\Illuminate\Contracts\Routing\ResponseFactory')
+          $app->make('Illuminate\Contracts\Cookie\Factory'),
+          $app->make('Illuminate\Contracts\Encryption\Encrypter'),
+          $app->make('Illuminate\Contracts\Routing\ResponseFactory')
         );
       }
     );

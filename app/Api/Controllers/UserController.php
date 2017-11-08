@@ -2,18 +2,24 @@
 
 namespace App\Api\Controllers;
 
-use App\Services\SignUpService,
-		Illuminate\Http\Request,
-		Illuminate\Validation\ValidationException;
+use Illuminate\Contracts\Routing\ResponseFactory as Response,
+    Illuminate\Validation\ValidationException,
+    App\Services\SignUpService,
+    App\Services\OauthService,
+    Illuminate\Http\Request;
 
 class UserController
 {
-  private $signupService;
+  private $signUpService;
+  private $oAuthService;
+  private $response;
 
-  public function __construct(SignUpService $signupService)
+  public function __construct(SignUpService $signUpService, OauthService $oAuthService, Response $response)
   {
-    $this->signupService = $signupService;
-  }
+    $this->signUpService = $signUpService;
+    $this->oAuthService = $oAuthService;
+		$this->response = $response;
+	}
 
   public function signUp(Request $request)
   {
@@ -21,11 +27,11 @@ class UserController
 
     try {
       $this->signUpService->signUp($data);
+      $oAuthCredentials = $this->oAuthService->passwordGrantAuth($data['email'], $data['password']);
+      return $this->response->json($oAuthCredentials);
     }
 		catch (ValidationException $e) {
-			
-		}
 
-    return $this->response->api_success('User successfully signed up.');
+		}
   }
 }

@@ -4,15 +4,14 @@ import { push } from 'react-router-redux'
 
 import SignUp from './SignUp.component'
 
-const mapStateToProps = () => ({
+const mapStateToProps = (state) => ({
 
 })
 
-const mapDispatchToProps= (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   submitSignup: (signUpData) => {
-    axios.post('/api/singup', signUpData)
+    axios.post('/api/signup', signUpData)
       .then((response) => {
-        console.log(response)
         dispatch(push('/overview'))
       })
   }
