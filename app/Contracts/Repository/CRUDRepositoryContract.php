@@ -2,7 +2,7 @@
 
 namespace App\Contracts\Repository;
 
-interface CRUDRespositoryContract {
+interface CRUDRepositoryContract {
 	public function all();
 
 	public function create(array $data);
