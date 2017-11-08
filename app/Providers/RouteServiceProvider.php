@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Contracts\Routing\Registrar as RouteRegistrar,
+  Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -33,13 +33,11 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function map()
+    public function map(RouteRegistrar $route)
     {
-        $this->mapApiRoutes();
+        $this->mapApiRoutes($route);
 
-        $this->mapWebRoutes();
-
-        //
+        $this->mapWebRoutes($route);
     }
 
     /**
@@ -49,9 +47,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapWebRoutes()
+    protected function mapWebRoutes(RouteRegistrar $route)
     {
-        Route::middleware('web')
+        $route->middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
     }
@@ -63,9 +61,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapApiRoutes()
+    protected function mapApiRoutes(RouteRegistrar $route)
     {
-        Route::prefix('api')
+        $route->prefix('api')
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
