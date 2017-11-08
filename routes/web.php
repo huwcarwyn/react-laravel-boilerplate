@@ -1,6 +1,7 @@
 <?php
 
-Route::any('{all}', function () {
-    return view('app');
-})
-->where(['all' => '.*']);
+$spa = function() {
+  return view('app');
+};
+
+Route::fallback($spa);
