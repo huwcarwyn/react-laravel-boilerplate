@@ -2,19 +2,25 @@
 
 namespace App\Models;
 
-use Laravel\Passport\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens,
+    Illuminate\Notifications\Notifiable,
+    Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'password',
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function setPasswordAttribute($password)
+    {
+      $hash = resolve('Illuminate\Contracts\Hashing\Hasher');
+      $this->attributes['password'] = $hash->make($password);
+    }
 }
