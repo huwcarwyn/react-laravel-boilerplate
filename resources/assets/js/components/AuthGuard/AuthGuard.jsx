@@ -1,7 +1,7 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-class AuthGuard extends React.Component {
+export class AuthGuard extends React.Component {
   componentDidMount() {
     const { history, isLoggedIn } = this.props
 
@@ -17,4 +17,10 @@ class AuthGuard extends React.Component {
   }
 }
 
-export default withRouter(AuthGuard)
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.currentUser.id !== null,
+})
+
+export default connect(
+  mapStateToProps
+)(AuthGuard)

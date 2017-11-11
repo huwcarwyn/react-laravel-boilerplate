@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
 
-import { FieldSet } from 'components'
+import { FormLine } from 'components'
 import { regexes } from '../../../../constants'
 
 import './SignUpForm.scss'
@@ -34,10 +34,10 @@ const SignUpForm = (props) => {
   const { handleSubmit } = props
 
   return (<form styleName="sign-up-form" onSubmit={handleSubmit}>
-    <Field component={FieldSet} type="text" name="first_name" labelText="First Name" />
-    <Field component={FieldSet} type="text" name="last_name" labelText="Last Name" />
-    <Field component={FieldSet} type="text" name="email" labelText="Email" />
-    <Field component={FieldSet} type="password" name="password" labelText="Password" />
+    <Field component={FormLine} type="text" name="first_name" labelText="First Name" />
+    <Field component={FormLine} type="text" name="last_name" labelText="Last Name" />
+    <Field component={FormLine} type="text" name="email" labelText="Email" />
+    <Field component={FormLine} type="password" name="password" labelText="Password" />
     <div className="form-line">
       <button styleName="submit-button" className="btn btn-blue" type="submit">Sign Up</button>
     </div>

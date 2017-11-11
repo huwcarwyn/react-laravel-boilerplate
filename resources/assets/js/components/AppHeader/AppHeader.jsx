@@ -1,10 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import { Logo, UserCard, AppWidthConstraint } from 'components'
 
 import './AppHeader.scss'
 
-const AppHeader = (props) => {
+export const AppHeader = (props) => {
   const { user } = props
 
   return (
@@ -18,4 +19,10 @@ const AppHeader = (props) => {
   </div>)
 }
 
-export default AppHeader
+const mapStateToProps = (state) => ({
+  user: state.currentUser,
+})
+
+export default connect(
+  mapStateToProps
+)(AppHeader)

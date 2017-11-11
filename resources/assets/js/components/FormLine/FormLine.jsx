@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 
-const FieldSet = (props) => {
+const FormLine = (props) => {
   const {labelText, name, type, input, meta: {touched, error}} = props
 
   return (
