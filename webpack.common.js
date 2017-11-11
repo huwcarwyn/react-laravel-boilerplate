@@ -1,6 +1,11 @@
 const path = require('path')
 
-const config = {
+module.exports = {
+  entry: {
+    vendor: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-dom', 'redux-form', 'axios', 'redux'],
+    app: path.join(__dirname, 'resources/assets/js/app.jsx'),
+  },
+
   output: {
     filename: 'js/[name].js',
     path: path.join(__dirname, 'public/')
@@ -64,5 +69,3 @@ const config = {
     extensions: ['.js', '.jsx', '.json']
   }
 }
-
-module.exports = config
