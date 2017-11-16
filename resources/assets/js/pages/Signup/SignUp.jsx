@@ -8,14 +8,18 @@ import { Card } from 'components'
 import SignUpForm from './components/SignUpForm/SignUpForm'
 import './SignUp.scss'
 
-export const SignUp = (props) => (
-  <div styleName="sign-up">
-    <h1 styleName="page-header">Sign Up</h1>
-    <Card>
-      <SignUpForm onSubmit={props.submitSignup} />
-    </Card>
-  </div>
-)
+export const SignUp = (props) => {
+  const { submitSignup } = props
+
+  return (
+    <div styleName="sign-up">
+      <h1 styleName="page-header">Sign Up</h1>
+      <Card>
+        <SignUpForm onSubmit={submitSignup} />
+      </Card>
+    </div>
+  )
+}
 
 const mapStateToProps = (state) => ({
 

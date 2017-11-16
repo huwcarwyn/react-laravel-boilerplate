@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 export class AuthGuard extends React.Component {
   componentDidMount() {
-    const { history, isLoggedIn } = this.props
+    const { redirectToSignup, isLoggedIn } = this.props
 
     if(!isLoggedIn) {
-      history.push('/signup')
+      redirectToSignup()
     }
   }
 
@@ -21,6 +22,13 @@ const mapStateToProps = (state) => ({
   isLoggedIn: state.currentUser.id !== null,
 })
 
+const mapDispatchToProps = (dispatch) => ({
+  redirectToSignup: () => {
+    dispatch(push('/signup'))
+  }
+})
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(AuthGuard)
