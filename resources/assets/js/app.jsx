@@ -13,10 +13,15 @@ import { SignUp, LogIn, UserOverview } from 'pages'
 import { AuthGuard } from 'components'
 
 /**
+ * Import Axios Set-Up
+ */
+import './axios-setup'
+
+/**
  * Import the global styling here, override the webpack CSS loaders since we don't want
  * modules enabled here.
  */
-require("!!style-loader!css-loader!sass-loader!../styles/app.scss")
+import "!!style-loader!css-loader!sass-loader!../styles/app.scss"
 
 const browserHistory = createHistory()
 
