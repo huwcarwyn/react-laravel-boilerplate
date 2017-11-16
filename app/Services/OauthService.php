@@ -4,19 +4,14 @@ namespace App\Services;
 
 use GuzzleHttp\Client,
     Illuminate\Contracts\Cookie\Factory as Cookie,
-    Illuminate\Contracts\Encryption\Encrypter as Crypt,
     Illuminate\Contracts\Routing\ResponseFactory as Response;
 
-class OauthService 
+class OauthService
 {
-  private $cookie;
-  private $crypt;
   private $response;
 
-  public function __construct(Cookie $cookie, Crypt $crypt, Response $response)
+  public function __construct(Response $response)
   {
-    $this->cookie = $cookie;
-    $this->crypt = $crypt;
     $this->response = $response;
   }
 
@@ -24,9 +19,9 @@ class OauthService
   {
     $oAuthCredentials = $this->passwordGrantAuth($email, $password);
 
-    $response = $this->response->json($oAuthCredentials);
-
-    $this->cookie->queue($this->crypt->encrypt($oAuthCredentials->refresh_token));
+    $response = $this->response
+      ->json($oAuthCredentials)
+      ->cookie('bearer', $oAuthCredentials->refresh_token);
 
     return $response;
   }
@@ -42,6 +37,7 @@ class OauthService
         'client_secret' => env('OAUTH_CLIENT_SECRET'),
         'username' => $email,
         'password' => $password,
+        'scope' => '*',
       ]
     ]);
 

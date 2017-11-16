@@ -3,7 +3,6 @@
 namespace App\Api\Controllers;
 
 use Illuminate\Contracts\Routing\ResponseFactory as Response,
-		Illuminate\Contracts\Auth\Factory as Auth,
 		App\Services\LoginService,
 		App\Services\OauthService,
 		Illuminate\Http\Request;
@@ -12,11 +11,9 @@ class SessionController {
 
 	private $oAuthService;
 	private $response;
-	private $auth;
 
-	public function __construct(LoginService $oAuthService, Auth $auth) {
+	public function __construct(OauthService $oAuthService) {
 		$this->oAuthService = $oAuthService;
-		$this->auth = $auth;
 	}
 
 	public function currentUser()

@@ -13,6 +13,7 @@ class ServiceLayerServiceProvider extends ServiceProvider
     $this->app->singleton(
       'App\Services\SignUpService', function($app) {
         return new \App\Services\SignUpService(
+          $app->make('Illuminate\Contracts\Auth\Factory'),
           $app->make('Illuminate\Contracts\Validation\Factory'),
           $app->make('App\Contracts\Repository\UserRepositoryContract'),
           $app->make('App\Services\OauthService')
@@ -23,8 +24,6 @@ class ServiceLayerServiceProvider extends ServiceProvider
     $this->app->singleton(
       'App\Services\OauthService', function($app) {
         return new \App\Services\OauthService(
-          $app->make('Illuminate\Contracts\Cookie\Factory'),
-          $app->make('Illuminate\Contracts\Encryption\Encrypter'),
           $app->make('Illuminate\Contracts\Routing\ResponseFactory')
         );
       }
