@@ -14,8 +14,4 @@ class UserRepository extends CRUDRepository implements UserRepositoryContract
 	{
 		$this->model = $model;
 	}
-
-	public function getUserModel() {
-		return $this->model;
-	}
 }

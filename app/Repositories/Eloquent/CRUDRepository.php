@@ -35,5 +35,9 @@ abstract class CRUDRepository implements CRUDRepositoryContract
 		return $this->model->findOrFail($id)->delete();
 	}
 
+	public function getModel()
+	{
+		return $this->model;
+	}
 
 }

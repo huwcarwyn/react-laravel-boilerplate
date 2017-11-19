@@ -3,12 +3,12 @@
 namespace App\Services;
 
 use App\Contracts\Repository\UserRepositoryContract as UserRepository,
+    Illuminate\Contracts\Routing\ResponseFactory as Response,
     Illuminate\Contracts\Validation\Factory as Validator,
     Illuminate\Contracts\Auth\Factory as Auth,
     Illuminate\Validation\ValidationException,
     Laravel\Passport\ApiTokenCookieFactory,
-    Illuminate\Http\Request,
-    Illuminate\Http\Response;
+    Illuminate\Http\Request;
 
 class SignUpService {
   private $validator;
@@ -19,8 +19,8 @@ class SignUpService {
 
   public function __construct(
     Auth $auth,
-    Validator $validator, 
-    UserRepository $user, 
+    Validator $validator,
+    UserRepository $user,
     Response $response,
     ApiTokenCookieFactory $cookie)
   {
@@ -54,10 +54,8 @@ class SignUpService {
     $data = $request->only(['first_name', 'last_name', 'email', 'password']);
 
     $newUser = $this->createUser($data);
-
-    $this->auth->login($newUser);
-
-    return $this->response->api_sucess('User Successfully Created')
-      ->withCookie($this->cookie->make($newUser->getKey(), $request->session()->token()))
+    
+    return $this->response->api_success('User Successfully Created')
+      ->withCookie($this->cookie->make($newUser->getModel()->getKey(), $request->header('X-CSRF-TOKEN')));
   }
 }
