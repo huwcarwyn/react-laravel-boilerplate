@@ -4,9 +4,12 @@ const { currentUser } = initialState
 
 const userSessionReducer = (state=currentUser, action) => {
   switch (action.type) {
-    case 'SET_CURRENT_USER_DATA':
+    case 'USER_SESSION/SET_CURRENT_USER_INFO':
       return {
-        ...action.userData
+        id: action.payload.id,
+        firstName: action.payload.first_name,
+        lastName: action.payload.last_name,
+        email: action.payload.email,
       }
     default:
       return state

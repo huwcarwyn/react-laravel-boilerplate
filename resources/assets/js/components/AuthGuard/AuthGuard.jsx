@@ -4,9 +4,12 @@ import { push } from 'react-router-redux'
 
 export class AuthGuard extends React.Component {
   componentDidMount() {
-    const { redirectToSignup, isLoggedIn } = this.props
+    
+  }
 
-    if(!isLoggedIn) {
+  componentWillReceiveProps(nextProps) {
+    const { redirectToSignup } = this.props
+    if(!nextProps.isLoggedIn) {
       redirectToSignup()
     }
   }

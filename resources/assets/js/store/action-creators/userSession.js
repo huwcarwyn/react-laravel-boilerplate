@@ -4,8 +4,8 @@ import { userSessionActions } from '../actions'
 
 const getCurrentUserInfo = () => (dispatch) => {
   axios.get('/api/users/me')
-    .then((userData) => {
-      dispatch({type: userSessionActions.SET_CURRENT_USER_INFO, userData})
+    .then((response) => {
+      dispatch({type: userSessionActions.SET_CURRENT_USER_INFO, payload: response.data})
     })
     .catch(() => {
       return null
