@@ -20,8 +20,7 @@ class OauthService
     $oAuthCredentials = $this->passwordGrantAuth($email, $password);
 
     $response = $this->response
-      ->json($oAuthCredentials)
-      ->cookie('bearer', $oAuthCredentials->refresh_token);
+      ->json($oAuthCredentials);
 
     return $response;
   }

@@ -5,9 +5,9 @@ namespace App\Services;
 use App\Contracts\Repository\UserRepositoryContract as UserRepository,
     Illuminate\Contracts\Routing\ResponseFactory as Response,
     Illuminate\Contracts\Validation\Factory as Validator,
-    Illuminate\Contracts\Auth\Factory as Auth,
     Illuminate\Validation\ValidationException,
     Laravel\Passport\ApiTokenCookieFactory,
+    App\Services\OauthService,
     Illuminate\Http\Request;
 
 class SignUpService {
@@ -15,20 +15,20 @@ class SignUpService {
   private $response;
   private $cookie;
   private $user;
-  private $auth;
+  private $oAuthService;
 
   public function __construct(
-    Auth $auth,
     Validator $validator,
     UserRepository $user,
     Response $response,
-    ApiTokenCookieFactory $cookie)
+    ApiTokenCookieFactory $cookie,
+    OauthService $oAuthService)
   {
-    $this->auth = $auth;
     $this->user = $user;
     $this->cookie = $cookie;
     $this->response = $response;
     $this->validator = $validator;
+    $this->oAuthService = $oAuthService;
   }
 
   public function createUser($data)
@@ -54,8 +54,12 @@ class SignUpService {
     $data = $request->only(['first_name', 'last_name', 'email', 'password']);
 
     $newUser = $this->createUser($data);
+
+    // We need to call the password grant endpoint here so that our token is saved in
+    // the database.
+    $credentials = $this->oAuthService->passwordGrantAuth($data['email'], $data['password']);
     
-    return $this->response->api_success('User Successfully Created')
+    return $this->response->json($credentials)
       ->withCookie($this->cookie->make($newUser->getModel()->getKey(), $request->header('X-CSRF-TOKEN')));
   }
 }
