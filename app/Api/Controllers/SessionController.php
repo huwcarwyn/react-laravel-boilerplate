@@ -20,7 +20,7 @@ class SessionController {
 
 	public function currentUser()
 	{
-		return $this->auth->user->toJson();
+		return $this->auth->user()->toJson();
 	}
 
 	public function login(Request $request)

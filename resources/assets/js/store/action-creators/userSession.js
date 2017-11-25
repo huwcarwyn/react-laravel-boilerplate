@@ -1,14 +1,11 @@
 import axios from 'axios'
 
-import { userSessionActions } from '../actions'
+import { userSessionActions as Actions } from '../actions'
 
 const getCurrentUserInfo = () => (dispatch) => {
-  axios.get('/api/users/me')
+  return axios.get('/api/users/me')
     .then((response) => {
-      dispatch({type: userSessionActions.SET_CURRENT_USER_INFO, payload: response.data})
-    })
-    .catch(() => {
-      return null
+      dispatch({type: Actions.SET_CURRENT_USER_INFO, payload: response.data})
     })
 }
 

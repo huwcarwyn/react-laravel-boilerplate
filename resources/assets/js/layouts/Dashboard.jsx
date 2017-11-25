@@ -5,10 +5,6 @@ import { AppHeader } from 'components'
 import { userSessionActionCreators } from 'store/action-creators'
 
 class DashboardLayout extends React.Component {
-  componentDidMount() {
-    this.props.getCurrentUserInfo()
-  }
-
   render() {
     return (
       <div>
@@ -21,13 +17,7 @@ class DashboardLayout extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  getCurrentUserInfo: () => {
-    dispatch(userSessionActionCreators.getCurrentUserInfo())
-  },
-})
-
 export default connect(
-  () => ({}),
-  mapDispatchToProps
+  null,
+  null
 )(DashboardLayout)

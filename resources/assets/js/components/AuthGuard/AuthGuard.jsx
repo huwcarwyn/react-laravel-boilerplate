@@ -1,17 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { replace } from 'react-router-redux'
+import { userSessionActionCreators } from 'store/action-creators'
 
 export class AuthGuard extends React.Component {
   componentDidMount() {
-    
-  }
+    const { authOrRedirect } = this.props
 
-  componentWillReceiveProps(nextProps) {
-    const { redirectToSignup } = this.props
-    if(!nextProps.isLoggedIn) {
-      redirectToSignup()
-    }
+    authOrRedirect()
   }
 
   render() {
@@ -21,17 +17,16 @@ export class AuthGuard extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  isLoggedIn: state.currentUser.id !== null,
-})
-
 const mapDispatchToProps = (dispatch) => ({
-  redirectToSignup: () => {
-    dispatch(push('/signup'))
-  }
+  authOrRedirect: () => {
+    dispatch(userSessionActionCreators.getCurrentUserInfo())
+      .catch(() => {
+        dispatch(replace('login'))
+      })
+  },
 })
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(AuthGuard)
