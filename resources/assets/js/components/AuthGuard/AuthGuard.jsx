@@ -4,22 +4,46 @@ import { replace } from 'react-router-redux'
 import { userSessionActionCreators } from 'store/action-creators'
 
 export class AuthGuard extends React.Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isLoadingUser: true,
+    }
+  }
+
+  componentWillMount() {
     const { authOrRedirect } = this.props
 
     authOrRedirect()
+      .then((response) => {
+        this.setState({
+          isLoadingUser: false,
+        })
+      })
   }
 
   render() {
+    const { children } = this.props
+    const { isLoadingUser } = this.state
+
+    if (isLoadingUser) {
+      return (
+        <div>
+          Loading...
+        </div>
+      )
+    }
+
     return (
-      <div>{this.props.children}</div>
+      <div>{children}</div>
     )
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
   authOrRedirect: () => {
-    dispatch(userSessionActionCreators.getCurrentUserInfo())
+    return dispatch(userSessionActionCreators.getCurrentUserInfo())
       .catch(() => {
         dispatch(replace('login'))
       })

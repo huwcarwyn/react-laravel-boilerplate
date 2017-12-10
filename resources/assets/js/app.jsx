@@ -8,7 +8,7 @@ import { syncHistoryWithStore, routerMiddleware, ConnectedRouter } from 'react-r
 import thunk from 'redux-thunk'
 
 import { rootReducer } from 'store/reducers'
-import { DashboardLayout } from 'layouts'
+import { DashboardLayout } from 'layouts/Dashboard'
 import { SignUp, LogIn, UserOverview } from 'pages'
 import { AuthGuard } from 'components'
 
