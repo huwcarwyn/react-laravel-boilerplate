@@ -2,8 +2,25 @@ import React from 'react'
 import { reduxForm, Field } from 'redux-form'
 
 import { FormLine } from 'components'
+import { regexes } from 'constants'
 
 import './LogInForm.scss'
+
+const validateLogin = (values) => {
+  let errors = {}
+
+  if (!values.email) {
+    errors.email = 'This field is required'
+  } else if (!regexes.email.test(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+
+  if (!values.password) {
+    errors.password = 'This field is required'
+  }
+
+  return errors
+}
 
 const LoginForm = (props) => {
   const { handleSubmit } = props
@@ -21,4 +38,5 @@ const LoginForm = (props) => {
 
 export default reduxForm({
   form: 'login',
+  validate: validateLogin,
 })(LoginForm)

@@ -2,12 +2,12 @@ import React from 'react'
 import { reduxForm, Field } from 'redux-form'
 
 import { FormLine } from 'components'
-import { regexes } from '../../../../constants'
+import { regexes } from 'constants'
 
 import './SignUpForm.scss'
 
 const validateSignUp = (values) => {
-  const errors = {}
+  let errors = {}
 
   if (!values.first_name) {
     errors.first_name = 'This field is required'
