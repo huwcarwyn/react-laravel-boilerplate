@@ -2,19 +2,23 @@
 
 namespace App\Api\Controllers;
 
-use Illuminate\Contracts\Routing\ResponseFactory as Response,
-		Illuminate\Contracts\Auth\Factory as Auth,
+use Illuminate\Contracts\Auth\Factory as Auth,
 		App\Services\LoginService,
-		App\Services\OauthService,
+		App\Services\LogoutService,
 		Illuminate\Http\Request;
 
 class SessionController {
 
-	private $oAuthService;
+	private $loginService;
+	private $logoutService;
 	private $auth;
 
-	public function __construct(OauthService $oAuthService, Auth $auth) {
-		$this->oAuthService = $oAuthService;
+	public function __construct(
+		LoginService $loginService,
+		LogoutService $logoutService,
+		Auth $auth) {
+		$this->loginService = $loginService;
+		$this->logoutService = $logoutService;
 		$this->auth = $auth;
 	}
 
@@ -25,19 +29,11 @@ class SessionController {
 
 	public function login(Request $request)
 	{
-		try {
-			$oAuthCredentialsResponse = $this->oAuthService->passwordGrantAuthResponse($request->only('email', 'password'));
-
-			return $oAuthCredentialsResponse;
-		}
-
-		catch (Exception $e) {
-			return false;
-		}
+		$this->loginService->attemptLogin($request);
 	}
 
 	public function logOut()
 	{
-
+		$this->logoutService->logOut();
 	}
 }

@@ -17,13 +17,6 @@ class UserController
 
   public function signUp(Request $request)
   {
-    try {
       return $this->signUpService->apiSignUp($request);
-    }
-
-		catch (ValidationException $e) {
-
-		}
-
   }
 }
