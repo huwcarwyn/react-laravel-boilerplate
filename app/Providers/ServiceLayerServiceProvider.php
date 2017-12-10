@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider,
     App\Services\SignUpService,
-    App\Services\OauthService;
+    App\Services\OauthService,
+    App\Services\LoginService,
+    App\Services\LogoutService;
 
 class ServiceLayerServiceProvider extends ServiceProvider
 {
@@ -31,5 +33,24 @@ class ServiceLayerServiceProvider extends ServiceProvider
         );
       }
     );
+
+    $this->app->singleton(
+      'App\Services\LoginService', function($app) {
+        return new LoginService(
+          $app->make('Illuminate\Contracts\Auth\Factory'),
+          $app->make('Illuminate\Contracts\Validation\Factory'),
+          $app->make('App\Services\OauthService'),
+          $app->make('Laravel\Passport\ApiTokenCookieFactory'),
+          $app->make('Illuminate\Contracts\Routing\ResponseFactory')
+        );
+      }
+    );
+
+    $this->app->singleton(
+      'App\Services\LogoutService', function($app) {
+        return new LogoutService(
+          $app->make('Illuminate\Contracts\Auth\Factory')
+        );
+      });
   }
 }

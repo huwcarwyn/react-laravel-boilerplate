@@ -31,19 +31,18 @@ class SignUpService {
     $this->oAuthService = $oAuthService;
   }
 
-  public function createUser($data)
+  public function validateUserData($data)
   {
-    $validateSignupData = $this->validator->make($data, [
+    return $this->validator->make($data, [
       'first_name' => 'required',
       'last_name' => 'required',
       'email' => 'required|email',
       'password' => 'required'
     ]);
+  }
 
-    if($validateSignupData->fails()) {
-      throw new ValidationException($validateSignupData);
-    }
-
+  public function createUser($data)
+  {
     $this->user->create($data);
 
     return $this->user;
@@ -53,13 +52,21 @@ class SignUpService {
   {
     $data = $request->only(['first_name', 'last_name', 'email', 'password']);
 
+    if ($this->validateUserData($data)->fails()) {
+      return $this->response->json(
+        $status = 422,
+        $validateSignupData->errors()->all()
+      );
+    }
+
     $newUser = $this->createUser($data);
 
     // We need to call the password grant endpoint here so that our token is saved in
     // the database.
     $credentials = $this->oAuthService->passwordGrantAuth($data['email'], $data['password']);
-    
-    return $this->response->json($credentials)
-      ->withCookie($this->cookie->make($newUser->getModel()->getKey(), $request->header('X-CSRF-TOKEN')));
+
+    $apiCookie = $this->cookie->make($newUser->getModel()->getKey(), $request->header('X-CSRF-TOKEN'));
+
+    return $this->response->json($credentials)->withCookie($apiCookie);
   }
 }
