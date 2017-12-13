@@ -1,4 +1,6 @@
 const path = require('path')
+const tailwindcss = require('tailwindcss')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -36,19 +38,50 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [{
-          loader: "style-loader"
-        }, {
-          loader: "css-loader?importLoader=1&modules&localIdentName=[local]_[hash:base64:5]"
-        }, {
-          loader: "sass-loader",
-          options: {
-            sourceMap: true,
-            includePaths: [
-              './resources/assets/styles',
-            ]
-          }
-        }]
+        exclude:/app.scss/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [{
+            loader: "css-loader",
+            options: {
+              import: 1,
+              modules: true,
+              localIdentName: "[local]_[hash:base64:5]",
+            }
+          }, {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+              includePaths: [
+                './resources/assets/styles',
+              ]
+            }
+          }]
+        })
+      },
+      {
+        test: /app.scss/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [{
+            loader: "css-loader",
+          }, {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+              includePaths: [
+                './resources/assets/styles',
+              ],
+            }
+          }, {
+            loader: "postcss-loader",
+            options: {
+              plugins: [
+                  tailwindcss('./tailwind.config.js')
+              ]
+            }
+          }]
+        })
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/,
@@ -63,6 +96,10 @@ module.exports = {
       }
     ]
   },
+
+  plugins: [
+    new ExtractTextPlugin('./public/css/app.css'),
+  ],
 
   resolve: {
     modules: ['node_modules', path.join(__dirname, 'resources/assets/js'), 'resources/assets/img'],
