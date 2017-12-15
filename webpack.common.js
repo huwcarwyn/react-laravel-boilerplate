@@ -4,7 +4,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: {
-    vendor: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-dom', 'redux-form', 'axios', 'redux'],
     app: path.join(__dirname, 'resources/assets/js/app.jsx'),
   },
 
@@ -98,11 +97,11 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin('./public/css/app.css'),
+    new ExtractTextPlugin('./css/app.css'),
   ],
 
   resolve: {
-    modules: ['node_modules', path.join(__dirname, 'resources/assets/js'), 'resources/assets/img'],
+    modules: ['node_modules', path.join(__dirname, 'resources/assets/js'), path.join(__dirname, 'resources/assets/img')],
     extensions: ['.js', '.jsx', '.json']
   }
 }

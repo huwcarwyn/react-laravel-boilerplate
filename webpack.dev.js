@@ -5,10 +5,4 @@ const common = require(path.join(__dirname, 'webpack.common.js'))
 
 module.exports = merge(common, {
   devtool: 'inline-source-map',
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-    }),
-  ]
 })
