@@ -21,7 +21,7 @@ import './axios-setup'
  * Import the global styling here, override the webpack CSS loaders since we don't want
  * modules enabled here.
  */
-require("!!style-loader!css-loader!sass-loader!../styles/app.scss")
+require("../styles/app.scss")
 
 const browserHistory = createHistory()
 
