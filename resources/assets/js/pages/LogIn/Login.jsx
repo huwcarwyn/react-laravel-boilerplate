@@ -5,21 +5,19 @@ import { connect } from 'react-redux'
 import { Card } from 'components'
 
 import LogInForm from './components/LogInForm/LogInForm'
-import './LogIn.scss'
 
 export const LogIn = (props) => {
   const { attemptLogin } = props
 
   return (
-    <div styleName="login">
-      <h1 styleName="page-header">Log In</h1>
+    <div className="max-w-md mt-8 mx-auto">
+      <h1 className="text-center text-grey-darkest mb-4">Log In</h1>
       <Card>
         <LogInForm onSumbit={attemptLogin} />
       </Card>
     </div>
   )
 }
-
 
 const mapStateToProps = (state) => ({
 

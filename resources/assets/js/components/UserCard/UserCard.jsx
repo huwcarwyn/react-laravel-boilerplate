@@ -1,33 +1,45 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import defaultProfileImage from 'default-profile-picture.jpeg'
-import './UserCard.scss'
 
-const UserCard = (props) => {
-    const { firstName, lastName, profileImage, colorTheme } = props
+export const UserCardComponent = (props) => {
+    const { user, colorTheme, className } = props
+    const { firstName, lastName, profileImage } = user
 
     const fullName = lastName !== undefined ? [firstName, lastName].join(" ") : firstName
 
-    const theme = colorTheme == 'dark' ? 'dark' : 'light'
+    const themeTextClass = colorTheme == 'dark' ? 'text-blue-darker' : 'text-white'
+
+    const UserMenuItem = (props) => (
+      <li className={`inline-block ${props.className}`}>
+        <a className="text-white" href={props.to}>{props.children}</a>
+      </li>
+    )
 
     return (
-      <div styleName={`user-card ${theme}`}>
-        <div styleName="profile-picture">
-          <img
-            styleName="profile-picture-image"
-            src={profileImage !== undefined ? profileImage : defaultProfileImage }
-            alt=""/>
-        </div>
+      <div className={`flex items-center ${className} ${themeTextClass}`}>
+        <img
+          src={profileImage !== undefined ? profileImage : defaultProfileImage }
+          className="w-10 h-10 rounded-full mr-4"
+          alt=""/>
 
-        <div styleName="user-info">
-          <div styleName="full-name">{fullName}</div>
-          <ul styleName="user-actions">
-            <li><a href="/logout">Logout</a></li>
-            <li><a href="/settings">Settings</a></li>
+        <div className="text-sm">
+          <div className="mb-1">{fullName}</div>
+          <ul className="list-reset text-sm">
+            <UserMenuItem to="/logout">Logout</UserMenuItem>
+            <UserMenuItem className="float-right" to="/settings">Settings</UserMenuItem>
           </ul>
         </div>
       </div>
     )
 }
 
-export default UserCard
+const mapStateToProps = (state) => ({
+  user: state.currentUser,
+})
+
+export const UserCard = connect(
+  mapStateToProps,
+  null
+)(UserCardComponent)

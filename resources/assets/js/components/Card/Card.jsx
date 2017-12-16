@@ -1,11 +1,7 @@
 import React from 'react'
 
-import './Card.scss'
-
-const Card = (props) => {
-  return(<div styleName="card">
+export const Card = (props) => {
+  return(<div className="max-w-md rounded overflow-hidden shadow-md p-8 border border-grey-light">
     {props.children}
   </div>)
 }
-
-export default Card

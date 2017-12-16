@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
 import { userSessionActionCreators } from 'store/action-creators'
 
-export class AuthGuard extends React.Component {
+export class AuthGuardComponent extends React.Component {
   constructor(props) {
     super(props)
 
@@ -50,7 +50,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 })
 
-export default connect(
+export const AuthGuard = connect(
   null,
   mapDispatchToProps
-)(AuthGuard)
+)(AuthGuardComponent)

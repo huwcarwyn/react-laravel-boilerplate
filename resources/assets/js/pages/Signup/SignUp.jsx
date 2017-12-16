@@ -6,14 +6,13 @@ import { push } from 'react-router-redux'
 import { Card } from 'components'
 
 import SignUpForm from './components/SignUpForm/SignUpForm'
-import './SignUp.scss'
 
 export const SignUp = (props) => {
   const { submitSignup } = props
 
   return (
-    <div styleName="sign-up">
-      <h1 styleName="page-header">Sign Up</h1>
+    <div className="max-w-md mt-8 mx-auto">
+      <h1 className="text-center text-grey-darkest mb-4">Sign Up</h1>
       <Card>
         <SignUpForm onSubmit={submitSignup} />
       </Card>

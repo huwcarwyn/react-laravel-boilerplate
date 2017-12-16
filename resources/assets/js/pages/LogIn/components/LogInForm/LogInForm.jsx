@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
 
-import { FormLine } from 'components'
+import { FormLine, NeutralButton } from 'components'
 import { regexes } from 'constants'
 
 import './LogInForm.scss'
@@ -30,7 +30,7 @@ const LoginForm = (props) => {
       <Field component={FormLine} type="text" name="email" labelText="Email" />
       <Field component={FormLine} type="password" name="password" labelText="Password" />
       <div className="form-line">
-        <button className="btn btn-blue" styleName="submit-button" type="submit">Log In</button>
+        <NeutralButton className="float-right" type="submit">Log In</NeutralButton>
       </div>
     </form>
   )

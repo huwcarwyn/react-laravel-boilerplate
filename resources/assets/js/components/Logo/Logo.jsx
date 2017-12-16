@@ -1,9 +1,5 @@
 import React from 'react'
 
-import './Logo.scss'
-
-const Logo = (props) => (
-  <h1 styleName="logo">Boilerplate</h1>
+export const Logo = (props) => (
+  <h1 className="text-white text-lg">Boilerplate</h1>
 )
-
-export default Logo
