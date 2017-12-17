@@ -15,7 +15,7 @@ class OauthService
     $this->response = $response;
   }
 
-  public function passwordGrantAuthResponse($email, $password)
+  public function passwordGrantWithResponse($email, $password)
   {
     $oAuthCredentials = $this->passwordGrantAuth($email, $password);
 

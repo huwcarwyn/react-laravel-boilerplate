@@ -55,7 +55,7 @@ class LoginService
 
       $apiCookie = $this->cookie->make($this->auth->user()->getKey(), $request->header('X-CSRF-TOKEN'));
 
-      return $this->response->json($credentials)->withCookie($apiCookie);
+      return $this->oAuthService->passwordGrantWithResponse($email, $password)->withCookie($apiCookie);
     }
 
     else {

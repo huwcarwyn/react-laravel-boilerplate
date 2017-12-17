@@ -63,10 +63,8 @@ class SignUpService {
 
     // We need to call the password grant endpoint here so that our token is saved in
     // the database.
-    $credentials = $this->oAuthService->passwordGrantAuth($data['email'], $data['password']);
-
     $apiCookie = $this->cookie->make($newUser->getModel()->getKey(), $request->header('X-CSRF-TOKEN'));
 
-    return $this->response->json($credentials)->withCookie($apiCookie);
+    return $this->oAuthService->passwordGrantWithResponse($data['email'], $data['password'])->withCookie($apiCookie);
   }
 }
