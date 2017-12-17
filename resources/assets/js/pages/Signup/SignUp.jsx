@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { push } from 'react-router-redux'
 
-import { Card } from 'components'
+import { PaddedCard } from 'components'
 
-import SignUpForm from './components/SignUpForm/SignUpForm'
+import SignUpForm from './components/SignUpForm'
 
 export const SignUp = (props) => {
   const { submitSignup } = props
@@ -13,9 +13,9 @@ export const SignUp = (props) => {
   return (
     <div className="max-w-md mt-8 mx-auto">
       <h1 className="text-center text-grey-darkest mb-4">Sign Up</h1>
-      <Card>
+      <PaddedCard>
         <SignUpForm onSubmit={submitSignup} />
-      </Card>
+      </PaddedCard>
     </div>
   )
 }

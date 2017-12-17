@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { NeutralButton, NegativeButton, PositiveButton } from 'components/Button/Button'
+import { NeutralButton, NegativeButton, PositiveButton } from 'components/Button'
 
 storiesOf('Button', module)
   .add('All Buttons', () => {
@@ -18,10 +18,10 @@ storiesOf('Button', module)
 
       return (
         <div>
-          {buttons.map((buttonInfo) => {
+          {buttons.map((buttonInfo, index) => {
             let ButtonComponent = buttonInfo.component
 
-            return (<div className="p-4 inline-block">
+            return (<div key={index} className="p-4 inline-block">
               <ButtonComponent>{buttonInfo.text}</ButtonComponent>
             </div>)
           })}

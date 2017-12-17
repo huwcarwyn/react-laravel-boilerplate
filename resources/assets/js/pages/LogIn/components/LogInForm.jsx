@@ -1,10 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { reduxForm, Field } from 'redux-form'
 
 import { FormLine, NeutralButton } from 'components'
-import { regexes } from 'constants'
-
-import './LogInForm.scss'
+import { regexes } from '../../../constants'
 
 const validateLogin = (values) => {
   let errors = {}
@@ -26,11 +25,12 @@ const LoginForm = (props) => {
   const { handleSubmit } = props
 
   return (
-    <form styleName="log-in-form" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Field component={FormLine} type="text" name="email" labelText="Email" />
       <Field component={FormLine} type="password" name="password" labelText="Password" />
-      <div className="form-line">
-        <NeutralButton className="float-right" type="submit">Log In</NeutralButton>
+      <div className="flex items-center">
+        <Link to="/signup">Or Signup</Link>
+        <NeutralButton className="ml-auto" type="submit">Log In</NeutralButton>
       </div>
     </form>
   )

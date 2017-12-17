@@ -13,7 +13,7 @@ export const UserCardComponent = (props) => {
 
     const UserMenuItem = (props) => (
       <li className={`inline-block ${props.className}`}>
-        <a className="text-white" href={props.to}>{props.children}</a>
+        <a className={`${themeTextClass}`} href={props.to}>{props.children}</a>
       </li>
     )
 
@@ -27,8 +27,8 @@ export const UserCardComponent = (props) => {
         <div className="text-sm">
           <div className="mb-1">{fullName}</div>
           <ul className="list-reset text-sm">
-            <UserMenuItem to="/logout">Logout</UserMenuItem>
-            <UserMenuItem className="float-right" to="/settings">Settings</UserMenuItem>
+            <UserMenuItem className="mr-4" to="/logout">Logout</UserMenuItem>
+            <UserMenuItem to="/settings">Settings</UserMenuItem>
           </ul>
         </div>
       </div>

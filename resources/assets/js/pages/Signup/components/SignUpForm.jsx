@@ -1,10 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { reduxForm, Field } from 'redux-form'
 
 import { FormLine, NeutralButton } from 'components'
-import { regexes } from '../../../../constants'
-
-import './SignUpForm.scss'
+import { regexes } from '../../../constants'
 
 const validateSignUp = (values) => {
   let errors = {}
@@ -33,15 +32,18 @@ const validateSignUp = (values) => {
 const SignUpForm = (props) => {
   const { handleSubmit } = props
 
-  return (<form styleName="sign-up-form" onSubmit={handleSubmit}>
-    <Field component={FormLine} type="text" name="first_name" labelText="First Name" />
-    <Field component={FormLine} type="text" name="last_name" labelText="Last Name" />
-    <Field component={FormLine} type="text" name="email" labelText="Email" />
-    <Field component={FormLine} type="password" name="password" labelText="Password" />
-    <div className="form-line">
-      <NeutralButton className="float-right" type="submit">Sign Up</NeutralButton>
-    </div>
-  </form>)
+  return (
+    <form onSubmit={handleSubmit}>
+      <Field component={FormLine} type="text" name="first_name" labelText="First Name" />
+      <Field component={FormLine} type="text" name="last_name" labelText="Last Name" />
+      <Field component={FormLine} type="text" name="email" labelText="Email" />
+      <Field component={FormLine} type="password" name="password" labelText="Password" />
+      <div className="flex items-center">
+        <Link to="/login">Or Login</Link>
+        <NeutralButton className="ml-auto" type="submit">Sign Up</NeutralButton>
+      </div>
+    </form>
+  )
 }
 
 export default reduxForm({
