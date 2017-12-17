@@ -3,10 +3,11 @@
 namespace App\Services;
 
 use Illuminate\Contracts\Routing\ResponseFactory as Response,
-    Illuminate\Contracts\Auth\Factory as Auth,
     Illuminate\Contracts\Validation\Factory as Validator,
+    Illuminate\Contracts\Auth\Factory as Auth,
     Laravel\Passport\ApiTokenCookieFactory,
-    App\Services\OauthService;
+    App\Services\OauthService,
+    Illuminate\Http\Request;
 
 class LoginService
 {
@@ -24,40 +25,37 @@ class LoginService
     Response $response)
   {
     $this->auth = $auth;
+    $this->cookie = $cookie;
+    $this->response = $response;
     $this->validator = $validator;
     $this->oAuthService = $oAuthService;
-    $this->response = $response;
   }
 
-  public function validateLoginInfo($data) {
-    $this->validator->make([
+  public function validateLoginInfo($data)
+  {
+    return $this->validator->make($data, [
       'email' => 'required|email',
       'password' => 'required'
     ]);
   }
 
-  public function login($username, $password)
+  public function attemptLogin(Request $request)
   {
-    $validateLoginInfo = $this->validateLoginInfo([
-      'email' => $email,
-      'password' => $password
-    ]);
+    $data = $request->only('email', 'password');
+    $email = $data['email'];
+    $password = $data['password'];
+
+    $validateLoginInfo = $this->validateLoginInfo($data);
 
     if($validateLoginInfo->fails()) {
-      return $this->response->json(
-        $status = 422,
-        $data = $validateLoginInfo->errors()->all()
-      );
+      return $this->response->json($validateLoginInfo->errors()->all(), 422);
     }
 
-    if($this->auth->attempt(['email' => $email, 'password' => $password])) {
-      $credentials = $this->oAuthService->passwordGrantAuth($email, $password);
-
+    if($this->auth->attempt($data)) {
       $apiCookie = $this->cookie->make($this->auth->user()->getKey(), $request->header('X-CSRF-TOKEN'));
 
       return $this->oAuthService->passwordGrantWithResponse($email, $password)->withCookie($apiCookie);
     }
-
     else {
       return $this->response->api_error('Invalid Login Details');
     }

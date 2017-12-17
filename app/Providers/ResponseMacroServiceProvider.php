@@ -12,13 +12,13 @@ class ResponseMacroServiceProvider extends ServiceProvider
     $response->macro('api_success', function($value) use ($response) {
       return $response->json([
         'success' => $value
-      ]);
+      ], 200);
     });
 
     $response->macro('api_error', function($value) use ($response) {
-      return $response->json($status=400, $data = [
+      return $response->json([
         'error' => $value
-      ]);
+      ], 400);
     });
   }
 }
