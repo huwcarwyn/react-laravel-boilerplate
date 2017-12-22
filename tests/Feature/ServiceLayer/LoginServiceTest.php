@@ -14,6 +14,8 @@ class LoginServiceTest extends TestCase
     private $oAuthService;
     private $loginService;
 
+    use RefreshDatabase;
+
     public function setUp()
     {
         parent::setUp();

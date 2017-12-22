@@ -2,7 +2,7 @@
 /public/img
 /public/js
 /public/css
-/public/styles
+/tests/Browser/screenshots
 /storage/*.key
 /vendor
 /.idea

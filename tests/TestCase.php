@@ -17,6 +17,7 @@ abstract class TestCase extends BaseTestCase
 
         $this->faker = FakerFactory::create();
 
-        $kernel->call('migrate:fresh');
+        $kernel = resolve('Illuminate\Contracts\Console\Kernel');
+        $kernel->call('migrate');
     }
 }
