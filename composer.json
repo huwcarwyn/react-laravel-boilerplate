@@ -13,10 +13,12 @@
         "nesbot/carbon": "^1.22"
     },
     "require-dev": {
+        "codedungeon/phpunit-result-printer": "^0.4.4",
+        "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
+        "laravel/dusk": "^2.0",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~6.0",
-        "filp/whoops": "~2.0"
+        "phpunit/phpunit": "~6.0"
     },
     "autoload": {
         "classmap": [
