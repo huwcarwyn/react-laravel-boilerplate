@@ -6,8 +6,7 @@ use Illuminate\Contracts\Routing\ResponseFactory as Response,
     Illuminate\Contracts\Validation\Factory as Validator,
     Illuminate\Contracts\Auth\Factory as Auth,
     Laravel\Passport\ApiTokenCookieFactory,
-    App\Services\OauthService,
-    Illuminate\Http\Request;
+    App\Services\OauthService;
 
 class LoginService
 {
@@ -39,25 +38,21 @@ class LoginService
     ]);
   }
 
-  public function attemptLogin(Request $request)
+  public function attemptLogin($loginInfo, $csrfToken)
   {
-    $data = $request->only('email', 'password');
-    $email = $data['email'];
-    $password = $data['password'];
-
-    $validateLoginInfo = $this->validateLoginInfo($data);
+    $validateLoginInfo = $this->validateLoginInfo($loginInfo);
 
     if($validateLoginInfo->fails()) {
-      return $this->response->json($validateLoginInfo->errors()->all(), 422);
+      return $this->response->json($validateLoginInfo->failed(), 422);
     }
 
-    if($this->auth->attempt($data)) {
-      $apiCookie = $this->cookie->make($this->auth->user()->getKey(), $request->header('X-CSRF-TOKEN'));
+    if($this->auth->attempt($loginInfo)) {
+      $apiCookie = $this->cookie->make($this->auth->user()->getKey(), $csrfToken);
 
-      return $this->oAuthService->passwordGrantWithResponse($email, $password)->withCookie($apiCookie);
+      return $this->oAuthService->passwordGrantWithResponse($loginInfo['email'], $loginInfo['password'])->withCookie($apiCookie);
     }
     else {
-      return $this->response->api_error('Invalid Login Details');
+      return $this->response->api_error(['Incorrect Login Details']);
     }
   }
 }

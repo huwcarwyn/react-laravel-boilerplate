@@ -41,30 +41,20 @@ class SignUpService {
     ]);
   }
 
-  public function createUser($data)
+  public function signUp($userInfo, $csrfToken)
   {
-    $this->user->create($data);
+    $dataValidator = $this->validateUserData($userInfo);
 
-    return $this->user;
-  }
-
-  public function apiSignUp(Request $request)
-  {
-    $data = $request->only(['first_name', 'last_name', 'email', 'password']);
-
-    if ($this->validateUserData($data)->fails()) {
-      return $this->response->json(
-        $status = 422,
-        $validateSignupData->errors()->all()
-      );
+    if ($dataValidator->fails()) {
+      return $this->response->json($dataValidator->failed(), 422);
     }
 
-    $newUser = $this->createUser($data);
+    $this->user->create($userInfo);
 
     // We need to call the password grant endpoint here so that our token is saved in
     // the database.
-    $apiCookie = $this->cookie->make($newUser->getModel()->getKey(), $request->header('X-CSRF-TOKEN'));
+    $apiCookie = $this->cookie->make($this->user->getModel()->getKey(), $csrfToken);
 
-    return $this->oAuthService->passwordGrantWithResponse($data['email'], $data['password'])->withCookie($apiCookie);
+    return $this->oAuthService->passwordGrantWithResponse($userInfo['email'], $userInfo['password'])->withCookie($apiCookie);
   }
 }

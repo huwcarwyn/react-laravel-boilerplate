@@ -17,6 +17,9 @@ class UserController
 
   public function signUp(Request $request)
   {
-      return $this->signUpService->apiSignUp($request);
+      $userInfo = $request->only(['first_name', 'last_name', 'email', 'password']);
+      $csrfToken = $request->header('X-CSRF-TOKEN');
+
+      return $this->signUpService->signUp($userInfo, $csrfToken);
   }
 }
