@@ -20,8 +20,7 @@ class ServiceLayerServiceProvider extends ServiceProvider
           $app->make('Illuminate\Contracts\Validation\Factory'),
           $app->make('App\Contracts\Repository\UserRepositoryContract'),
           $app->make('Illuminate\Contracts\Routing\ResponseFactory'),
-          $app->make('Laravel\Passport\ApiTokenCookieFactory'),
-          $app->make('App\Services\OauthService')
+          $app->make('Laravel\Passport\ApiTokenCookieFactory')
         );
       }
     );
@@ -39,7 +38,6 @@ class ServiceLayerServiceProvider extends ServiceProvider
         return new LoginService(
           $app->make('Illuminate\Contracts\Auth\Factory'),
           $app->make('Illuminate\Contracts\Validation\Factory'),
-          $app->make('App\Services\OauthService'),
           $app->make('Laravel\Passport\ApiTokenCookieFactory'),
           $app->make('Illuminate\Contracts\Routing\ResponseFactory')
         );
@@ -49,7 +47,9 @@ class ServiceLayerServiceProvider extends ServiceProvider
     $this->app->singleton(
       'App\Services\LogoutService', function($app) {
         return new LogoutService(
-          $app->make('Illuminate\Contracts\Auth\Factory')
+          $app->make('Illuminate\Contracts\Auth\Factory'),
+          $app->make('Illuminate\Contracts\Cookie\Factory'),
+          $app->make('Illuminate\Contracts\Routing\ResponseFactory')
         );
       });
   }

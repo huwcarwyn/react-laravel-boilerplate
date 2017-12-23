@@ -7,7 +7,6 @@ use App\Contracts\Repository\UserRepositoryContract as UserRepository,
     Illuminate\Contracts\Validation\Factory as Validator,
     Illuminate\Validation\ValidationException,
     Laravel\Passport\ApiTokenCookieFactory,
-    App\Services\OauthService,
     Illuminate\Http\Request;
 
 class SignUpService {
@@ -21,14 +20,12 @@ class SignUpService {
     Validator $validator,
     UserRepository $user,
     Response $response,
-    ApiTokenCookieFactory $cookie,
-    OauthService $oAuthService)
+    ApiTokenCookieFactory $cookie)
   {
     $this->user = $user;
     $this->cookie = $cookie;
     $this->response = $response;
     $this->validator = $validator;
-    $this->oAuthService = $oAuthService;
   }
 
   public function validateUserData($data)
@@ -55,6 +52,6 @@ class SignUpService {
     // the database.
     $apiCookie = $this->cookie->make($this->user->getModel()->getKey(), $csrfToken);
 
-    return $this->oAuthService->passwordGrantWithResponse($userInfo['email'], $userInfo['password'])->withCookie($apiCookie);
+    return $this->response->api_success('User successfully signed up')->withCookie($apiCookie);
   }
 }

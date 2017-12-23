@@ -5,21 +5,18 @@ namespace App\Services;
 use Illuminate\Contracts\Routing\ResponseFactory as Response,
     Illuminate\Contracts\Validation\Factory as Validator,
     Illuminate\Contracts\Auth\Factory as Auth,
-    Laravel\Passport\ApiTokenCookieFactory,
-    App\Services\OauthService;
+    Laravel\Passport\ApiTokenCookieFactory;
 
 class LoginService
 {
   private $auth;
   private $validator;
   private $cookie;
-  private $oAuthService;
   private $response;
 
   public function __construct(
     Auth $auth,
     Validator $validator,
-    OauthService $oAuthService,
     ApiTokenCookieFactory $cookie,
     Response $response)
   {
@@ -27,7 +24,6 @@ class LoginService
     $this->cookie = $cookie;
     $this->response = $response;
     $this->validator = $validator;
-    $this->oAuthService = $oAuthService;
   }
 
   public function validateLoginInfo($data)
@@ -49,10 +45,10 @@ class LoginService
     if($this->auth->attempt($loginInfo)) {
       $apiCookie = $this->cookie->make($this->auth->user()->getKey(), $csrfToken);
 
-      return $this->oAuthService->passwordGrantWithResponse($loginInfo['email'], $loginInfo['password'])->withCookie($apiCookie);
+      return $this->response->api_success('User logged in')->withCookie($apiCookie);
     }
     else {
-      return $this->response->api_error(['Incorrect Login Details']);
+      return $this->response->api_error('Incorrect Login Details');
     }
   }
 }

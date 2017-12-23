@@ -2,24 +2,26 @@
 
 namespace App\Services;
 
-use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Contracts\Auth\Factory as Auth,
+    Illuminate\Contracts\Cookie\Factory as Cookie,
+    Illuminate\Contracts\Routing\ResponseFactory as Response;
 
 class LogoutService
 {
   private $auth;
+  private $cookie;
+  private $response;
 
-  public function __construct(Auth $auth)
+  public function __construct(Auth $auth, Cookie $cookie, Response $response)
   {
     $this->auth = $auth;
+    $this->cookie = $cookie;
+    $this->response = $response;
   }
 
   public function logout()
-  {
-    /**
-     * Since the API determines whether or not the user is logged in via
-     * the presence of the JWT, we log the user out by revoking this
-     * token.
-     */
-    $this->auth->user()->token()->revoke();
+  {    
+    return $this->response->api_success('Successfully logged out')
+                          ->withCookie($this->cookie->forget('laravel_token'));
   }
 }

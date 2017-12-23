@@ -11,7 +11,6 @@ class LoginServiceTest extends TestCase
 {
     private $user;
     private $response;
-    private $oAuthService;
     private $loginService;
 
     use RefreshDatabase;
@@ -29,12 +28,10 @@ class LoginServiceTest extends TestCase
 
         $this->csrfToken = str_random(10);
         
-        $this->oAuthService = \Mockery::mock('App\Services\OauthService');
 
         $this->loginService = new LoginService(
             $auth, 
             $validation, 
-            $this->oAuthService, 
             $cookie, 
             $this->response
         );
@@ -42,19 +39,11 @@ class LoginServiceTest extends TestCase
 
     public function testLoginWithCorrectDetailsReturnsOkWithCredentials()
     {
-        $oAuthCredentials = [
-            'access_token' => str_random(12),
-            'refresh_token' => str_random(12)
-        ];
-
         $loginInfo = ['email' => $this->user->email, 'password' => 'password'];
-
-        $this->oAuthService->shouldReceive('passwordGrantWithResponse->withCookie')
-                           ->andReturn($this->response->json($oAuthCredentials));
 
         $response = $this->loginService->attemptLogin($loginInfo, $this->csrfToken);
 
-        $this->assertEquals(json_decode($response->getContent(), true), $oAuthCredentials);
+        $this->assertArrayHasKey('success', json_decode($response->getContent(), true));
     }
 
     public function testLoginWithIncorrectDetailsErrors()
