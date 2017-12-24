@@ -1,21 +1,18 @@
 import React from 'react'
+import axios from 'axios'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { push } from 'react-router-redux'
 
 import defaultProfileImage from 'default-profile-picture.jpeg'
 
 export const UserCardComponent = (props) => {
-    const { user, colorTheme, className } = props
+    const { user, colorTheme, className, logOut } = props
     const { firstName, lastName, profileImage } = user
 
     const fullName = lastName !== undefined ? [firstName, lastName].join(" ") : firstName
 
     const themeTextClass = colorTheme == 'dark' ? 'text-blue-darker' : 'text-white'
-
-    const UserMenuItem = (props) => (
-      <li className={`inline-block ${props.className}`}>
-        <a className={`${themeTextClass}`} href={props.to}>{props.children}</a>
-      </li>
-    )
 
     return (
       <div className={`flex items-center ${className} ${themeTextClass}`}>
@@ -27,8 +24,12 @@ export const UserCardComponent = (props) => {
         <div className="text-sm">
           <div className="mb-1">{fullName}</div>
           <ul className="list-reset text-sm">
-            <UserMenuItem className="mr-4" to="/logout">Logout</UserMenuItem>
-            <UserMenuItem to="/settings">Settings</UserMenuItem>
+          	<li className="inline-block mr-4">
+							<span className={`${themeTextClass} underline cursor-pointer`} onClick={logOut}>Logout</span>
+          	</li>
+          	<li className="inline-block">
+          		<Link className={`${themeTextClass}`} to="/settings">Settings</Link>
+          	</li>
           </ul>
         </div>
       </div>
@@ -39,7 +40,16 @@ const mapStateToProps = (state) => ({
   user: state.currentUser,
 })
 
+const mapDispatchToProps = (dispatch: any) => ({
+	logOut: () => {
+		axios.get('/api/logout')
+			.then((response) => {
+				dispatch(push('/login'))
+			})
+	}
+})
+
 export const UserCard = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(UserCardComponent)

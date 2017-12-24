@@ -8,7 +8,7 @@ export class AuthGuardComponent extends React.Component {
     super(props)
 
     this.state = {
-      isLoadingUser: true,
+      loading: true,
     }
   }
 
@@ -17,20 +17,22 @@ export class AuthGuardComponent extends React.Component {
 
     authOrRedirect()
       .then((response) => {
-        this.setState({
-          isLoadingUser: false,
-        })
+      	if (response.status === 200) {
+	        this.setState({
+	          loading: false,
+	        })
+      	}
       })
   }
 
   render() {
     const { children } = this.props
-    const { isLoadingUser } = this.state
+    const { loading } = this.state
 
-    if (isLoadingUser) {
+    if (loading) {
       return (
-        <div>
-          Loading...
+        <div className="flex h-screen items-center">
+          <div className="w-screen text-3xl text-center text-grey">Loading...</div>
         </div>
       )
     }
