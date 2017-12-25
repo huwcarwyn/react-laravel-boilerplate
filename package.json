@@ -34,6 +34,7 @@
     "style-loader": "^0.18.2",
     "tailwindcss": "^0.3.0",
     "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7",
     "webpack-merge": "^4.1.1"
   },
   "dependencies": {
@@ -42,6 +43,7 @@
     "history": "^4.7.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-hot-loader": "^3.1.3",
     "react-redux": "^5.0.6",
     "react-router": "^4.1.2",
     "react-router-dom": "^4.2.2",
