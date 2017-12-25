@@ -4,12 +4,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: {
-    app: path.join(__dirname, 'resources/assets/js/app.jsx'),
+    app: path.join(__dirname, 'resources/assets/js/main.jsx'),
   },
 
   output: {
     filename: 'js/[name].js',
-    path: path.join(__dirname, 'public/')
+    path: path.join(__dirname, 'public/'),
+    publicPath: '/',
   },
 
   module: {
@@ -31,7 +32,8 @@ module.exports = {
                 }
               },
               "generateScopedName": "[local]_[hash:base64:5]"
-            }]
+            }],
+            'react-hot-loader/babel'
           ]
         }
       },
