@@ -39,7 +39,7 @@ const SignUpForm = (props) => {
       <Field component={FormLine} type="text" name="email" labelText="Email" />
       <Field component={FormLine} type="password" name="password" labelText="Password" />
       <div className="flex items-center">
-        <Link to="/login">Or Login</Link>
+        <Link className="no-underline text-blue" to="/login">Or Login</Link>
         <NeutralButton className="ml-auto" type="submit">Sign Up</NeutralButton>
       </div>
     </form>

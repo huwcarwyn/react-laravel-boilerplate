@@ -11,9 +11,9 @@ export const SignUp = (props) => {
   const { submitSignup } = props
 
   return (
-    <div className="max-w-md mt-8 mx-auto">
-      <h1 className="text-center text-grey-darkest mb-4">Sign Up</h1>
+    <div className="max-w-md mt-10 mx-auto">
       <PaddedCard>
+      	<h1 className="text-center text-grey-darkest mb-4">Sign Up</h1>
         <SignUpForm onSubmit={submitSignup} />
       </PaddedCard>
     </div>
