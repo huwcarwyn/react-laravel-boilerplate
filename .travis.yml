@@ -1,0 +1,14 @@
+language: php
+
+php:
+  - '7.2.0'
+
+install:
+  - composer install --no-interaction --prefer-dist --no-suggest
+  - npm install
+
+script: vendor/bin/phpunit --verbose
+
+cache:
+  directories:
+    - "node_modules"
