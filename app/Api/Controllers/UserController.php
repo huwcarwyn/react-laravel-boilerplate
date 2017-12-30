@@ -3,16 +3,19 @@
 namespace App\Api\Controllers;
 
 use Illuminate\Validation\ValidationException,
+    App\Services\ForgotPasswordService,
     App\Services\SignUpService,
     Illuminate\Http\Request;
 
 class UserController
 {
   private $signUpService;
+  private $forgotPasswordService;
 
-  public function __construct(SignUpService $signUpService)
+  public function __construct(SignUpService $signUpService, ForgotPasswordService $forgotPasswordService)
   {
     $this->signUpService = $signUpService;
+    $this->forgotPasswordService = $forgotPasswordService;
 	}
 
   public function signUp(Request $request)
@@ -21,5 +24,12 @@ class UserController
       $csrfToken = $request->header('X-CSRF-TOKEN');
 
       return $this->signUpService->signUp($userInfo, $csrfToken);
+  }
+
+  public function forgotPassword(Request $request)
+  {
+    $user = $request->user();
+
+    return $this->forgotPasswordService->sendPasswordRequest($user);
   }
 }

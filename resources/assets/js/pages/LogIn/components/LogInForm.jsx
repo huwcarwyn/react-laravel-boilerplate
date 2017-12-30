@@ -30,6 +30,8 @@ const LoginForm = (props) => {
       <Field component={FormLine} type="password" name="password" labelText="Password" />
       <div className="flex items-center">
         <Link className="no-underline text-blue" to="/signup">Or Signup</Link>
+        <span className="inline-block px-2">|</span>
+        <Link className="no-underline text-blue" to="/forgot-password">Forgot Password?</Link>
         <NeutralButton className="ml-auto" type="submit">Log In</NeutralButton>
       </div>
     </form>

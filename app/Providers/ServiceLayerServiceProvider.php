@@ -6,7 +6,8 @@ use Illuminate\Support\ServiceProvider,
     App\Services\SignUpService,
     App\Services\OauthService,
     App\Services\LoginService,
-    App\Services\LogoutService;
+    App\Services\LogoutService,
+    App\Services\ForgotPasswordService;
 
 class ServiceLayerServiceProvider extends ServiceProvider
 {
@@ -51,6 +52,17 @@ class ServiceLayerServiceProvider extends ServiceProvider
           $app->make('Illuminate\Contracts\Cookie\Factory'),
           $app->make('Illuminate\Contracts\Routing\ResponseFactory')
         );
-      });
+      }
+    );
+
+    $this->app->singleton(
+      'App\Services\ForgotPasswordService', function($app) {
+        return new ForgotPasswordService(
+          $app->make('Illuminate\Contracts\Auth\PasswordBroker'),
+          $app->make('Illuminate\Contracts\Validation\Factory'),
+          $app->make('Illuminate\Contracts\Routing\ResponseFactory')
+        );
+      }
+    );
   }
 }
