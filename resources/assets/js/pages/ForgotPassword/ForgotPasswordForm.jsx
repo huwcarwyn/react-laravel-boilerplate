@@ -38,5 +38,6 @@ export const ForgotPasswordFormComponent = (props) => {
 }
 
 export const ForgotPasswordForm = reduxForm({
-  form: 'forgotPassword'
+  form: 'forgotPassword',
+  validate
 })(ForgotPasswordFormComponent)

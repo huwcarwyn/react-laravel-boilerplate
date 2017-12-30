@@ -33,7 +33,7 @@ export const App = (props) => (
   	        </DashboardLayout>
   	      </AuthGuard>
   	    </Switch>
-  	  </ConnectedRouter>      
+  	  </ConnectedRouter>
     </div>
 	</Provider>
 )

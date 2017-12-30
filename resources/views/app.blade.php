@@ -15,7 +15,7 @@
 	    <link href="/css/app.css" rel="stylesheet" />
 	</head>
 </head>
-<body>
+<body class="bg-grey-lightest">
 	<div id="app">
 
 	</div>

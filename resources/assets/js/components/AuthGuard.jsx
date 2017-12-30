@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
-import { userSessionActionCreators } from 'store/action-creators/userSession'
+import { getCurrentUserInfo } from 'store/action-creators/userSession'
 
 export class AuthGuardComponent extends React.Component {
   constructor(props) {
@@ -45,7 +45,7 @@ export class AuthGuardComponent extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   authOrRedirect: () => {
-    return dispatch(userSessionActionCreators.getCurrentUserInfo())
+    return dispatch(getCurrentUserInfo())
       .catch(() => {
         dispatch(replace('/login'))
       })

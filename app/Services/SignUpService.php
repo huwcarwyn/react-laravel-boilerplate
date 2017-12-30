@@ -33,7 +33,7 @@ class SignUpService {
     return $this->validator->make($data, [
       'first_name' => 'required',
       'last_name' => 'required',
-      'email' => 'required|email',
+      'email' => 'required|email|unique:users,email',
       'password' => 'required'
     ]);
   }
@@ -43,7 +43,7 @@ class SignUpService {
     $dataValidator = $this->validateUserData($userInfo);
 
     if ($dataValidator->fails()) {
-      return $this->response->apiValidationError($dataValidator->failed());
+      return $this->response->apiValidateError($dataValidator->failed());
     }
 
     $this->user->create($userInfo);

@@ -1,7 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import axios from 'axios'
+import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import { SubmissionError } from 'redux-form'
 
 import { PaddedCard } from 'components'
 
@@ -18,11 +19,30 @@ export const SignUpComponent = (props) => {
   )
 }
 
+const parseValidationErrorResponse = (response) => {
+	let errors = {}
+
+	if (response.email && response.email.Unique) {
+		errors.email = 'This email already exists, please try a different email.'
+	}
+
+	return errors
+}
+
 const mapDispatchToProps = (dispatch) => ({
   submitSignup: (signUpData) => {
-    axios.post('/api/signup', signUpData)
+    return axios.post('/api/signup', signUpData)
       .then((response) => {
-        dispatch(push('/overview'))
+      	if (response.status === 200) {
+      		// Successful signup, move on to dashboard/overview.
+        	dispatch(push('/overview'))
+      	}
+      })
+      .catch((error) => {
+				if (error.response.status === 422) {
+					// Invalid data was supplied to the API, show validation errors
+					throw new SubmissionError(parseValidationErrorResponse(error.response.data))
+				}
       })
   }
 })

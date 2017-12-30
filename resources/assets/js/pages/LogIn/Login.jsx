@@ -22,11 +22,26 @@ export const LogInComponent = (props) => {
   )
 }
 
+const parseValidationFromResponse = (response) => {
+	let errors = {}
+
+	if (response.error === "Incorrect Login Details") {
+		errors.email = "Incorrect login details"
+	}
+
+	return errors
+}
+
 const mapDispatchToProps = (dispatch) => ({
   attemptLogin: (loginDetails) => {
-    axios.post('/api/login', loginDetails)
+    return axios.post('/api/login', loginDetails)
       .then((response) => {
         dispatch(push('/overview'))
+      })
+      .catch((error) => {
+      	if (error.response.status === 400) {
+      		throw new SubmissionError(parseValidationFromResponse(error.response.data))
+      	}
       })
   }
 })

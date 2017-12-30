@@ -39,7 +39,7 @@ class LoginService
     $validateLoginInfo = $this->validateLoginInfo($loginInfo);
 
     if($validateLoginInfo->fails()) {
-      return $this->response->apiValidationError($validateLoginInfo->failed());
+      return $this->response->apiValidateError($validateLoginInfo->failed());
     }
 
     if($this->auth->attempt($loginInfo)) {

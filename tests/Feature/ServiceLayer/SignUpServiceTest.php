@@ -24,9 +24,12 @@ class SignUpServiceTest extends TestCase
         $cookie = resolve('Laravel\Passport\ApiTokenCookieFactory');
         $userRepository = resolve('App\Contracts\Repository\UserRepositoryContract');
         
+        /**
+         * Put these properties on the class since they are needed 
+         * by individual test cases.
+         */
         $this->response = resolve('Illuminate\Contracts\Routing\ResponseFactory');
         $this->csrfToken = str_random(10);
-        
         $this->oAuthService = \Mockery::mock('App\Services\OauthService');
 
         $this->signUpService = new SignUpService(
