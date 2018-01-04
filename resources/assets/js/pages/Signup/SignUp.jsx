@@ -11,18 +11,12 @@ export const SignUp = (props) => {
   const { submitSignup } = props
 
   return (
-    <div className="max-w-md mt-10 mx-auto">
-      <PaddedCard>
-      	<h1 className="text-center text-grey-darkest mb-4">Sign Up</h1>
-        <SignUpForm onSubmit={submitSignup} />
-      </PaddedCard>
-    </div>
+    <PaddedCard className="mt-10 mx-auto">
+    	<h1 className="text-center text-grey-darkest mb-4">Sign Up</h1>
+      <SignUpForm onSubmit={submitSignup} />
+    </PaddedCard>
   )
 }
-
-const mapStateToProps = (state) => ({
-
-})
 
 const mapDispatchToProps = (dispatch) => ({
   submitSignup: (signUpData) => {
@@ -34,6 +28,6 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(SignUp)
