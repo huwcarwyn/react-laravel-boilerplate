@@ -8,7 +8,7 @@ import { PaddedCard } from 'components'
 
 import LogInForm from './components/LogInForm'
 
-export const LogIn = (props) => {
+export const LogInComponent = (props) => {
   const { attemptLogin } = props
 
   return (
@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-export default connect(
+export const LogIn = connect(
   null,
   mapDispatchToProps
-)(LogIn)
+)(LogInComponent)

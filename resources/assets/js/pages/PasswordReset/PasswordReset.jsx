@@ -8,7 +8,8 @@ import { PaddedCard } from 'components'
 import { PasswordResetForm } from './PasswordResetForm'
 
 export const PasswordResetComponent = (props) => {
-  const { submitPasswordReset } = props
+  const { submitPasswordReset, match } = props
+  console.log(match.params.resetToken)
   return (
     <PaddedCard className="mt-10 mx-auto">
       <h1 className="text-center text-grey-darkest mb-4">Recover Your Password</h1>
@@ -17,9 +18,13 @@ export const PasswordResetComponent = (props) => {
   )
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   submitPasswordReset: (values) => {
-    axios.post('/api/reset_password', values)
+    const { match } = ownProps
+    axios.post('/api/reset-password', {
+      ...values,
+      token: match.params.resetToken,
+    })
       .then((response) => {
         if (repsonse.status === 200) {
 

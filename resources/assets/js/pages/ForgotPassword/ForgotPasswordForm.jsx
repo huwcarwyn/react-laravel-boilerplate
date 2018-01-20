@@ -19,8 +19,10 @@ const validate = (values) => {
 }
 
 export const ForgotPasswordFormComponent = (props) => {
+  const { handleSubmit } = props
+
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <Field
         type="text"
         name="email"
@@ -31,7 +33,7 @@ export const ForgotPasswordFormComponent = (props) => {
         <Link className="no-underline text-blue" to="/login">Back to Login</Link>
         <NeutralButton className="ml-auto" type="submit">Request</NeutralButton>
       </div>
-    </div>
+    </form>
   )
 }
 

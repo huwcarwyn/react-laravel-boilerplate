@@ -1,10 +1,10 @@
 import React from 'react'
 
-const UserOverview = (props) => {
+const UserOverviewComponent = (props) => {
   return (
     <div>
     </div>
   )
 }
 
-export default UserOverview
+export const UserOverview = UserOverviewComponent

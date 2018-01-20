@@ -15,14 +15,18 @@ const validate = (values) => {
 
   if (!values.password_confirm) {
     errors.password_confirm = 'This field is required'
+  } else if (values.password !== values.password_confirm) {
+    errors.password_confirm = 'The two passwords don\'t match'
   }
 
   return errors
 }
 
 export const PasswordResetFormComponent = (props) => {
+  const { handleSubmit } = props
+
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <Field
         type="password"
         name="password"
@@ -36,7 +40,7 @@ export const PasswordResetFormComponent = (props) => {
           component={FormLine} />
 
       <NeutralButton className="float-right" type="submit">Set New Password</NeutralButton>
-    </div>
+    </form>
   )
 }
 

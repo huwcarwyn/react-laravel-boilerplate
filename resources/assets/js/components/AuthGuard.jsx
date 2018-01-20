@@ -47,7 +47,7 @@ const mapDispatchToProps = (dispatch) => ({
   authOrRedirect: () => {
     return dispatch(userSessionActionCreators.getCurrentUserInfo())
       .catch(() => {
-        dispatch(replace('login'))
+        dispatch(replace('/login'))
       })
   },
 })

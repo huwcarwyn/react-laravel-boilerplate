@@ -10,7 +10,9 @@ import {
   LogIn,
   SignUp,
   UserOverview,
-  ForgotPassword } from 'pages'
+  PasswordReset,
+  ForgotPassword,
+ } from 'pages'
 import { AuthGuard } from 'components'
 
 import { store, browserHistory } from './create-store'
@@ -22,6 +24,7 @@ export const App = (props) => (
 	      <Route path='/login' component={LogIn} />
 	      <Route path='/signup' component={SignUp} />
         <Route path='/forgot-password' component={ForgotPassword} />
+        <Route path='/reset-password/:resetToken' component={PasswordReset} />
 	      <AuthGuard>
 	        <DashboardLayout>
 	          <Route path='/overview' component={UserOverview} />

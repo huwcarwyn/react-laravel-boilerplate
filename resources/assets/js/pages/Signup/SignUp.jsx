@@ -7,7 +7,7 @@ import { PaddedCard } from 'components'
 
 import SignUpForm from './components/SignUpForm'
 
-export const SignUp = (props) => {
+export const SignUpComponent = (props) => {
   const { submitSignup } = props
 
   return (
@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-export default connect(
+export const SignUp = connect(
     null,
     mapDispatchToProps
-)(SignUp)
+)(SignUpComponent)
