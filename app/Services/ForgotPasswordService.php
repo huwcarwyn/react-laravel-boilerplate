@@ -22,14 +22,14 @@ class ForgotPasswordService
 		$this->validator = $validator;
 		$this->response = $response;
 	}
-	
+
 	public function passwordRequest($email)
 	{
 		if ($this->validateEmail($email)->fails()) {
 			return $this->response->json($dataValidator->failed(), 422);
 		} else {
 			$this->passwordBroker->sendResetLink(['email' => $email]);
-			return $this->response->api_success('Password reset request successfully sent');
+			return $this->response->apiSuccess('Password reset request successfully sent');
 		}
 	}
 

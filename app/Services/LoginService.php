@@ -45,10 +45,10 @@ class LoginService
     if($this->auth->attempt($loginInfo)) {
       $apiCookie = $this->cookie->make($this->auth->user()->getKey(), $csrfToken);
 
-      return $this->response->api_success('User logged in')->withCookie($apiCookie);
+      return $this->response->apiSuccess('User logged in')->withCookie($apiCookie);
     }
     else {
-      return $this->response->api_error('Incorrect Login Details');
+      return $this->response->apiError('Incorrect Login Details');
     }
   }
 }

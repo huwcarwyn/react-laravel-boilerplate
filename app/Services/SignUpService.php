@@ -52,6 +52,6 @@ class SignUpService {
     // the database.
     $apiCookie = $this->cookie->make($this->user->getModel()->getKey(), $csrfToken);
 
-    return $this->response->api_success('User successfully signed up')->withCookie($apiCookie);
+    return $this->response->apiSuccess('User successfully signed up')->withCookie($apiCookie);
   }
 }
