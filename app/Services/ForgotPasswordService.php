@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use Illuminate\Contracts\Auth\PasswordBroker,
-	Illuminate\Contracts\Validation\Factory as Validator,
-	Illuminate\Contracts\Routing\ResponseFactory as Response;
+use Illuminate\Contracts\Validation\Factory as Validator,
+		Illuminate\Contracts\Routing\ResponseFactory as Response,
+		Illuminate\Contracts\Auth\PasswordBroker;
 
 class ForgotPasswordService
 {

@@ -28,8 +28,8 @@ class UserController
 
   public function forgotPassword(Request $request)
   {
-    $user = $request->user();
+    $data = $request->only('email');
 
-    return $this->forgotPasswordService->sendPasswordRequest($user);
+    return $this->forgotPasswordService->passwordRequest($data['email']);
   }
 }

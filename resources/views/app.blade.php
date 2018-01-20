@@ -12,14 +12,14 @@
 	    <title>{{ config('app.name', 'Laravel') }}</title>
 
 	    <!-- Styles -->
-	    <link href="css/app.css" rel="stylesheet" />
+	    <link href="/css/app.css" rel="stylesheet" />
 	</head>
 </head>
 <body>
 	<div id="app">
 
 	</div>
-	<script charset="utf8" src="js/vendor.js"></script>
-	<script charset="utf8" src="js/app.js"></script>
+	<script charset="utf8" src="/js/vendor.js"></script>
+	<script charset="utf8" src="/js/app.js"></script>
 </body>
 </html>

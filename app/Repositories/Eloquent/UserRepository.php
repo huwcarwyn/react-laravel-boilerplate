@@ -14,4 +14,9 @@ class UserRepository extends CRUDRepository implements UserRepositoryContract
 	{
 		$this->model = $model;
 	}
+
+	public function findByEmail($email)
+	{
+		return $this->model->where('email', $email)->first();
+	}
 }
