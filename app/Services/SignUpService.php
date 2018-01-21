@@ -43,7 +43,7 @@ class SignUpService {
     $dataValidator = $this->validateUserData($userInfo);
 
     if ($dataValidator->fails()) {
-      return $this->response->json($dataValidator->failed(), 422);
+      return $this->response->apiValidationError($dataValidator->failed());
     }
 
     $this->user->create($userInfo);

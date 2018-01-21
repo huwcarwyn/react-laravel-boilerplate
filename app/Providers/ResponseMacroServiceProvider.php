@@ -15,6 +15,10 @@ class ResponseMacroServiceProvider extends ServiceProvider
       ], 200);
     });
 
+    $response->macro('apiValidateError', function($value) use ($response) {
+      return $response->json($value, 422);
+    });
+
     $response->macro('apiError', function($value) use ($response) {
       return $response->json([
         'error' => $value

@@ -7,10 +7,14 @@ Route::group(['middleware' => ['auth:api']], function() {
 	Route::get('/logout', '\App\Api\Controllers\SessionController@logout');
 });
 
-Route::post('/forgot-password', '\App\Api\Controllers\UserController@forgotPassword');
+/**
+ * Password reset endpoints
+ */
+Route::post('/forgot-password', '\App\Api\Controllers\PasswordResetController@forgotPassword');
+Route::post('/reset-password', '\App\Api\Controllers\PasswordResetController@resetPassword');
 
 /**
- * These routes return JWT's, so make sure to wrap them in the encrypt cookies
+ * These endpoints return JWT's, so make sure to wrap them in the encrypt cookies
  * middleware.
  */
 Route::group(['middleware' => ['encryptCookies']], function() {
