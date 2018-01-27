@@ -74,7 +74,7 @@ var colors = {
 
   'yellow-darkest': '#453411',
   'yellow-darker': '#684f1d',
-  'yellow-dark': '#f2d024',
+  'yellow-dark': '#eabb1d',
   'yellow': '#ffed4a',
   'yellow-light': '#fff382',
   'yellow-lighter': '#fff9c2',
@@ -629,6 +629,7 @@ module.exports = {
     '6': '1.5rem',
     '8': '2rem',
     '10': '2.5rem',
+    '20': '5rem',
   },
 
 
@@ -658,6 +659,7 @@ module.exports = {
     '6': '1.5rem',
     '8': '2rem',
     '10': '2.5rem',
+    '20': '5rem',
   },
 
 
@@ -685,6 +687,7 @@ module.exports = {
     '4': '1rem',
     '6': '1.5rem',
     '8': '2rem',
+    '20': '5rem',
   },
 
 

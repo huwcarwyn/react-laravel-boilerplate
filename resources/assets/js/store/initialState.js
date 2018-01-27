@@ -5,7 +5,8 @@ const initialState = {
     firstName: null,
     lastName: null,
     email: null,
-  }
+  },
+  notifications: {}
 }
 
 export default initialState

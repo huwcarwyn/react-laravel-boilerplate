@@ -29,10 +29,10 @@ class ForgotPasswordLinkService
 	{
 		return $this->response->apiSuccess('Password link reset request sent');
 	}
-	
+
 	public function sendResetLinkFailedResponse()
 	{
-		return $this->sendResetResponse('Password link reset request sent');
+		return $this->sendResetLinkResponse('Password link reset request sent');
 	}
 
 	public function broker()

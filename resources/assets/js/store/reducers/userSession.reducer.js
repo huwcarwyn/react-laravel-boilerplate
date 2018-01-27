@@ -2,7 +2,7 @@ import initialState from '../initialState'
 
 const { currentUser } = initialState
 
-const userSessionReducer = (state=currentUser, action) => {
+export const userSessionReducer = (state=currentUser, action) => {
   switch (action.type) {
     case 'USER_SESSION/SET_CURRENT_USER_INFO':
       return {
@@ -15,5 +15,3 @@ const userSessionReducer = (state=currentUser, action) => {
       return state
   }
 }
-
-export default userSessionReducer

@@ -11,7 +11,7 @@ export const PasswordResetComponent = (props) => {
   const { submitPasswordReset, match } = props
   console.log(match.params.resetToken)
   return (
-    <PaddedCard className="mt-10 mx-auto">
+    <PaddedCard className="mt-20 mx-auto">
       <h1 className="text-center text-grey-darkest mb-4">Recover Your Password</h1>
       <PasswordResetForm onSubmit={submitPasswordReset} />
     </PaddedCard>

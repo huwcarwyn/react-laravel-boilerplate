@@ -13,24 +13,27 @@ import {
   PasswordReset,
   ForgotPassword,
  } from 'pages'
-import { AuthGuard } from 'components'
+import { AuthGuard, NotificationOutput } from 'components'
 
 import { store, browserHistory } from './create-store'
 
 export const App = (props) => (
   <Provider store={store}>
-	  <ConnectedRouter history={browserHistory}>
-	    <Switch>
-	      <Route path='/login' component={LogIn} />
-	      <Route path='/signup' component={SignUp} />
-        <Route path='/forgot-password' component={ForgotPassword} />
-        <Route path='/reset-password/:resetToken' component={PasswordReset} />
-	      <AuthGuard>
-	        <DashboardLayout>
-	          <Route path='/overview' component={UserOverview} />
-	        </DashboardLayout>
-	      </AuthGuard>
-	    </Switch>
-	  </ConnectedRouter>
+    <div>
+      <NotificationOutput />
+  	  <ConnectedRouter history={browserHistory}>
+  	    <Switch>
+  	      <Route path='/login' component={LogIn} />
+  	      <Route path='/signup' component={SignUp} />
+          <Route path='/forgot-password' component={ForgotPassword} />
+          <Route path='/reset-password/:resetToken' component={PasswordReset} />
+  	      <AuthGuard>
+  	        <DashboardLayout>
+  	          <Route path='/overview' component={UserOverview} />
+  	        </DashboardLayout>
+  	      </AuthGuard>
+  	    </Switch>
+  	  </ConnectedRouter>      
+    </div>
 	</Provider>
 )

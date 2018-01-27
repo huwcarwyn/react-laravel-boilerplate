@@ -10,4 +10,7 @@ $spa = function() {
  */
 Route::get('reset-password/{token}', $spa)->name('password.reset');
 
-Route::fallback($spa);
+/**
+ * Catchall route for the single page application
+ */
+Route::get('/{view?}', $spa)->where('view', '(.*)')->name('catchall');

@@ -11,7 +11,7 @@ export const SignUpComponent = (props) => {
   const { submitSignup } = props
 
   return (
-    <PaddedCard className="mt-10 mx-auto">
+    <PaddedCard className="mt-20 mx-auto">
     	<h1 className="text-center text-grey-darkest mb-4">Sign Up</h1>
       <SignUpForm onSubmit={submitSignup} />
     </PaddedCard>

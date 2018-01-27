@@ -12,7 +12,7 @@ export const LogInComponent = (props) => {
   const { attemptLogin } = props
 
   return (
-    <div className="max-w-md mt-10 mx-auto">
+    <div className="max-w-md mt-20 mx-auto">
       <PaddedCard>
       	<h1 className="text-center text-grey-darkest mb-4">Log In</h1>
 

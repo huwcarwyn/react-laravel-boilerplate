@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
-import { userSessionActionCreators } from 'store/action-creators'
+import { userSessionActionCreators } from 'store/action-creators/userSession'
 
 export class AuthGuardComponent extends React.Component {
   constructor(props) {
