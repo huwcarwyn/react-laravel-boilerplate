@@ -27,7 +27,7 @@ class ForgotPasswordLinkService
 	 */
 	public function sendResetLinkResponse()
 	{
-		return $this->response->apiSuccess('Password link reset request sent');
+		return $this->response->success('Password link reset request sent');
 	}
 
 	public function sendResetLinkFailedResponse()

@@ -27,12 +27,11 @@ class LoginServiceTest extends TestCase
         $cookie = resolve('Laravel\Passport\ApiTokenCookieFactory');
 
         $this->csrfToken = str_random(10);
-        
 
         $this->loginService = new LoginService(
-            $auth, 
-            $validation, 
-            $cookie, 
+            $auth,
+            $validation,
+            $cookie,
             $this->response
         );
     }
@@ -43,7 +42,7 @@ class LoginServiceTest extends TestCase
 
         $response = $this->loginService->attemptLogin($loginInfo, $this->csrfToken);
 
-        $this->assertArrayHasKey('success', json_decode($response->getContent(), true));
+				$this->assertEquals($response->status(), 200);
     }
 
     public function testLoginWithIncorrectDetailsErrors()
@@ -53,7 +52,6 @@ class LoginServiceTest extends TestCase
         $response = $this->loginService->attemptLogin($loginInfo, $this->csrfToken);
 
         $this->assertEquals($response->status(), 400);
-        $this->assertArrayHasKey('error', json_decode($response->getContent(), true));
     }
 
     public function testInvalidLoginDetailsTriggersValidation()
@@ -61,8 +59,9 @@ class LoginServiceTest extends TestCase
         $loginInfo = ['email' => '', 'password' => 'password'];
 
         $response = $this->loginService->attemptLogin($loginInfo, $this->csrfToken);
+				$responseContent = json_decode($response->getContent(), true);
 
         $this->assertEquals($response->status(), 422);
-        $this->assertArrayHasKey('email', json_decode($response->getContent(), true));
+        $this->assertArrayHasKey('email', $responseContent['messages']);
     }
 }

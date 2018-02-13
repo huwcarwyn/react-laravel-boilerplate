@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch) => ({
       .catch((error) => {
 				if (error.response.status === 422) {
 					// Invalid data was supplied to the API, show validation errors
-					throw new SubmissionError(parseValidationErrorResponse(error.response.data))
+					throw new SubmissionError(parseValidationErrorResponse(error.response.data.messages))
 				}
       })
   }

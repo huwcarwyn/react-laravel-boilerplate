@@ -23,9 +23,9 @@ class SignUpServiceTest extends TestCase
         $validation = resolve('Illuminate\Contracts\Validation\Factory');
         $cookie = resolve('Laravel\Passport\ApiTokenCookieFactory');
         $userRepository = resolve('App\Contracts\Repository\UserRepositoryContract');
-        
+
         /**
-         * Put these properties on the class since they are needed 
+         * Put these properties on the class since they are needed
          * by individual test cases.
          */
         $this->response = resolve('Illuminate\Contracts\Routing\ResponseFactory');
@@ -76,7 +76,7 @@ class SignUpServiceTest extends TestCase
         $responseContent = json_decode($response->getContent(), true);
 
         $this->assertEquals($response->status(), 422);
-        $this->assertArrayHasKey('first_name', $responseContent);
-        $this->assertArrayHasKey('email', $responseContent);
+        $this->assertArrayHasKey('first_name', $responseContent['messages']);
+        $this->assertArrayHasKey('email', $responseContent['messages']);
     }
 }

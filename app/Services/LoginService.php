@@ -39,16 +39,16 @@ class LoginService
     $validateLoginInfo = $this->validateLoginInfo($loginInfo);
 
     if($validateLoginInfo->fails()) {
-      return $this->response->apiValidateError($validateLoginInfo->failed());
+      return $this->response->validateError($validateLoginInfo->failed());
     }
 
     if($this->auth->attempt($loginInfo)) {
       $apiCookie = $this->cookie->make($this->auth->user()->getKey(), $csrfToken);
 
-      return $this->response->apiSuccess('User logged in')->withCookie($apiCookie);
+      return $this->response->success('User logged in')->withCookie($apiCookie);
     }
     else {
-      return $this->response->apiError('Incorrect Login Details');
+      return $this->response->error('Incorrect Login Details');
     }
   }
 }

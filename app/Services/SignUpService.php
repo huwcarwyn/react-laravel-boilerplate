@@ -43,7 +43,7 @@ class SignUpService {
     $dataValidator = $this->validateUserData($userInfo);
 
     if ($dataValidator->fails()) {
-      return $this->response->apiValidateError($dataValidator->failed());
+      return $this->response->validateError($dataValidator->failed());
     }
 
     $this->user->create($userInfo);
@@ -52,6 +52,6 @@ class SignUpService {
     // the database.
     $apiCookie = $this->cookie->make($this->user->getModel()->getKey(), $csrfToken);
 
-    return $this->response->apiSuccess('User successfully signed up')->withCookie($apiCookie);
+    return $this->response->success('User successfully signed up')->withCookie($apiCookie);
   }
 }

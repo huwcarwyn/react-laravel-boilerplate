@@ -33,7 +33,7 @@ class ResetPasswordService
 
 	public function sendResetResponse($message)
 	{
-		return $this->response->apiSuccess($message);
+		return $this->response->success($message);
 	}
 
 	public function sendResetFailedResponse($message)

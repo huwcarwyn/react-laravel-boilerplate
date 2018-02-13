@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) => ({
           dispatch(push('/login'))
           dispatch(flashNotification('success', 'The password reset request has been sent to your Email inbox.'))
         } else if (response.status === 422) {
-          throw new SubmissionError(response)
+          throw new SubmissionError(response.messages)
         }
       })
   },
