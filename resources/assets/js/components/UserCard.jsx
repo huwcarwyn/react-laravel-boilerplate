@@ -18,8 +18,7 @@ export const UserCardComponent = (props) => {
       <div className={`flex items-center ${className} ${themeTextClass}`}>
         <img
           src={profileImage !== undefined ? profileImage : defaultProfileImage }
-          className="w-10 h-10 rounded-full mr-4"
-          alt=""/>
+          className="w-10 h-10 rounded-full mr-4" />
 
         <div className="text-sm">
           <div className="mb-1">{fullName}</div>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { SubmissionError } from 'redux-form'
 
-import { PaddedCard } from 'components'
+import { Card, CardContent } from 'components'
 
 import SignUpForm from './components/SignUpForm'
 
@@ -12,10 +12,12 @@ export const SignUpComponent = (props) => {
   const { submitSignup } = props
 
   return (
-    <PaddedCard className="mt-20 mx-auto">
-    	<h1 className="text-center text-grey-darkest mb-4">Sign Up</h1>
-      <SignUpForm onSubmit={submitSignup} />
-    </PaddedCard>
+    <Card className="mt-20 mx-auto">
+      <CardContent>
+        <h1 className="text-center text-grey-darkest mb-4">Sign Up</h1>
+        <SignUpForm onSubmit={submitSignup} />        
+      </CardContent>
+    </Card>
   )
 }
 

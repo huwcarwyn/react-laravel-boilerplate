@@ -10,22 +10,14 @@ import {
 
 storiesOf('Notifications', module)
 	.add('Neutral', () => (
-		<NeutralNotification>
-			I'm a notification
-		</NeutralNotification>
+		<NeutralNotification message="I'm a notification" />
 	))
 	.add('Negative', () => (
-		<NegativeNotification>
-			I'm a notification
-		</NegativeNotification>
+		<NegativeNotification message="I'm a notification" />
 	))
 	.add('Warning', () => (
-		<WarningNotification>
-			I'm a notification
-		</WarningNotification>
+		<WarningNotification message="I'm a notification" />
 	))
  	.add('Positive', () => (
- 		<PositiveNotification>
- 			I'm a notification
- 		</PositiveNotification>
+ 		<PositiveNotification message="I'm a notification" />
 	))

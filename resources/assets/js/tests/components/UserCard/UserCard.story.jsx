@@ -1,5 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import { MemoryRouter } from 'react-router'
 
 import { UserCardComponent as UserCard } from 'components/UserCard'
 
@@ -10,6 +11,9 @@ const user = {
 }
 
 storiesOf('User Card', module)
+  // Need to add this decorator since the component has Links in it which need
+  // a router to work. We use MemoryRouter since it's ideal for testing envs
+  .addDecorator((story) => (<MemoryRouter>{story()}</MemoryRouter>))
   .add('Light Theme', () => (
     <div className="inline-block bg-blue-darker p-4">
       <UserCard user={user} colorTheme="light" />
