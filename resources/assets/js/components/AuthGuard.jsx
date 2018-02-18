@@ -13,16 +13,22 @@ export class AuthGuardComponent extends React.Component {
   }
 
   componentWillMount() {
-    const { authOrRedirect } = this.props
+    const { authOrRedirect, currentUserId } = this.props
 
-    authOrRedirect()
-      .then((response) => {
-      	if (response.status === 200) {
-	        this.setState({
-	          loading: false,
-	        })
-      	}
+    if (!currentUserId) {
+      authOrRedirect()
+        .then((response) => {
+          if (response.status === 200) {
+            this.setState({
+              loading: false,
+            })
+          }
+        })
+    } else {
+      this.setState({
+        loading: false,
       })
+    }
   }
 
   render() {
@@ -43,6 +49,10 @@ export class AuthGuardComponent extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  currentUserId: state.currentUser.id
+})
+
 const mapDispatchToProps = (dispatch) => ({
   authOrRedirect: () => {
     return dispatch(getCurrentUserInfo())
@@ -53,6 +63,6 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export const AuthGuard = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AuthGuardComponent)

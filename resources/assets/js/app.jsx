@@ -12,10 +12,22 @@ import {
   UserOverview,
   PasswordReset,
   ForgotPassword,
+  NotFound,
  } from 'pages'
 import { AuthGuard, NotificationOutput } from 'components'
 
 import { store, browserHistory } from './create-store'
+
+// Higher order component for rendering a page with the dashboard layout
+const withDashboard = (ContentComponent) => {
+  return (props) => (
+    <AuthGuard>
+      <DashboardLayout>
+        <ContentComponent {...props} />
+      </DashboardLayout>
+    </AuthGuard>
+  )
+}
 
 export const App = (props) => (
   <Provider store={store}>
@@ -23,15 +35,14 @@ export const App = (props) => (
       <NotificationOutput />
   	  <ConnectedRouter history={browserHistory}>
   	    <Switch>
-  	      <Route path='/login' component={LogIn} />
-  	      <Route path='/signup' component={SignUp} />
-          <Route path='/forgot-password' component={ForgotPassword} />
-          <Route path='/reset-password/:resetToken' component={PasswordReset} />
-  	      <AuthGuard>
-  	        <DashboardLayout>
-  	          <Route path='/overview' component={UserOverview} />
-  	        </DashboardLayout>
-  	      </AuthGuard>
+  	      <Route exact path='/login' component={LogIn} />
+  	      <Route exact path='/signup' component={SignUp} />
+          <Route exact path='/forgot-password' component={ForgotPassword} />
+          <Route exact path='/reset-password/:resetToken' component={PasswordReset} />
+          {/* Dashboard routes */}
+  	      <Route exact path='/overview' component={withDashboard(UserOverview)} />
+          {/* 404 route */}
+          <Route path="*" exact={true} component={NotFound}/>
   	    </Switch>
   	  </ConnectedRouter>
     </div>
