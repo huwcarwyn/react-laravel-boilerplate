@@ -1,10 +1,11 @@
 import initialState from '../../initialState'
 
-const { notifications } = initialState
+import { flashMessageActions as actions} from '../../actions'
+const { flashMessages } = initialState
 
-export const notificationsReducer = (state=notifications, action) => {
+export const flashMessagesReducer = (state=flashMessages, action) => {
   switch (action.type) {
-    case 'NOTIFICATIONS/SHOW_NOTIFICATION':
+    case actions.FLASH_MESSAGE:
       return {
         ...state,
         [action.uid]: {
@@ -12,7 +13,7 @@ export const notificationsReducer = (state=notifications, action) => {
           'message': action.message,
         }
       }
-    case 'NOTIFICATIONS/HIDE_NOTIFICATION':
+    case actions.HIDE_MESSAGE:
       const { ...newState } = state
       delete newState[action.uid]
 

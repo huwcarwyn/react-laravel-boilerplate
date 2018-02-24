@@ -3,13 +3,13 @@ import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
 import { sessionReducer } from './session.reducer'
-import { notificationsReducer } from './ui/notifications.reducer'
+import { flashMessagesReducer } from './ui/flashMessages.reducer'
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   form: formReducer,
   routing: routerReducer,
-  notifications: notificationsReducer,
+  flashMessages: flashMessagesReducer,
 })
 
 export default rootReducer

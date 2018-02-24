@@ -6,7 +6,7 @@ export const DashboardLayout = (props) => (
   <div>
     <AppHeader />
     <div>
-      {props.main}
+      {props.children}
     </div>
   </div>
 )

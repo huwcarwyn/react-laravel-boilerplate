@@ -8,7 +8,7 @@ const initialState = {
       email: null,
     },
   },
-  notifications: {}
+  flashMessages: {}
 }
 
 export default initialState

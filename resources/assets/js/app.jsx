@@ -14,7 +14,7 @@ import {
   ForgotPassword,
   NotFound,
  } from 'pages'
-import { AuthGuard, NotificationOutput } from 'components'
+import { AuthGuard, FlashMessageRoot } from 'components'
 
 import { store, browserHistory } from './create-store'
 
@@ -32,7 +32,7 @@ const withDashboard = (ContentComponent) => {
 export const App = (props) => (
   <Provider store={store}>
     <div>
-      <NotificationOutput />
+      <FlashMessageRoot />
   	  <ConnectedRouter history={browserHistory}>
   	    <Switch>
   	      <Route exact path='/login' component={LogIn} />

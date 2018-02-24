@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { SubmissionError } from 'redux-form'
 
-import { flashNotification } from 'store/action-creators/notifications'
+import { flashMessage } from 'store/action-creators/flashMessages'
 import { Card, CardContent } from 'components'
 
 import { ForgotPasswordForm } from './ForgotPasswordForm'
@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) => ({
       .then((response) => {
         if (response.status === 200) {
           dispatch(push('/login'))
-          dispatch(flashNotification('success', 'The password reset request has been sent to your Email inbox.'))
+          dispatch(flashMessage('success', 'The password reset request has been sent to your Email inbox.'))
         } else if (response.status === 422) {
           throw new SubmissionError(response.messages)
         }
