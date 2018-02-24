@@ -36,7 +36,7 @@ export const UserCardComponent = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.currentUser,
+  user: state.session.currentUser,
 })
 
 const mapDispatchToProps = (dispatch: any) => ({

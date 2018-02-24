@@ -1,10 +1,12 @@
 
 const initialState = {
-  currentUser: {
-    id: null,
-    firstName: null,
-    lastName: null,
-    email: null,
+  session: {
+    currentUser: {
+      id: null,
+      firstName: null,
+      lastName: null,
+      email: null,
+    },
   },
   notifications: {}
 }

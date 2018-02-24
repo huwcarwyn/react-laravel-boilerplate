@@ -18,7 +18,7 @@ export class AuthGuardComponent extends React.Component {
     if (!currentUserId) {
       authOrRedirect()
         .then((response) => {
-          if (response.status === 200) {
+          if (response && response.status === 200) {
             this.setState({
               loading: false,
             })
@@ -50,7 +50,7 @@ export class AuthGuardComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  currentUserId: state.currentUser.id
+  currentUserId: state.session.currentUser.id
 })
 
 const mapDispatchToProps = (dispatch) => ({

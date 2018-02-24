@@ -11,7 +11,7 @@ export const Card = (props) => {
 }
 
 export const CardContent = (props) => (
-  <div className="p-4">
+  <div className={`p-4 ${props.className || ''}`}>
     {props.children}
   </div>
 )
