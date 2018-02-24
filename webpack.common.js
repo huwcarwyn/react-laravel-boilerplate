@@ -19,23 +19,6 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react'],
-          plugins: [
-            'transform-object-rest-spread',
-            'transform-es2015-destructuring',
-            ["react-css-modules", {
-              "filetypes": {
-                ".scss": {
-                  "syntax": "postcss-scss",
-                  "plugins": ["postcss-nested"]
-                }
-              },
-              "generateScopedName": "[local]_[hash:base64:5]"
-            }],
-            'react-hot-loader/babel'
-          ]
-        }
       },
       {
         test: /\.scss$/,
