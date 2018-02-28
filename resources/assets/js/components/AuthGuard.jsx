@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
-import { getCurrentUserInfo } from 'store/action-creators/userSession'
+import { getCurrentUserInfo } from 'store/action-creators/session'
 
 export class AuthGuardComponent extends React.Component {
   constructor(props) {

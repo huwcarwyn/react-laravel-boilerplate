@@ -1,6 +1,7 @@
 import { JSDOM  } from 'jsdom'
 import React from 'react'
 import chai from 'chai'
+import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
 import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
@@ -23,6 +24,7 @@ global.window = dom.window
 
 // Set up test globals for convenience
 global.React = React
+global.sinon = sinon
 global.expect = chai.expect
 global.mount = Enzyme.mount
 global.shallow = Enzyme.shallow
