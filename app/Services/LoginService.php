@@ -48,7 +48,7 @@ class LoginService
       return $this->response->success('User logged in')->withCookie($apiCookie);
     }
     else {
-      return $this->response->error('Incorrect Login Details');
+      return $this->response->error('Incorrect login details');
     }
   }
 }

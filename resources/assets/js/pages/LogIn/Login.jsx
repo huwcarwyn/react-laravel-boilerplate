@@ -12,21 +12,19 @@ export const LogInComponent = (props) => {
   const { attemptLogin } = props
 
   return (
-    <div className="max-w-md mt-20 mx-auto">
-      <Card>
-        <CardContent>
-          <h1 className="text-center text-grey-darkest mb-4">Log In</h1>
-          <LogInForm onSubmit={attemptLogin} />
-        </CardContent>
-      </Card>
-    </div>
+    <Card className="max-w-md mt-20 mx-auto">
+      <CardContent>
+        <h1 className="text-center text-grey-darkest mb-4">Log In</h1>
+        <LogInForm onSubmit={attemptLogin} />
+      </CardContent>
+    </Card>
   )
 }
 
 const parseValidationFromResponse = (response) => {
 	let errors = {}
 
-	if (response.error === "Incorrect Login Details") {
+	if (response.errors === true && resonse.messages === "Incorrect login details") {
 		errors.email = "Incorrect login details"
 	}
 

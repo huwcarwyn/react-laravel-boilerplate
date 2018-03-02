@@ -12,10 +12,10 @@ export const SignUpComponent = (props) => {
   const { submitSignup } = props
 
   return (
-    <Card className="mt-20 mx-auto">
+    <Card className="mt-20 max-w-md mx-auto">
       <CardContent>
         <h1 className="text-center text-grey-darkest mb-4">Sign Up</h1>
-        <SignUpForm onSubmit={submitSignup} />        
+        <SignUpForm onSubmit={submitSignup} />
       </CardContent>
     </Card>
   )

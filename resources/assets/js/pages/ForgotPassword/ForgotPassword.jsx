@@ -12,7 +12,7 @@ import { ForgotPasswordForm } from './ForgotPasswordForm'
 export const ForgotPasswordComponent = (props) => {
   const { submitForgotPassword } = props
   return (
-    <Card className="mt-20 mx-auto">
+    <Card className="mt-20 max-w-md mx-auto">
       <CardContent>
         <h1 className="text-center text-grey-darkest mb-4">Recover Your Password</h1>
         <ForgotPasswordForm onSubmit={submitForgotPassword} />
