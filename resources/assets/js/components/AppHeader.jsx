@@ -1,18 +1,13 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
-import { Logo, UserCard, AppWidthConstraint } from 'components'
+import { Logo, UserCard } from 'components'
 
-export const AppHeader = (props) => {
-  const { user } = props
+export const AppHeader = (props) => (
+  <div className="bg-blue-darker">
+    <div className="max-w-2xl flex items-center bg-blue-darker py-2 px-4 mx-auto">
+      <Logo />
 
-  return (
-    <div className="bg-blue-darker">
-      <div className="max-w-2xl flex items-center bg-blue-darker py-2 px-4 mx-auto">
-        <Logo />
-
-        <UserCard className="ml-auto" colorTheme="light" />
-      </div>
+      <UserCard className="ml-auto" colorTheme="light" />
     </div>
-  )
-}
+  </div>
+)

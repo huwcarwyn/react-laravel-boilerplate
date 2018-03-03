@@ -9,7 +9,8 @@
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.production.js",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "test": "mocha-webpack --webpack-config webpack.common.js \"resources/assets/js/tests/**/*.test.{js,jsx}\" --opts resources/assets/js/tests/tests.opts"
+    "test": "mocha-webpack --webpack-config webpack.common.js \"resources/assets/js/tests/**/*.test.{js,jsx}\" --opts resources/assets/js/tests/tests.opts",
+    "lintjs": "node_modules/.bin/eslint resources/assets/js/**.{jsx,js}"
   },
   "devDependencies": {
     "@storybook/react": "^3.2.17",
@@ -23,7 +24,12 @@
     "cross-env": "^5.1.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.18.1",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-standard": "^3.0.1",
     "eslint_d": "^5.2.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^0.11.2",
@@ -52,7 +58,7 @@
     "history": "^4.7.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-hot-loader": "^3.1.3",
+    "react-hot-loader": "^4.0.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.1.2",
     "react-router-dom": "^4.2.2",

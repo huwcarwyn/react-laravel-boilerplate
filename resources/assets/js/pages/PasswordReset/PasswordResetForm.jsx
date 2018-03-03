@@ -1,16 +1,13 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
-import { Link } from 'react-router-dom'
 
 import { FormLine, NeutralButton } from 'components'
-
-import { regexes } from '../../constants'
 
 const validate = (values) => {
   let errors = {}
 
   if (!values.email) {
-  	errors.email = 'This field is required'
+    errors.email = 'This field is required'
   }
 
   if (!values.password) {
@@ -43,11 +40,11 @@ export const PasswordResetFormComponent = (props) => {
         labelText="Enter a New Password"
         component={FormLine} />
 
-        <Field
-          type="password"
-          name="password_confirmation"
-          labelText="Confirm Your New Password"
-          component={FormLine} />
+      <Field
+        type="password"
+        name="password_confirmation"
+        labelText="Confirm Your New Password"
+        component={FormLine} />
 
       <NeutralButton className="float-right" type="submit">Set New Password</NeutralButton>
     </form>
@@ -56,5 +53,5 @@ export const PasswordResetFormComponent = (props) => {
 
 export const PasswordResetForm = reduxForm({
   form: 'passwordReset',
-  validate,
+  validate
 })(PasswordResetFormComponent)

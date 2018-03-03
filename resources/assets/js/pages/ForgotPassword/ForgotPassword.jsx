@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch) => ({
           throw new SubmissionError(response.messages)
         }
       })
-  },
+  }
 })
 
 export const ForgotPassword = connect(

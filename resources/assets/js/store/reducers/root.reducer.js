@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
   session: sessionReducer,
   form: formReducer,
   routing: routerReducer,
-  flashMessages: flashMessagesReducer,
+  flashMessages: flashMessagesReducer
 })
 
 export default rootReducer

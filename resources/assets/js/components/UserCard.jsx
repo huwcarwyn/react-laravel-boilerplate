@@ -7,45 +7,45 @@ import { push } from 'react-router-redux'
 import defaultProfileImage from 'default-profile-picture.jpeg'
 
 export const UserCardComponent = (props) => {
-    const { user, colorTheme, className, logOut } = props
-    const { firstName, lastName, profileImage } = user
+  const { user, colorTheme, className, logOut } = props
+  const { firstName, lastName, profileImage } = user
 
-    const fullName = lastName !== undefined ? [firstName, lastName].join(" ") : firstName
+  const fullName = lastName !== undefined ? [firstName, lastName].join(' ') : firstName
 
-    const themeTextClass = colorTheme == 'dark' ? 'text-blue-darker' : 'text-white'
+  const themeTextClass = colorTheme === 'dark' ? 'text-blue-darker' : 'text-white'
 
-    return (
-      <div className={`flex items-center ${className} ${themeTextClass}`}>
-        <img
-          src={profileImage !== undefined ? profileImage : defaultProfileImage }
-          className="w-10 h-10 rounded-full mr-4" />
+  return (
+    <div className={`flex items-center ${className} ${themeTextClass}`}>
+      <img
+        src={profileImage !== undefined ? profileImage : defaultProfileImage }
+        className="w-10 h-10 rounded-full mr-4" />
 
-        <div className="text-sm">
-          <div className="mb-1">{fullName}</div>
-          <ul className="list-reset text-sm">
-          	<li className="inline-block mr-4">
-							<span className={`${themeTextClass} underline cursor-pointer`} onClick={logOut}>Logout</span>
-          	</li>
-          	<li className="inline-block">
-          		<Link className={`${themeTextClass}`} to="/settings">Settings</Link>
-          	</li>
-          </ul>
-        </div>
+      <div className="text-sm">
+        <div className="mb-1">{fullName}</div>
+        <ul className="list-reset text-sm">
+          <li className="inline-block mr-4">
+            <span className={`${themeTextClass} underline cursor-pointer`} onClick={logOut}>Logout</span>
+          </li>
+          <li className="inline-block">
+            <Link className={`${themeTextClass}`} to="/settings">Settings</Link>
+          </li>
+        </ul>
       </div>
-    )
+    </div>
+  )
 }
 
 const mapStateToProps = (state) => ({
-  user: state.session.currentUser,
+  user: state.session.currentUser
 })
 
-const mapDispatchToProps = (dispatch: any) => ({
-	logOut: () => {
-		axios.get('/api/logout')
-			.then((response) => {
-				dispatch(push('/login'))
-			})
-	}
+const mapDispatchToProps = (dispatch) => ({
+  logOut: () => {
+    axios.get('/api/logout')
+      .then((response) => {
+        dispatch(push('/login'))
+      })
+  }
 })
 
 export const UserCard = connect(

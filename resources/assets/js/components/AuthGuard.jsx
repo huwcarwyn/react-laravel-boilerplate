@@ -4,15 +4,15 @@ import { replace } from 'react-router-redux'
 import { getCurrentUserInfo } from 'store/action-creators/session'
 
 export class AuthGuardComponent extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
-      loading: true,
+      loading: true
     }
   }
 
-  componentWillMount() {
+  componentWillMount () {
     const { authOrRedirect, currentUserId } = this.props
 
     if (!currentUserId) {
@@ -20,18 +20,18 @@ export class AuthGuardComponent extends React.Component {
         .then((response) => {
           if (response && response.status === 200) {
             this.setState({
-              loading: false,
+              loading: false
             })
           }
         })
     } else {
       this.setState({
-        loading: false,
+        loading: false
       })
     }
   }
 
-  render() {
+  render () {
     const { children } = this.props
     const { loading } = this.state
 
@@ -59,7 +59,7 @@ const mapDispatchToProps = (dispatch) => ({
       .catch(() => {
         dispatch(replace('/login'))
       })
-  },
+  }
 })
 
 export const AuthGuard = connect(

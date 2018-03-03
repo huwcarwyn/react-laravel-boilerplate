@@ -48,5 +48,5 @@ const SignUpForm = (props) => {
 
 export default reduxForm({
   form: 'signup',
-  validate: validateSignUp,
+  validate: validateSignUp
 })(SignUpForm)

@@ -5,8 +5,8 @@ const initialState = {
       id: null,
       firstName: null,
       lastName: null,
-      email: null,
-    },
+      email: null
+    }
   },
   flashMessages: {}
 }

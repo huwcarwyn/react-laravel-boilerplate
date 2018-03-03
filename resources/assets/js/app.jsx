@@ -1,5 +1,3 @@
-require("react-hot-loader/patch")
-
 import React from 'react'
 import { Provider } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
@@ -12,8 +10,8 @@ import {
   UserOverview,
   PasswordReset,
   ForgotPassword,
-  NotFound,
- } from 'pages'
+  NotFound
+} from 'pages'
 import { AuthGuard, FlashMessageRoot } from 'components'
 
 import { store, browserHistory } from './create-store'
@@ -33,18 +31,18 @@ export const App = (props) => (
   <Provider store={store}>
     <div>
       <FlashMessageRoot />
-  	  <ConnectedRouter history={browserHistory}>
-  	    <Switch>
-  	      <Route exact path='/login' component={LogIn} />
-  	      <Route exact path='/signup' component={SignUp} />
+      <ConnectedRouter history={browserHistory}>
+        <Switch>
+          <Route exact path='/login' component={LogIn} />
+          <Route exact path='/signup' component={SignUp} />
           <Route exact path='/forgot-password' component={ForgotPassword} />
           <Route exact path='/reset-password/:resetToken' component={PasswordReset} />
           {/* Dashboard routes */}
-  	      <Route exact path='/overview' component={withDashboard(UserOverview)} />
+          <Route exact path='/overview' component={withDashboard(UserOverview)} />
           {/* 404 route */}
           <Route path="*" exact={true} component={NotFound}/>
-  	    </Switch>
-  	  </ConnectedRouter>
+        </Switch>
+      </ConnectedRouter>
     </div>
-	</Provider>
+  </Provider>
 )

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Field } from 'redux-form'
 
 export const FormLine = (props) => {
   const {labelText, name, type, input, meta: {touched, error}} = props

@@ -6,11 +6,11 @@ import { Card, CardContent, CardListItem } from 'components/Card'
 storiesOf('Card', module)
   .addDecorator((story) => (<div className="p-6">{story()}</div>))
   .add('Default', () => (
-      <Card>
+    <Card>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo ipsa quos
         maxime, expedita ullam qui culpa doloremque earum dignissimos fugit
         rerum quam, at ipsam, incidunt aut laboriosam, eos veritatis aperiam.
-      </Card>
+    </Card>
   ))
   .add('With padded content', () => (
     <Card>

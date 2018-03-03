@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import {
-	NeutralFlashMessage,
-	NegativeFlashMessage,
-	WarningFlashMessage,
-	PositiveFlashMessage
+  NeutralFlashMessage,
+  NegativeFlashMessage,
+  WarningFlashMessage,
+  PositiveFlashMessage
 } from 'components/FlashMessages'
 import { hideMessage } from 'store/action-creators/flashMessages'
 
@@ -20,34 +20,37 @@ export const FlashMessageComponent = (props) => {
 
         let MessageComponent
         switch (type) {
-          case 'success':
-          	MessageComponent = PositiveFlashMessage
-          	break
-					case 'warn':
-						MessageComponent = WarningFlashMessage
-						break
-					case 'danger':
-						MessageComponent = NegativeFlashMessage
-						break
+        case 'neutral':
+          MessageComponent = NeutralFlashMessage
+          break
+        case 'success':
+          MessageComponent = PositiveFlashMessage
+          break
+        case 'warn':
+          MessageComponent = WarningFlashMessage
+          break
+        case 'danger':
+          MessageComponent = NegativeFlashMessage
+          break
         }
 
-				return <MessageComponent
-					key={index}
-					message={message}
-					onDeleteClick={onDeleteClick} />
+        return <MessageComponent
+          key={index}
+          message={message}
+          onDeleteClick={onDeleteClick} />
       })}
     </div>
   )
 }
 
 const mapStateToProps = (state) => ({
-  flashMessages: state.flashMessages,
+  flashMessages: state.flashMessages
 })
 
 const mapDispatchToProps = (dispatch) => ({
-	handleHideMessage: (uid) => {
-		dispatch(hideMessage(uid))
-	}
+  handleHideMessage: (uid) => {
+    dispatch(hideMessage(uid))
+  }
 })
 
 export const FlashMessageRoot = connect(

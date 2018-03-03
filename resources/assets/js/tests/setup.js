@@ -1,4 +1,4 @@
-import { JSDOM  } from 'jsdom'
+import { JSDOM } from 'jsdom'
 import React from 'react'
 import chai from 'chai'
 import sinon from 'sinon'
