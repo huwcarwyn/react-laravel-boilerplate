@@ -15,7 +15,7 @@ import {
 } from 'pages'
 import { AuthGuard, FlashMessageRoot } from 'components'
 
-import { store, browserHistory } from './create-store'
+import { store, browserHistory } from 'store/create-store'
 
 const withDashboard = (ContentComponent) => {
   return (props) => (
