@@ -1,5 +1,4 @@
-
-const initialState = {
+export const initialState = {
   session: {
     currentUser: {
       id: null,
@@ -10,5 +9,3 @@ const initialState = {
   },
   flashMessages: {}
 }
-
-export default initialState

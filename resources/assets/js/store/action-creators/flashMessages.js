@@ -6,7 +6,7 @@ export const flashMessage = (type, message, timeOut = 5000) => async (dispatch) 
   const uid = Date.now()
 
   dispatch({
-    type: actions.FLASH_MESSAGE,
+    type: actions.SHOW_MESSAGE,
     messageType: type,
     uid,
     message

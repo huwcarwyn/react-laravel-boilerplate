@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { userSessionActions as Actions } from '../actions'
+import { sessionActions as Actions } from '../actions'
 
 export const getCurrentUserInfo = () => (dispatch) => {
   return axios.get('/api/users/me')
