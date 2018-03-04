@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { SubmissionError } from 'redux-form'
 
-import SignUpForm from './components/SignUpForm'
+import SignUpForm from './SignUpForm'
 
 export const SignUpComponent = (props) => {
   const { submitSignup } = props

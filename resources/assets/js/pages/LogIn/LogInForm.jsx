@@ -3,22 +3,15 @@ import { Link } from 'react-router-dom'
 import { reduxForm, Field } from 'redux-form'
 
 import { FormLine, NeutralButton } from 'components'
-import { regexes } from '../../../constants'
+import { email as emailRegex } from 'constants/regexes'
+import { linkStyle } from 'constants/styles'
 
-const validateSignUp = (values) => {
+const validateLogin = (values) => {
   let errors = {}
-
-  if (!values.first_name) {
-    errors.first_name = 'This field is required'
-  }
-
-  if (!values.last_name) {
-    errors.last_name = 'This field is required'
-  }
 
   if (!values.email) {
     errors.email = 'This field is required'
-  } else if (!regexes.email.test(values.email)) {
+  } else if (!emailRegex.test(values.email)) {
     errors.email = 'Invalid email address'
   }
 
@@ -29,24 +22,24 @@ const validateSignUp = (values) => {
   return errors
 }
 
-const SignUpForm = (props) => {
+const LoginForm = (props) => {
   const { handleSubmit } = props
 
   return (
     <form onSubmit={handleSubmit}>
-      <Field component={FormLine} type="text" name="first_name" labelText="First Name" />
-      <Field component={FormLine} type="text" name="last_name" labelText="Last Name" />
       <Field component={FormLine} type="text" name="email" labelText="Email" />
       <Field component={FormLine} type="password" name="password" labelText="Password" />
       <div className="flex items-center">
-        <Link className="no-underline text-blue" to="/login">Or Login</Link>
-        <NeutralButton className="ml-auto" type="submit">Sign Up</NeutralButton>
+        <Link className={linkStyle} to="/signup">Or Signup</Link>
+        <span className="inline-block px-2">|</span>
+        <Link className={linkStyle} to="/forgot-password">Forgot Password?</Link>
+        <NeutralButton className="ml-auto" type="submit">Log In</NeutralButton>
       </div>
     </form>
   )
 }
 
 export default reduxForm({
-  form: 'signup',
-  validate: validateSignUp
-})(SignUpForm)
+  form: 'login',
+  validate: validateLogin
+})(LoginForm)

@@ -3,15 +3,16 @@ import { reduxForm, Field } from 'redux-form'
 import { Link } from 'react-router-dom'
 
 import { FormLine, NeutralButton } from 'components'
+import { linkStyle } from 'constants/styles'
 
-import { regexes } from '../../constants'
+import { email as emailRegex } from 'constants/regexes'
 
 const validate = (values) => {
   let errors = {}
 
   if (!values.email) {
     errors.email = 'This field is required'
-  } else if (!regexes.email.test(values.email)) {
+  } else if (!emailRegex.test(values.email)) {
     errors.email = 'Invalid email address'
   }
 
@@ -30,7 +31,7 @@ export const ForgotPasswordFormComponent = (props) => {
         component={FormLine} />
 
       <div className="flex items-center">
-        <Link className="no-underline text-blue" to="/login">Back to Login</Link>
+        <Link className={linkStyle} to="/login">Back to Login</Link>
         <NeutralButton className="ml-auto" type="submit">Request</NeutralButton>
       </div>
     </form>

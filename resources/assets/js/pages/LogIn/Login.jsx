@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { SubmissionError } from 'redux-form'
 
-import LogInForm from './components/LogInForm'
+import LogInForm from './LogInForm'
 
 export const LogInComponent = (props) => {
   const { attemptLogin } = props
