@@ -5,19 +5,13 @@ import { push } from 'react-router-redux'
 import { SubmissionError } from 'redux-form'
 
 import { flashMessage } from 'store/action-creators/flashMessages'
-import { Card, CardContent } from 'components'
 
 import { ForgotPasswordForm } from './ForgotPasswordForm'
 
 export const ForgotPasswordComponent = (props) => {
   const { submitForgotPassword } = props
   return (
-    <Card className="mt-20 max-w-md mx-auto">
-      <CardContent>
-        <h1 className="text-center text-grey-darkest mb-4">Recover Your Password</h1>
-        <ForgotPasswordForm onSubmit={submitForgotPassword} />
-      </CardContent>
-    </Card>
+    <ForgotPasswordForm onSubmit={submitForgotPassword} />
   )
 }
 

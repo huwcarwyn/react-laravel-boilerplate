@@ -4,20 +4,13 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { SubmissionError } from 'redux-form'
 
-import { Card, CardContent } from 'components'
-
 import LogInForm from './components/LogInForm'
 
 export const LogInComponent = (props) => {
   const { attemptLogin } = props
 
   return (
-    <Card className="max-w-md mt-20 mx-auto">
-      <CardContent>
-        <h1 className="text-center text-grey-darkest mb-4">Log In</h1>
-        <LogInForm onSubmit={attemptLogin} />
-      </CardContent>
-    </Card>
+    <LogInForm onSubmit={attemptLogin} />
   )
 }
 

@@ -3,20 +3,13 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { SubmissionError } from 'redux-form'
 
-import { Card, CardContent } from 'components'
-
 import { PasswordResetForm } from './PasswordResetForm'
 
 export const PasswordResetComponent = (props) => {
   const { submitPasswordReset, match } = props
   console.log(match.params.resetToken)
   return (
-    <Card className="mt-20 max-w-md mx-auto">
-      <CardContent>
-        <h1 className="text-center text-grey-darkest mb-4">Recover Your Password</h1>
-        <PasswordResetForm onSubmit={submitPasswordReset} />
-      </CardContent>
-    </Card>
+    <PasswordResetForm onSubmit={submitPasswordReset} />
   )
 }
 

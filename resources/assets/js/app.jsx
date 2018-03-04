@@ -3,7 +3,8 @@ import { Provider } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 
-import { DashboardLayout } from 'layouts/Dashboard'
+import { DashboardLayout, FormPageLayout } from 'layouts'
+
 import {
   LogIn,
   SignUp,
@@ -16,7 +17,6 @@ import { AuthGuard, FlashMessageRoot } from 'components'
 
 import { store, browserHistory } from './create-store'
 
-// Higher order component for rendering a page with the dashboard layout
 const withDashboard = (ContentComponent) => {
   return (props) => (
     <AuthGuard>
@@ -33,10 +33,10 @@ export const App = (props) => (
       <FlashMessageRoot />
       <ConnectedRouter history={browserHistory}>
         <Switch>
-          <Route exact path='/login' component={LogIn} />
-          <Route exact path='/signup' component={SignUp} />
-          <Route exact path='/forgot-password' component={ForgotPassword} />
-          <Route exact path='/reset-password/:resetToken' component={PasswordReset} />
+          <Route exact path='/login' render={() => <FormPageLayout title="Log In"><LogIn /></FormPageLayout>} />
+          <Route exact path='/signup' render={() => <FormPageLayout title="Sign Up"><SignUp /></FormPageLayout>} />
+          <Route exact path='/forgot-password' render={() => <FormPageLayout title="Forgot Password"><ForgotPassword /></FormPageLayout>} />
+          <Route exact path='/reset-password/:resetToken' render={() => <FormPageLayout title="Reset Password"><PasswordReset /></FormPageLayout>} />
           {/* Dashboard routes */}
           <Route exact path='/overview' component={withDashboard(UserOverview)} />
           {/* 404 route */}
