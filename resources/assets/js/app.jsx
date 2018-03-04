@@ -8,7 +8,7 @@ import { DashboardLayout, FormPageLayout } from 'layouts'
 import {
   LogIn,
   SignUp,
-  UserOverview,
+  Overview,
   PasswordReset,
   ForgotPassword,
   NotFound
@@ -38,7 +38,7 @@ export const App = (props) => (
           <Route exact path='/forgot-password' render={() => <FormPageLayout title="Forgot Password"><ForgotPassword /></FormPageLayout>} />
           <Route exact path='/reset-password/:resetToken' render={() => <FormPageLayout title="Reset Password"><PasswordReset /></FormPageLayout>} />
           {/* Dashboard routes */}
-          <Route exact path='/overview' component={withDashboard(UserOverview)} />
+          <Route exact path='/overview' component={withDashboard(Overview)} />
           {/* 404 route */}
           <Route path="*" exact={true} component={NotFound}/>
         </Switch>
