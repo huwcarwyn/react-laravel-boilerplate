@@ -23,7 +23,7 @@ describe('session action creators', () => {
     it('dispatches the correct action with the response data', async () => {
       const expectedActions = [
         { type: actions.SET_CURRENT_USER_INFO,
-          payload: userData
+          user: userData
         }
       ]
 

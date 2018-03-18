@@ -8,7 +8,7 @@ import defaultProfileImage from 'default-profile-picture.jpeg'
 
 export const UserCardComponent = (props) => {
   const { user, colorTheme, className, logOut } = props
-  const { firstName, lastName, profileImage } = user
+  const { first_name: firstName, last_name: lastName, profileImage } = user
 
   const fullName = lastName !== undefined ? [firstName, lastName].join(' ') : firstName
 
@@ -36,7 +36,7 @@ export const UserCardComponent = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.session.currentUser
+  user: state.entities.users[state.session.currentUser]
 })
 
 const mapDispatchToProps = (dispatch) => ({

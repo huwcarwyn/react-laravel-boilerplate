@@ -1,20 +1,17 @@
 import { initialState } from '../initialState'
 
+import { sessionActions as Actions } from 'store/actions'
+import { createReducer } from 'store/reducers/utilities'
+
 const { session } = initialState
 
-export const sessionReducer = (state = session, action) => {
-  switch (action.type) {
-  case 'USER_SESSION/SET_CURRENT_USER_INFO':
-    return {
-      ...state,
-      currentUser: {
-        id: action.payload.id,
-        firstName: action.payload.first_name,
-        lastName: action.payload.last_name,
-        email: action.payload.email
-      }
-    }
-  default:
-    return state
+const setCurrentUser = (state, { user }) => {
+  return {
+    ...state,
+    currentUser: user.id
   }
 }
+
+export const sessionReducer = createReducer(session, {
+  [Actions.SET_CURRENT_USER_INFO]: setCurrentUser
+})

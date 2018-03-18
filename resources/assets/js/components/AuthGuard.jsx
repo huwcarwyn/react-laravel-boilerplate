@@ -50,7 +50,7 @@ export class AuthGuardComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  currentUserId: state.session.currentUser.id
+  currentUserId: state.session.currentUser
 })
 
 const mapDispatchToProps = (dispatch) => ({
