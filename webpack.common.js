@@ -1,8 +1,9 @@
 const path = require('path')
+require('babel-polyfill')
 
 module.exports = {
   entry: {
-    app: path.join(__dirname, 'resources/assets/js/main.jsx')
+    app: ['babel-polyfill', path.join(__dirname, 'resources/assets/js/main.jsx')]
   },
 
   output: {

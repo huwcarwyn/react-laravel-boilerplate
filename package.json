@@ -54,6 +54,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "babel-plugin-react-css-modules": "^3.3.3",
+    "babel-polyfill": "^6.26.0",
     "history": "^4.7.2",
     "normalizr": "^3.2.4",
     "react": "^16.2.0",
