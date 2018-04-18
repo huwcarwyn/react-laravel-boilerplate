@@ -26,43 +26,53 @@ module.exports = merge.smart(common, {
       {
         test: /\.scss$/,
         exclude: /app.scss/,
-        use: [{
-          loader: 'css-loader',
-          options: {
-            import: 1,
-            modules: true,
-            localIdentName: '[local]_[hash:base64:5]'
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              import: 1,
+              modules: true,
+              localIdentName: '[local]_[hash:base64:5]'
+            }
+          }, {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              includePaths: [
+                './resources/assets/styles'
+              ]
+            }
           }
-        }, {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: true,
-            includePaths: [
-              './resources/assets/styles'
-            ]
-          }
-        }]
+        ]
       },
       {
         test: /app.scss/,
-        use: [{
-          loader: 'css-loader'
-        }, {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: true,
-            includePaths: [
-              './resources/assets/styles'
-            ]
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          }, {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              includePaths: [
+                './resources/assets/styles'
+              ]
+            }
+          }, {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [
+                tailwindcss('./tailwind.config.js')
+              ]
+            }
           }
-        }, {
-          loader: 'postcss-loader',
-          options: {
-            plugins: [
-              tailwindcss('./tailwind.config.js')
-            ]
-          }
-        }]
+        ]
       }
     ]
   },
