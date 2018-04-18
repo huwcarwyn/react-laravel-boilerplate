@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 require('babel-polyfill')
 
 module.exports = {
@@ -36,5 +37,9 @@ module.exports = {
   resolve: {
     modules: ['node_modules', path.join(__dirname, 'resources/assets/js'), path.join(__dirname, 'resources/assets/img')],
     extensions: ['.js', '.jsx', '.json']
-  }
+  },
+
+  plugins: [
+    new webpack.EnvironmentPlugin(['NODE_ENV'])
+  ]
 }
