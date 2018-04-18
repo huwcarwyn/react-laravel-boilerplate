@@ -4,7 +4,7 @@ const merge = require('webpack-merge')
 const tailwindcss = require('tailwindcss')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const common = require(path.join(__dirname, 'webpack.base.config.js'))
+const common = require(path.join(__dirname, 'webpack.common.js'))
 
 module.exports = merge.smart(common, {
   entry: {
