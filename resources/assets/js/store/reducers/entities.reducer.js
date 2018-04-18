@@ -1,7 +1,7 @@
-import { initialState } from '../initialState'
 import { merge } from 'lodash'
 import { normalize } from 'normalizr'
 
+import { initialState } from 'store/initialState'
 import { sessionActions } from 'store/actions'
 import { createReducer } from 'store/reducers/utilities'
 import { user as userSchema } from 'store/schemas'

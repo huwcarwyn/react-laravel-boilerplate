@@ -5,5 +5,6 @@ export const initialState = {
   session: {
     currentUser: null
   },
-  flashMessages: {}
+  flashMessages: {},
+  requests: {}
 }

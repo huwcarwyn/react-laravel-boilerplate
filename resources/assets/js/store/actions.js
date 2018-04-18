@@ -6,3 +6,9 @@ export const flashMessageActions = {
   SHOW_MESSAGE: 'FLASH_MESSAGE/SHOW',
   HIDE_MESSAGE: 'FLASH_MESSAGE/HIDE'
 }
+
+export const requestActions = {
+  'REQUEST': 'REQUEST/REQUEST',
+  'FAILED': 'REQUEST/FAILED',
+  'SUCCESS': 'REQUEST/SUCCESS'
+}

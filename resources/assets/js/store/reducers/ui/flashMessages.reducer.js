@@ -1,26 +1,25 @@
-import { initialState } from '../../initialState'
+import { initialState } from 'store/initialState'
+import { flashMessageActions as actions } from 'store/actions'
+import { createReducer } from 'store/reducers/utilities'
 
-import { flashMessageActions as actions } from '../../actions'
 const { flashMessages } = initialState
 
-export const flashMessagesReducer = (state = flashMessages, action) => {
-  switch (action.type) {
-  case actions.SHOW_MESSAGE:
-    return {
-      ...state,
-      [action.uid]: {
-        'type': action.messageType,
-        'message': action.message
-      }
-    }
-
-  case actions.HIDE_MESSAGE:
-    const { ...newState } = state
-    delete newState[action.uid]
-
-    return newState
-
-  default:
-    return state
+const showMessage = (state, action) => ({
+  ...state,
+  [action.uid]: {
+    'type': action.messageType,
+    'message': action.message
   }
+})
+
+const hideMessage = (state, action) => {
+  const { ...newState } = state
+  delete newState[action.uid]
+
+  return newState
 }
+
+export const flashMessagesReducer = createReducer(flashMessages, {
+  [actions.SHOW_MESSAGE]: showMessage,
+  [actions.HIDE_MESSAGE]: hideMessage
+})
