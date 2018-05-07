@@ -23,5 +23,5 @@ I personally use Vagrant and [Homestead](https://laravel.com/docs/5.5/homestead 
 - Install NPM dependencies using `npm install`
 - Make sure to create two databases, one main and one for running the tests
 - Fill out a .env file in the project root using the .env.example file as a template
-- If you want to use the webpack dev server, make sure that the proxy entry in the weback.dev.js
+- If you want to use the webpack dev server, make sure that the proxy entry in the weback.dev.js points to the server that's running your Laravel installation.
 
