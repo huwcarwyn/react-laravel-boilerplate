@@ -3,20 +3,12 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\User,
-		App\Repositories\Eloquent\CRUDRepository,
-		App\Contracts\Repository\UserRepositoryContract;
+	Prettus\Repository\Eloquent\BaseRepository,
+	App\Contracts\Repository\UserRepositoryContract;
 
-class UserRepository extends CRUDRepository implements UserRepositoryContract
+class UserRepository extends BaseRepository implements UserRepositoryContract
 {
-	protected $model;
-
-	public function __construct(User $model)
-	{
-		$this->model = $model;
-	}
-
-	public function findByEmail($email)
-	{
-		return $this->model->where('email', $email)->first();
+	public function model() {
+		return User::class;
 	}
 }

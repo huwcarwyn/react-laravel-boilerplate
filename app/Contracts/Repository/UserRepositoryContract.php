@@ -2,7 +2,9 @@
 
 namespace App\Contracts\Repository;
 
-interface UserRepositoryContract
+use Prettus\Repository\Contracts\RepositoryInterface;
+
+interface UserRepositoryContract extends RepositoryInterface
 {
 
 }

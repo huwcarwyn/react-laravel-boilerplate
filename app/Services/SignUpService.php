@@ -46,11 +46,13 @@ class SignUpService {
       return $this->response->validateError($dataValidator->failed());
     }
 
-    $this->user->create($userInfo);
+    $newUser = $this->user->create($userInfo);
+
+    
 
     // We need to call the password grant endpoint here so that our token is saved in
     // the database.
-    $apiCookie = $this->cookie->make($this->user->getModel()->getKey(), $csrfToken);
+    $apiCookie = $this->cookie->make($newUser->id, $csrfToken);
 
     return $this->response->success('User successfully signed up')->withCookie($apiCookie);
   }
