@@ -7,18 +7,18 @@
     "require": {
         "php": ">=5.6.4",
         "guzzlehttp/guzzle": "^6.3",
-        "laravel/framework": "5.5.*",
-        "laravel/passport": "^4.0",
+        "laravel/framework": "5.6.*",
+        "laravel/passport": "^5.0",
         "laravel/tinker": "~1.0",
         "nesbot/carbon": "^1.22"
     },
     "require-dev": {
-        "codedungeon/phpunit-result-printer": "^0.4.4",
+        "codedungeon/phpunit-result-printer": "^0.17.1",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
-        "laravel/dusk": "^2.0",
+        "laravel/dusk": "^3.0",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~6.0"
+        "phpunit/phpunit": "~7.0"
     },
     "autoload": {
         "classmap": [
@@ -45,8 +45,7 @@
             "php artisan optimize"
         ],
         "post-update-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize"
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
