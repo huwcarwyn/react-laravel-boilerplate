@@ -22,6 +22,6 @@ const incrementRequestState = (state, { actionType }) => changeRequestState(stat
 const decrementRequestState = (state, { actionType }) => changeRequestState(state, actionType, -1)
 
 export const requestReducer = createReducer(requests, {
-  [requestActions.FETCH]: incrementRequestState,
+  [requestActions.REQUEST]: incrementRequestState,
   [requestActions.SUCCESS]: decrementRequestState
 })

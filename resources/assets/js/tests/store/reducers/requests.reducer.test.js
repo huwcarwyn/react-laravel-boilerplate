@@ -15,7 +15,7 @@ describe('requests reducer', () => {
     }
 
     expect(reducer(requests, {
-      type: actions.FETCH,
+      type: actions.REQUEST,
       actionType: 'test'
     })).to.deep.equal(expectedState)
   })

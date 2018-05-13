@@ -1,7 +1,7 @@
 import { requestActions } from 'store/actions'
 
 export const makeRequest = (actionType, requestCall) => async (dispatch) => {
-  dispatch({ type: requestActions.FETCH, actionType })
+  dispatch({ type: requestActions.REQUEST, actionType })
   try {
     const data = await requestCall()
     dispatch({ type: requestActions.SUCCESS, actionType })
