@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 
+import { currentUserSelector } from 'store/selectors/session'
 import defaultProfileImage from 'default-profile-picture.jpeg'
 
 export const UserCardComponent = (props) => {
@@ -36,7 +37,7 @@ export const UserCardComponent = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.entities.users[state.session.currentUser]
+  user: currentUserSelector(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
