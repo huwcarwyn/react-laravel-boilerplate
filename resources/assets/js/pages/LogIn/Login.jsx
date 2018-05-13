@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch) => ({
       })
       .catch((error) => {
         if (error.response.status === 400) {
-          throw new SubmissionError(parseValidationFromResponse(error.response.data.messages))
+          throw new SubmissionError(parseValidationFromResponse(error.response.data))
         }
       })
   }
