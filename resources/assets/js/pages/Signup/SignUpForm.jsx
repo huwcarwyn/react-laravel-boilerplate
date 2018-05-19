@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { reduxForm, Field } from 'redux-form'
 
-import { FormLine, NeutralButton } from 'components'
+import { TextFormLine, NeutralButton } from 'components'
 import { email as emailRegex } from 'constants/regexes'
 import { linkStyle } from 'constants/styles'
 
@@ -35,10 +35,10 @@ const SignUpForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Field component={FormLine} type="text" name="first_name" labelText="First Name" />
-      <Field component={FormLine} type="text" name="last_name" labelText="Last Name" />
-      <Field component={FormLine} type="text" name="email" labelText="Email" />
-      <Field component={FormLine} type="password" name="password" labelText="Password" />
+      <Field component={TextFormLine} type="text" name="first_name" labelText="First Name" />
+      <Field component={TextFormLine} type="text" name="last_name" labelText="Last Name" />
+      <Field component={TextFormLine} type="text" name="email" labelText="Email" />
+      <Field component={TextFormLine} type="password" name="password" labelText="Password" />
       <div className="flex items-center">
         <Link className={linkStyle} to="/login">Or Login</Link>
         <NeutralButton className="ml-auto" type="submit">Sign Up</NeutralButton>

@@ -2,7 +2,7 @@ import React from 'react'
 import { reduxForm, Field } from 'redux-form'
 import { Link } from 'react-router-dom'
 
-import { FormLine, NeutralButton } from 'components'
+import { NeutralButton, TextFormLine } from 'components'
 import { linkStyle } from 'constants/styles'
 
 import { email as emailRegex } from 'constants/regexes'
@@ -28,7 +28,7 @@ export const ForgotPasswordFormComponent = (props) => {
         type="text"
         name="email"
         labelText="Enter Your Email Address"
-        component={FormLine} />
+        component={TextFormLine} />
 
       <div className="flex items-center">
         <Link className={linkStyle} to="/login">Back to Login</Link>
