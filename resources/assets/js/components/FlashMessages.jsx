@@ -14,25 +14,25 @@ export const BaseFlashMessage = (props) => {
 }
 
 export const NeutralFlashMessage = (props) => (
-  <BaseFlashMessage className="bg-blue">
+  <BaseFlashMessage {...props} className="bg-blue">
     {props.message}
   </BaseFlashMessage>
 )
 
 export const NegativeFlashMessage = (props) => (
-  <BaseFlashMessage className="bg-red">
+  <BaseFlashMessage {...props} className="bg-red">
     {props.message}
   </BaseFlashMessage>
 )
 
 export const WarningFlashMessage = (props) => (
-  <BaseFlashMessage className="bg-yellow-dark">
+  <BaseFlashMessage {...props} className="bg-yellow-dark">
     {props.message}
   </BaseFlashMessage>
 )
 
 export const PositiveFlashMessage = (props) => (
-  <BaseFlashMessage className="bg-green">
+  <BaseFlashMessage {...props} className="bg-green">
     {props.message}
   </BaseFlashMessage>
 )

@@ -1,24 +1,24 @@
 import React from 'react'
 
 export const Card = (props) => {
-  const { title, children } = props
+  const { title, children, className } = props
 
   return (
-    <div className={`rounded overflow-hidden shadow border border-grey-light bg-white text-grey-darker ${props.className ? props.className : ''}`}>
+    <div className={`rounded overflow-hidden shadow border border-grey-light bg-white text-grey-darker ${className || ''}`}>
       {title && (<div className="text-lg font-bold py-3 px-4 border-b border-grey-light">{title}</div>)}
       {children}
     </div>
   )
 }
 
-export const CardContent = (props) => (
-  <div className={`p-8 ${props.className || ''}`}>
-    {props.children}
+export const CardContent = ({className, children}) => (
+  <div className={`p-8 ${className || ''}`}>
+    {children}
   </div>
 )
 
-export const CardListItem = (props) => (
+export const CardListItem = ({children}) => (
   <div className="p-4 border-b border-grey-light">
-    {props.children}
+    {children}
   </div>
 )

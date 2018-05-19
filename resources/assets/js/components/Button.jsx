@@ -1,9 +1,11 @@
 import React from 'react'
 
+const baseButtonStyles = 'bg-transparent font-semibold border hover:text-white hover:border-transparent'
+
 export const NeutralButton = (props) => (
   <button
     type={props.type}
-    className={`bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent ${props.className}`}>
+    className={`${baseButtonStyles} hover:bg-blue text-blue-dark py-2 px-4 border-blue  ${props.className}`}>
     {props.children}
   </button>
 )
@@ -11,7 +13,7 @@ export const NeutralButton = (props) => (
 export const NegativeButton = (props) => (
   <button
     type={props.type}
-    className={`bg-transparent hover:bg-red text-red-dark font-semibold hover:text-white py-2 px-4 border border-red hover:border-transparent ${props.className}`}>
+    className={`${baseButtonStyles} hover:bg-red text-red-dark py-2 px-4 border-red ${props.className}`}>
     {props.children}
   </button>
 )
@@ -19,7 +21,7 @@ export const NegativeButton = (props) => (
 export const PositiveButton = (props) => (
   <button
     type={props.type}
-    className={`bg-transparent hover:bg-green text-green-dark font-semibold hover:text-white py-2 px-4 border border-green hover:border-transparent ${props.className}`}>
+    className={`${baseButtonStyles} hover:bg-green text-green-dark py-2 px-4 border-green ${props.className}`}>
     {props.children}
   </button>
 )
