@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PasswordInput, TextInput } from 'components'
+import { PasswordInput, TextArea, TextInput } from 'components'
 
 export const FormLine = (props) => {
   const {labelText, name, children, meta: {touched, error}} = props
@@ -23,5 +23,11 @@ export const TextFormLine = (props) => (
 export const PasswordFormLine = (props) => (
   <FormLine {...props}>
     <PasswordInput {...props.input} />
+  </FormLine>
+)
+
+export const TextAreaFormLine = (props) => (
+  <FormLine {...props}>
+    <TextArea {...props.input} />
   </FormLine>
 )
