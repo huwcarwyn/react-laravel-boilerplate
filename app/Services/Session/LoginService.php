@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Session;
 
 use Illuminate\Contracts\Routing\ResponseFactory as Response,
     Illuminate\Contracts\Validation\Factory as Validator,

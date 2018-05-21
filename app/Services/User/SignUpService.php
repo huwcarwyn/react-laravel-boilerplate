@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\User;
 
 use App\Contracts\Repository\UserRepositoryContract as UserRepository,
     Illuminate\Contracts\Routing\ResponseFactory as Response,
@@ -54,6 +54,6 @@ class SignUpService {
     // the database.
     $apiCookie = $this->cookie->make($newUser->id, $csrfToken);
 
-    return $this->response->success('User successfully signed up')->withCookie($apiCookie);
+    return $this->response->success(['message' => 'User successfully signed up'])->withCookie($apiCookie);
   }
 }

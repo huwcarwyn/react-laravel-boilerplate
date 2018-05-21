@@ -2,8 +2,8 @@
 
 namespace App\Api\Controllers;
 
-use App\Services\ForgotPasswordLinkService,
-    App\Services\ResetPasswordService,
+use App\Services\PasswordReset\ForgotPasswordLinkService,
+    App\Services\PasswordReset\ResetPasswordService,
     Illuminate\Http\Request;
 
 class PasswordResetController

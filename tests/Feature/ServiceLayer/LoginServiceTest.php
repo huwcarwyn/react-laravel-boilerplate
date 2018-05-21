@@ -3,7 +3,7 @@
 namespace Tests\Feature\ServiceLayer;
 
 use Tests\TestCase,
-	App\Services\LoginService,
+	App\Services\Session\LoginService,
 	Illuminate\Foundation\Testing\WithoutMiddleware,
 	Illuminate\Foundation\Testing\RefreshDatabase;
 

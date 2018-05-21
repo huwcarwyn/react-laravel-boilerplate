@@ -4,7 +4,7 @@ namespace Tests\Feature\ServiceLayer;
 
 use Carbon\Carbon,
     Tests\TestCase,
-	App\Services\SignUpService,
+	App\Services\User\SignUpService,
 	Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SignUpServiceTest extends TestCase

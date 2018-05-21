@@ -3,8 +3,8 @@
 namespace App\Api\Controllers;
 
 use Illuminate\Contracts\Auth\Factory as Auth,
-		App\Services\LoginService,
-		App\Services\LogoutService,
+		App\Services\Session\LoginService,
+		App\Services\Session\LogoutService,
 		Illuminate\Http\Request;
 
 class SessionController {

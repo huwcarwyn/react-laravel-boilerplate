@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\PasswordReset;
 
 use Illuminate\Contracts\Routing\ResponseFactory as Response,
 	Illuminate\Foundation\Validation\ValidatesRequests,
@@ -33,7 +33,7 @@ class ResetPasswordService
 
 	public function sendResetResponse($message)
 	{
-		return $this->response->success($message);
+		return $this->response->success(['message' => $message]);
 	}
 
 	public function sendResetFailedResponse($message)

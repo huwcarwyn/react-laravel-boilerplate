@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\PasswordReset;
 
 use Illuminate\Contracts\Routing\ResponseFactory as Response,
 	Illuminate\Foundation\Auth\SendsPasswordResetEmails,
@@ -27,12 +27,12 @@ class ForgotPasswordLinkService
 	 */
 	public function sendResetLinkResponse()
 	{
-		return $this->response->success('Password link reset request sent');
+		return $this->response->success(['message' => 'Password link reset request sent']);
 	}
 
 	public function sendResetLinkFailedResponse()
 	{
-		return $this->sendResetLinkResponse('Password link reset request sent');
+		return $this->sendResetLinkResponse(['message' => 'Password link reset request sent']);
 	}
 
 	public function broker()
