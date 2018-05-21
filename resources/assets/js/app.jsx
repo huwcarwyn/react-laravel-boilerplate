@@ -12,7 +12,7 @@ import {
   PasswordReset,
   ForgotPassword,
   NotFound,
-  UserSettings
+  SettingsRoutes
 } from 'pages'
 import { AuthGuard, FlashMessageRoot } from 'components'
 
@@ -41,7 +41,7 @@ export const App = (props) => (
 
           {/* Dashboard routes */}
           <Route exact path='/' component={withDashboard(Overview)} />
-          <Route exact path='/settings' component={withDashboard(UserSettings)} />
+          <Route path='/settings' component={withDashboard(SettingsRoutes)} />
           {/* 404 route */}
           <Route path="*" exact={true} component={NotFound}/>
         </Switch>

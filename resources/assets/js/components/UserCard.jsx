@@ -28,7 +28,7 @@ export const UserCardComponent = (props) => {
             <span className={`${themeTextClass} underline cursor-pointer`} onClick={logOut}>Logout</span>
           </li>
           <li className="inline-block">
-            <Link className={`${themeTextClass}`} to="/settings">Settings</Link>
+            <Link className={`${themeTextClass}`} to="/settings/user">Settings</Link>
           </li>
         </ul>
       </div>
