@@ -11,7 +11,8 @@ import {
   Overview,
   PasswordReset,
   ForgotPassword,
-  NotFound
+  NotFound,
+  UserSettings
 } from 'pages'
 import { AuthGuard, FlashMessageRoot } from 'components'
 
@@ -37,8 +38,10 @@ export const App = (props) => (
           <Route exact path='/signup' render={() => <FormPageLayout title="Sign Up"><SignUp /></FormPageLayout>} />
           <Route exact path='/forgot-password' render={() => <FormPageLayout title="Forgot Password"><ForgotPassword /></FormPageLayout>} />
           <Route exact path='/reset-password/:resetToken' render={() => <FormPageLayout title="Reset Password"><PasswordReset /></FormPageLayout>} />
+
           {/* Dashboard routes */}
-          <Route exact path='/overview' component={withDashboard(Overview)} />
+          <Route exact path='/' component={withDashboard(Overview)} />
+          <Route exact path='/settings' component={withDashboard(UserSettings)} />
           {/* 404 route */}
           <Route path="*" exact={true} component={NotFound}/>
         </Switch>

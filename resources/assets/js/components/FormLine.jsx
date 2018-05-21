@@ -3,13 +3,15 @@ import React from 'react'
 import { PasswordInput, TextArea, TextInput } from 'components'
 
 export const FormLine = (props) => {
-  const {labelText, name, children, meta: {touched, error}} = props
+  const {labelText, name, children, className, meta: {touched, error}} = props
 
   return (
-    <div className="block py-4">
-      <label className="block pb-2 text-grey-darker text-md" htmlFor={name}>{labelText}</label>
-      {touched && (error && <div className="text-red text-sm">{error}</div>)}
-      {children}
+    <div className={`block py-4 ${className || ''}`}>
+      <label className="block text-grey-darker text-md" htmlFor={name}>
+        <span className="inline-block pb-2">{labelText}</span>
+        {touched && (error && <div className="text-red text-sm">{error}</div>)}
+        {children}
+      </label>
     </div>
   )
 }

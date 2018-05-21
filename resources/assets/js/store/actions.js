@@ -12,3 +12,7 @@ export const requestActions = {
   'FAILED': 'REQUEST/FAILED',
   'SUCCESS': 'REQUEST/SUCCESS'
 }
+
+export const userActions = {
+  'SAVE': 'USER/SAVE'
+}
