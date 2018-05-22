@@ -1,8 +1,9 @@
 import React from 'react'
-import axios from 'axios'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { SubmissionError } from 'redux-form'
+
+import { logIn } from 'store/action-creators/session'
 
 import LogInForm from './LogInForm'
 
@@ -26,7 +27,7 @@ const parseValidationFromResponse = (response) => {
 
 const mapDispatchToProps = (dispatch) => ({
   attemptLogin: (loginDetails) => {
-    return axios.post('/api/login', loginDetails)
+    return dispatch(logIn(loginDetails))
       .then((response) => {
         dispatch(push('/'))
       })
