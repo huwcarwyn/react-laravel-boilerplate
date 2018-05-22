@@ -10,10 +10,9 @@ class ResponseMacroServiceProvider extends ServiceProvider
   public function boot(ResponseFactory $response)
   {
     $response->macro('success', function($data) use ($response) {
-      return $response->json([
-        'errors' => false,
-        'data' => $data
-      ], 200);
+      $responseData = array_merge($data, ['errors' => false]);
+      
+      return $response->json($responseData, 200);
     });
 
     $response->macro('validateError', function($messages) use ($response) {
