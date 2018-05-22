@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\ServiceLayer;
+namespace Tests\Feature\Service\Session;
 
 use Tests\TestCase,
 	App\Services\Session\LoginService,

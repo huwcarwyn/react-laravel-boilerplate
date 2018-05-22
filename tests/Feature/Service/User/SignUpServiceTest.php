@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\ServiceLayer;
+namespace Tests\Feature\Service\User;
 
 use Carbon\Carbon,
     Tests\TestCase,
