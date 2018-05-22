@@ -160,7 +160,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ResponseMacroServiceProvider::class,
-        App\Providers\ServiceLayerServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
 
