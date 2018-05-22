@@ -14,7 +14,6 @@ class SignUpService {
   private $response;
   private $cookie;
   private $user;
-  private $oAuthService;
 
   public function __construct(
     Validator $validator,
