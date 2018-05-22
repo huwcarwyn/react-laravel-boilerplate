@@ -3,7 +3,7 @@ import React from 'react'
 const OverviewComponent = (props) => {
   return (
     <div>
-      TEST
+      Put your initial dashboard page here
     </div>
   )
 }
