@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => ({
   attemptLogin: (loginDetails) => {
     return axios.post('/api/login', loginDetails)
       .then((response) => {
-        dispatch(push('/overview'))
+        dispatch(push('/'))
       })
       .catch((error) => {
         if (error.response.status === 400) {
