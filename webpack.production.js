@@ -8,8 +8,8 @@ const common = require(path.join(__dirname, 'webpack.common.js'))
 
 module.exports = merge.smart(common, {
   entry: {
-    vendor: ['react', 'react-dom', 'react-redux', 'react-router', 'react-router-dom', 'redux-form', 'axios', 'redux'],
-    app: path.join(__dirname, 'resources/assets/js/app.jsx')
+    vendor: ['babel-polyfill', 'react', 'react-dom', 'react-redux', 'react-router', 'react-router-dom', 'redux-form', 'axios', 'redux'],
+    app: path.join(__dirname, 'resources/assets/js/main.jsx')
   },
 
   module: {
