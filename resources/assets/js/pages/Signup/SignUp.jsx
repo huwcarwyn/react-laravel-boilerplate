@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => ({
       .then((response) => {
         if (response.status === 200) {
           // Successful signup, move on to dashboard/overview.
-          dispatch(push('/overview'))
+          dispatch(push('/'))
         }
       })
       .catch((error) => {
