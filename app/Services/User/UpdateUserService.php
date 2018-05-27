@@ -28,7 +28,7 @@ class UpdateUserService {
     return $this->validator->make($data, [
       'first_name' => 'required',
       'last_name' => 'required',
-      'email' => 'required|email|unique:users,email',
+      'email' => 'email|unique:users,email',
       'old_password' => 'required_with:new_password',
       'new_password' => 'confirmed'
     ]);
@@ -36,6 +36,12 @@ class UpdateUserService {
 
   public function updateUser($userData)
   {
+    $currentUser = $this->repository->find($userData['id']);
+
+    if($userData['email'] && $currentUser->email == $userData['email']) {
+      unset($userData['email']);
+    }
+
     $validator = $this->makeUserUpdateValidator($userData);
 
     if ($validator->fails())
