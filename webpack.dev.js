@@ -5,6 +5,8 @@ const tailwindcss = require('tailwindcss')
 const common = require(path.join(__dirname, 'webpack.common.js'))
 
 module.exports = merge.smart(common, {
+  mode: 'development',
+
   devtool: 'inline-source-map',
 
   devServer: {

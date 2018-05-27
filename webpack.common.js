@@ -1,7 +1,11 @@
 const path = require('path')
 const webpack = require('webpack')
 
+require('babel-polyfill')
+
 module.exports = {
+  mode: 'development',
+
   entry: {
     app: ['babel-polyfill', path.join(__dirname, 'resources/assets/js/main.jsx')]
   },
