@@ -3,16 +3,21 @@
 namespace App\Api\Controllers;
 
 use Illuminate\Validation\ValidationException,
+    App\Services\User\UpdateUserService,
     App\Services\User\SignUpService,
     Illuminate\Http\Request;
 
 class UserController
 {
   private $signUpService;
+  private $updateUserService;
 
-  public function __construct(SignUpService $signUpService)
+  public function __construct(
+    SignUpService $signUpService,
+    UpdateUserService $updateUserService)
   {
     $this->signUpService = $signUpService;
+    $this->updateUserService = $updateUserService;
 	}
 
   public function signUp(Request $request)
@@ -26,14 +31,15 @@ class UserController
   public function update(Request $request)
   {
     $userData = $request->only([
+      'id',
       'first_name',
       'last_name',
       'email',
       'old_password',
       'new_password',
-      'new_password_repeat'
+      'new_password_confirmation'
     ]);
 
-    $this->createUserService->create($userData);
+    return $this->updateUserService->updateUser($userData);
   }
 }

@@ -2,7 +2,7 @@ import { merge } from 'lodash'
 import { normalize } from 'normalizr'
 
 import { initialState } from 'store/initialState'
-import { sessionActions } from 'store/actions'
+import { userActions } from 'store/actions'
 import { createReducer } from 'store/reducers/utilities'
 import { user as userSchema } from 'store/schemas'
 
@@ -17,5 +17,5 @@ const addUsersToStore = (state, { user }) => {
 }
 
 export const entitiesReducer = createReducer(entities, {
-  [sessionActions.SET_CURRENT_USER_INFO]: addUsersToStore
+  [userActions.SET_CURRENT_USER_INFO]: addUsersToStore
 })

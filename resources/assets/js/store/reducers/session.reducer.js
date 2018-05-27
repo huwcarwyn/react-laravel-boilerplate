@@ -1,6 +1,6 @@
 import { initialState } from '../initialState'
 
-import { sessionActions as Actions } from 'store/actions'
+import { userActions } from 'store/actions'
 import { createReducer } from 'store/reducers/utilities'
 
 const { session } = initialState
@@ -13,5 +13,5 @@ const setCurrentUser = (state, { user }) => {
 }
 
 export const sessionReducer = createReducer(session, {
-  [Actions.SET_CURRENT_USER_INFO]: setCurrentUser
+  [userActions.SET_CURRENT_USER_INFO]: setCurrentUser
 })

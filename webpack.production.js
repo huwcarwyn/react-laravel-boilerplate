@@ -17,7 +17,6 @@ module.exports = merge.smart(common, {
   mode: 'production',
 
   entry: {
-    vendor: ['babel-polyfill', 'react', 'react-dom', 'react-redux', 'react-router', 'react-router-dom', 'redux-form', 'axios', 'redux'],
     app: path.join(__dirname, 'resources/assets/js/main.jsx')
   },
 

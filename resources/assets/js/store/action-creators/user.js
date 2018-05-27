@@ -2,16 +2,19 @@ import axios from 'axios'
 
 import { userActions } from 'store/actions'
 import { makeRequest } from 'store/action-creators/requests'
+import { flashMessage } from 'store/action-creators/flashMessages'
 
 export const saveUser = (userData) => async (dispatch) => {
   const { id } = userData
 
-  return dispatch(
+  const response = await dispatch(
     makeRequest(
       'save-user-settings',
-      () => axios.put(`/api/user/${id}`, userData)
-    ))
-    .then((response) => {
-      dispatch({ type: userActions.save, payload: response.data.data })
-    })
+      () => axios.put(`/api/users/${id}`, userData)
+    )
+  )
+
+  dispatch(flashMessage('success', 'Successfully saved user info', 2000))
+
+  dispatch({ type: userActions.SET_CURRENT_USER_INFO, user: response.data.data })
 }

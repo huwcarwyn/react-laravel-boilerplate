@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => ['auth:api']], function() {
 	Route::get('/users/me', '\App\Api\Controllers\SessionController@currentUser');
 	Route::get('/logout', '\App\Api\Controllers\SessionController@logout');
+
+	Route::apiResource('/users', '\App\Api\Controllers\UserController');
 });
 
 /**

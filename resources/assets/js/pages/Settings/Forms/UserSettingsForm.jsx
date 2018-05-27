@@ -1,14 +1,16 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 
 import { PasswordFormLine, PositiveButton, TextFormLine } from 'components'
+import { saveUser } from 'store/action-creators/user'
 
 export class UserSettingsFormComponent extends React.Component {
   render () {
-    const { saveUserSettings } = this.props
+    const { handleSubmit, saveUserSettings } = this.props
+
     return (
-      <Fragment>
+      <form onSubmit={handleSubmit(saveUserSettings)}>
         <h3 className="text-grey-darkest font-normal">Your Details</h3>
 
         <div className="flex items-center">
@@ -45,22 +47,22 @@ export class UserSettingsFormComponent extends React.Component {
             labelText="New Password"
             className="flex-grow" />
           <Field
-            name="new_password_repeat"
+            name="new_password_confirmation"
             component={PasswordFormLine}
             labelText="Repeat your new password"
             className="flex-grow pl-4" />
         </div>
 
         <div className="flex border-grey-light">
-          <PositiveButton className="ml-auto" onClick={saveUserSettings}>Save Settings</PositiveButton>
+          <PositiveButton type="submit" className="ml-auto">Save Settings</PositiveButton>
         </div>
-      </Fragment>
+      </form>
     )
   }
 }
 
 export const UserSettingsFormForm = reduxForm({
-  form: 'accountSetting'
+  form: 'accountSettings'
 })(UserSettingsFormComponent)
 
 const mapStateToProps = (state) => {
@@ -71,8 +73,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  saveUserSettings: () => {
-    dispatch()
+  saveUserSettings: async (userData) => {
+    await dispatch(saveUser(userData))
   }
 })
 

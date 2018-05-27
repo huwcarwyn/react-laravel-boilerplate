@@ -8,7 +8,7 @@ use App\Contracts\Repository\UserRepositoryContract as UserRepository,
     Illuminate\Validation\ValidationException,
     Illuminate\Http\Request;
 
-class SignUpService {
+class UpdateUserService {
   private $validator;
   private $repository;
   private $user;
@@ -40,11 +40,11 @@ class SignUpService {
 
     if ($validator->fails())
     {
-      return $this->response->validationError($validator->failed());
+      return $this->response->validateError($validator->failed());
     }
 
-    $updatedUser = $this->repository->update($userData);
+    $updatedUser = $this->repository->update($userData, $userData['id']);
 
-    return $response->success($updatedUser)
+    return $this->response->success(['data' => $updatedUser]);
   }
 }
