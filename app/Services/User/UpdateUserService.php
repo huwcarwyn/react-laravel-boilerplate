@@ -38,7 +38,8 @@ class UpdateUserService {
   {
     $currentUser = $this->repository->find($userData['id']);
 
-    if($userData['email'] && $currentUser->email == $userData['email']) {
+    if($userData['email'] && $currentUser->email == $userData['email']) 
+    {
       unset($userData['email']);
     }
 

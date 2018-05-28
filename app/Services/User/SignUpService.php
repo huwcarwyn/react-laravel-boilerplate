@@ -47,10 +47,6 @@ class SignUpService {
 
     $newUser = $this->user->create($userInfo);
 
-    
-
-    // We need to call the password grant endpoint here so that our token is saved in
-    // the database.
     $apiCookie = $this->cookie->make($newUser->id, $csrfToken);
 
     return $this->response->success(['message' => 'User successfully signed up'])->withCookie($apiCookie);

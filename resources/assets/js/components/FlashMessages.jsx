@@ -4,7 +4,7 @@ export const BaseFlashMessage = (props) => {
   const { className, handleDeleteClick } = props
 
   return (
-    <div className={`flex text-white slide-down p-2 ${className || ''}`}>
+    <div className={`fixed w-screen flex text-white slide-down p-2 ${className || ''}`}>
       {props.children}
       <span className="ml-auto" onClick={handleDeleteClick}>
         X
