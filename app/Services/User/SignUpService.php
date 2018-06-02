@@ -5,9 +5,7 @@ namespace App\Services\User;
 use App\Contracts\Repository\UserRepositoryContract as UserRepository,
     Illuminate\Contracts\Routing\ResponseFactory as Response,
     Illuminate\Contracts\Validation\Factory as Validator,
-    Illuminate\Validation\ValidationException,
-    Laravel\Passport\ApiTokenCookieFactory,
-    Illuminate\Http\Request;
+    Laravel\Passport\ApiTokenCookieFactory;
 
 class SignUpService {
   private $validator;

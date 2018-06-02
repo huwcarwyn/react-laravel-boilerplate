@@ -4,10 +4,8 @@ namespace App\Services\User;
 
 use App\Contracts\Repository\UserRepositoryContract as UserRepository,
     Illuminate\Contracts\Routing\ResponseFactory as Response,
-    Illuminate\Contracts\Validation\Factory as Validator,
-    Illuminate\Validation\ValidationException,
-    Illuminate\Http\Request;
-
+    Illuminate\Contracts\Validation\Factory as Validator;
+    
 class UpdateUserService {
   private $validator;
   private $repository;
@@ -29,8 +27,6 @@ class UpdateUserService {
       'first_name' => 'required',
       'last_name' => 'required',
       'email' => 'email|unique:users,email',
-      'old_password' => 'required_with:new_password',
-      'new_password' => 'confirmed'
     ]);
   }
 
