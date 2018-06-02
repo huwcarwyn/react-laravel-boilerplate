@@ -22,10 +22,10 @@ class ResponseMacroServiceProvider extends ServiceProvider
       ], 422);
     });
 
-    $response->macro('error', function($messages) use ($response) {
+    $response->macro('error', function($message) use ($response) {
       return $response->json([
         'errors' => true,
-        'messages' => $messages
+        'message' => $message
       ], 400);
     });
   }
