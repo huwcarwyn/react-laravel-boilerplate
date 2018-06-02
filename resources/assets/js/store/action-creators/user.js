@@ -1,8 +1,6 @@
 import axios from 'axios'
 
-import { userActions } from 'store/actions'
 import { makeRequest } from 'store/action-creators/requests'
-import { flashMessage } from 'store/action-creators/flashMessages'
 
 export const saveUser = (userData) => async (dispatch) => {
   const { id } = userData
@@ -14,7 +12,18 @@ export const saveUser = (userData) => async (dispatch) => {
     )
   )
 
-  dispatch(flashMessage('success', 'Successfully saved user info', 4000))
+  return response
+}
 
-  dispatch({ type: userActions.SET_CURRENT_USER_INFO, user: response.data.data })
+export const changePassword = (data) => async (dispatch) => {
+  const { user_id: userId } = data
+
+  const response = await dispatch(
+    makeRequest(
+      'change-user-password',
+      () => axios.put(`/api/users/${userId}/update-password`, data)
+    )
+  )
+
+  return response
 }
