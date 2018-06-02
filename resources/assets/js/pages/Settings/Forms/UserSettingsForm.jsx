@@ -2,17 +2,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 
-import { PasswordFormLine, PositiveButton, TextFormLine } from 'components'
-import { saveUser } from 'store/action-creators/user'
+import { PositiveButton, TextFormLine } from 'components'
+import { email as emailRegex } from 'constants/regexes'
 
 export class UserSettingsFormComponent extends React.Component {
   render () {
-    const { handleSubmit, saveUserSettings } = this.props
+    const { handleSubmit, className } = this.props
 
     return (
-      <form onSubmit={handleSubmit(saveUserSettings)}>
-        <h3 className="text-grey-darkest font-normal">Your Details</h3>
-
+      <form className={className} onSubmit={handleSubmit}>
         <div className="flex items-center">
           <Field
             name="first_name"
@@ -32,37 +30,37 @@ export class UserSettingsFormComponent extends React.Component {
           labelText="Email"
           className="mb-6" />
 
-        <h3 className="text-grey-darkest font-normal">Change Your Password</h3>
-
-        <Field
-          name="old_password"
-          component={PasswordFormLine}
-          labelText="Enter your old password"
-          className="mb-2" />
-
-        <div className="flex items-center mb-4">
-          <Field
-            name="new_password"
-            component={PasswordFormLine}
-            labelText="New Password"
-            className="flex-grow" />
-          <Field
-            name="new_password_confirmation"
-            component={PasswordFormLine}
-            labelText="Repeat your new password"
-            className="flex-grow pl-4" />
-        </div>
-
         <div className="flex border-grey-light">
-          <PositiveButton type="submit" className="ml-auto">Save Settings</PositiveButton>
+          <PositiveButton type="submit" className="ml-auto">Save User Details</PositiveButton>
         </div>
       </form>
     )
   }
 }
 
-export const UserSettingsFormForm = reduxForm({
-  form: 'accountSettings'
+const validateUserSettings = (values) => {
+  let errors = {}
+
+  if (!values.first_name) {
+    errors.first_name = 'This field is required'
+  }
+
+  if (!values.last_name) {
+    errors.last_name = 'This field is required'
+  }
+
+  if (!values.email) {
+    errors.email = 'This field is required'
+  } else if (!emailRegex.test(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+
+  return errors
+}
+
+const UserSettingsFormForm = reduxForm({
+  form: 'accountSettings',
+  validate: validateUserSettings
 })(UserSettingsFormComponent)
 
 const mapStateToProps = (state) => {
@@ -72,13 +70,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  saveUserSettings: async (userData) => {
-    await dispatch(saveUser(userData))
-  }
-})
-
 export const UserSettingsForm = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(UserSettingsFormForm)

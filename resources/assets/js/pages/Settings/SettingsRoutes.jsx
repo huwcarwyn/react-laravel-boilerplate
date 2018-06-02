@@ -5,7 +5,7 @@ import { NavLink, Route, Switch } from 'react-router-dom'
 import { Card, CardContent } from 'components'
 import { linkStyle } from 'constants/styles'
 
-import { UserSettingsForm } from './Forms/UserSettingsForm'
+import { UserSettings } from './UserSettings'
 import { AppSettingsForm } from './Forms/AppSettingsForm'
 import { BillingSettingsForm } from './Forms/BillingSettingsForm'
 
@@ -36,7 +36,7 @@ export class SettingsRoutesComponent extends React.Component {
           <Card className="flex-grow ml-4">
             <CardContent>
               <Switch>
-                <Route exact path={`${currentUrl}/user`} component={UserSettingsForm} />
+                <Route exact path={`${currentUrl}/user`} component={UserSettings} />
                 <Route exact path={`${currentUrl}/app`} component={AppSettingsForm} />
                 <Route exact path={`${currentUrl}/billing`} component={BillingSettingsForm} />
               </Switch>
