@@ -1,10 +1,13 @@
 const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const tailwindcss = require('tailwindcss')
-const common = require(path.join(__dirname, 'webpack.common.js'))
+const {
+  commonConfig,
+  appSCSSLoader,
+  moduleSCSSLoader
+} = require(path.join(__dirname, 'webpack.common.js'))
 
-module.exports = merge.smart(common, {
+module.exports = merge.smart(commonConfig, {
   mode: 'development',
 
   devtool: 'inline-source-map',
@@ -25,57 +28,8 @@ module.exports = merge.smart(common, {
 
   module: {
     rules: [
-      {
-        test: /\.scss$/,
-        exclude: /app.scss/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              import: 1,
-              modules: true,
-              localIdentName: '[local]_[hash:base64:5]'
-            }
-          }, {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-              includePaths: [
-                './resources/assets/styles'
-              ]
-            }
-          }
-        ]
-      },
-      {
-        test: /app.scss/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader'
-          }, {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-              includePaths: [
-                './resources/assets/styles'
-              ]
-            }
-          }, {
-            loader: 'postcss-loader',
-            options: {
-              plugins: [
-                tailwindcss('./tailwind.config.js')
-              ]
-            }
-          }
-        ]
-      }
+      {...appSCSSLoader},
+      {...moduleSCSSLoader}
     ]
   },
 

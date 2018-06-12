@@ -1,7 +1,73 @@
 const path = require('path')
 const webpack = require('webpack')
+const tailwindcss = require('tailwindcss')
 
-module.exports = {
+const appSCSSLoader = {
+  test: /app.scss/,
+  use: [
+    {
+      loader: 'style-loader'
+    },
+    {
+      loader: 'css-loader'
+    }, {
+      loader: 'sass-loader',
+      options: {
+        sourceMap: true,
+        includePaths: [
+          './resources/assets/styles'
+        ]
+      }
+    }, {
+      loader: 'postcss-loader',
+      options: {
+        plugins: [
+          tailwindcss('./tailwind.config.js')
+        ]
+      }
+    }
+  ]
+}
+
+const moduleSCSSLoader = {
+  test: /\.scss$/,
+  exclude: /app.scss/,
+  use: [
+    {
+      loader: 'style-loader'
+    },
+    {
+      loader: 'css-loader',
+      options: {
+        import: 1,
+        modules: true,
+        localIdentName: '[local]_[hash:base64:5]'
+      }
+    }, {
+      loader: 'sass-loader',
+      options: {
+        sourceMap: true,
+        includePaths: [
+          './resources/assets/styles'
+        ]
+      }
+    }
+  ]
+}
+
+const fileLoader = {
+  test: /\.(png|jpg|jpeg|gif)$/,
+  use: [
+    {
+      loader: 'file-loader',
+      options: {
+        name: 'img/[name].[ext]'
+      }
+    }
+  ]
+}
+
+const commonConfig = {
   mode: 'development',
 
   entry: {
@@ -21,17 +87,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/
       },
-      {
-        test: /\.(png|jpg|jpeg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'img/[name].[ext]'
-            }
-          }
-        ]
-      }
+      {...fileLoader}
     ]
   },
 
@@ -43,4 +99,11 @@ module.exports = {
   plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV'])
   ]
+}
+
+module.exports = {
+  commonConfig,
+  appSCSSLoader,
+  moduleSCSSLoader,
+  fileLoader
 }
