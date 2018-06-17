@@ -1,5 +1,5 @@
 import { initialState } from 'store/initialState'
-import { sessionActions as actions } from 'store/actions'
+import { userActions as actions } from 'store/actions'
 import { sessionReducer as reducer } from 'store/reducers/session.reducer'
 
 describe('session reducer', () => {

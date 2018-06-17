@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { mockStore } from 'tests/store/mock-store'
+import { userActions as actions } from 'store/actions'
 import { getCurrentUserInfo } from 'store/action-creators/session'
-
-import { sessionActions as actions } from 'store/actions'
 
 describe('session action creators', () => {
   describe('getCurrentUserInfo', () => {
