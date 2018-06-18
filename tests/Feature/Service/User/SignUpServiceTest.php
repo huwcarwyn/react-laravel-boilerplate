@@ -4,8 +4,8 @@ namespace Tests\Feature\Service\User;
 
 use Carbon\Carbon,
     Tests\TestCase,
-	App\Services\User\SignUpService,
-	Illuminate\Foundation\Testing\RefreshDatabase;
+    App\Services\User\SignUpService,
+    Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SignUpServiceTest extends TestCase
 {
@@ -33,50 +33,50 @@ class SignUpServiceTest extends TestCase
         $this->oAuthService = \Mockery::mock('App\Services\OauthService');
 
         $this->signUpService = new SignUpService(
-            $validation,
-            $userRepository,
-            $this->response,
-            $cookie,
-            $this->oAuthService
+          $validation,
+          $userRepository,
+          $this->response,
+          $cookie,
+          $this->oAuthService
         );
     }
 
     public function testSigningUpPutsUserInDatabase()
     {
-        $userInfo = [
-            'first_name' => $this->faker->firstName,
-            'last_name' => $this->faker->lastName,
-            'email' => $this->faker->safeEmail,
-            'password' => str_random(10),
-        ];
+      $userInfo = [
+        'first_name' => $this->faker->firstName,
+        'last_name' => $this->faker->lastName,
+        'email' => $this->faker->safeEmail,
+        'password' => str_random(10)
+      ];
 
-        $oAuthCredentials = [
-            'access_token' => str_random(12),
-            'refresh_token' => str_random(12)
-        ];
+      $oAuthCredentials = [
+        'access_token' => str_random(12),
+        'refresh_token' => str_random(12)
+      ];
 
-        $this->oAuthService->shouldReceive('passwordGrantWithResponse->withCookie')
-                           ->andReturn($this->response->json($oAuthCredentials));
+      $this->oAuthService->shouldReceive('passwordGrantWithResponse->withCookie')
+                         ->andReturn($this->response->json($oAuthCredentials));
 
-        $this->signUpService->signUp($userInfo, $this->csrfToken);
+      $this->signUpService->signUp($userInfo, $this->csrfToken);
 
-        $this->assertDatabaseHas('users', ['email' => $userInfo['email']]);
+      $this->assertDatabaseHas('users', ['email' => $userInfo['email']]);
     }
 
     public function testInvalidSignUpDataReturnsErrors()
     {
-        $userInfo = [
-            'first_name' => '',
-            'last_name' => $this->faker->lastName,
-            'email' => 'invalidemail',
-            'password' => str_random(10),
-        ];
+      $userInfo = [
+        'first_name' => '',
+        'last_name' => $this->faker->lastName,
+        'email' => 'invalidemail',
+        'password' => str_random(10)
+      ];
 
-        $response = $this->signUpService->signUp($userInfo, $this->csrfToken);
-        $responseContent = json_decode($response->getContent(), true);
+      $response = $this->signUpService->signUp($userInfo, $this->csrfToken);
+      $responseContent = json_decode($response->getContent(), true);
 
-        $this->assertEquals($response->status(), 422);
-        $this->assertArrayHasKey('first_name', $responseContent['messages']);
-        $this->assertArrayHasKey('email', $responseContent['messages']);
+      $this->assertEquals($response->status(), 422);
+      $this->assertArrayHasKey('first_name', $responseContent['messages']);
+      $this->assertArrayHasKey('email', $responseContent['messages']);
     }
 }

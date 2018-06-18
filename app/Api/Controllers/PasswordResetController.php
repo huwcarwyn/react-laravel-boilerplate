@@ -17,7 +17,7 @@ class PasswordResetController
   {
     $this->resetPasswordService = $resetPasswordService;
     $this->forgotPasswordLinkService = $forgotPasswordLinkService;
-	}
+  }
 
   public function forgotPassword(Request $request)
   {

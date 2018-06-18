@@ -22,7 +22,7 @@ class UserController
     $this->signUpService = $signUpService;
     $this->updateUserService = $updateUserService;
     $this->changePasswordService = $changePasswordService;
-	}
+  }
 
   public function signUp(Request $request)
   {
