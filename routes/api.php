@@ -8,6 +8,11 @@ Route::group(['middleware' => ['auth:api']], function() {
 
 	Route::apiResource('/users', '\App\Api\Controllers\UserController');
 	Route::put('/users/{userId}/update-password', '\App\Api\Controllers\UserController@changePassword');
+
+	Route::get('/avatars', '\App\Api\Controllers\AvatarsController@getAvatar');
+	Route::post('/avatars', '\App\Api\Controllers\AvatarsController@uploadAvatar');
+	Route::put('/avatars', '\App\Api\Controllers\AvatarsController@updateAvatar');
+	Route::delete('/avatars', '\App\Api\Controllers\AvatarsController@deleteAvatar');
 });
 
 /**
