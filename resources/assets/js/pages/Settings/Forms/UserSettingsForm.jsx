@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 
-import { PositiveButton, TextFormLine } from 'components'
+import { PositiveButton, TextFormLine, PictureUpload } from 'components'
 import { email as emailRegex } from 'constants/regexes'
 
 export class UserSettingsFormComponent extends React.Component {
@@ -11,24 +11,26 @@ export class UserSettingsFormComponent extends React.Component {
 
     return (
       <form className={className} onSubmit={handleSubmit}>
-        <div className="flex items-center">
+        <div className="flex items-center my-4">
           <Field
-            name="first_name"
-            component={TextFormLine}
-            labelText="First Name"
-            className="flex-grow" />
-          <Field
-            name="last_name"
-            component={TextFormLine}
-            labelText="Last Name"
-            className="flex-grow pl-4" />
+            name="avatar_url"
+            component={PictureUpload}
+            className="mr-10" />
+          <div className="flex-grow">
+            <Field
+              name="first_name"
+              component={TextFormLine}
+              labelText="First Name" />
+            <Field
+              name="last_name"
+              component={TextFormLine}
+              labelText="Last Name" />
+            <Field
+              name="email"
+              component={TextFormLine}
+              labelText="Email" />
+          </div>
         </div>
-
-        <Field
-          name="email"
-          component={TextFormLine}
-          labelText="Email"
-          className="mb-6" />
 
         <div className="flex border-grey-light">
           <PositiveButton type="submit" className="ml-auto">Save User Details</PositiveButton>
