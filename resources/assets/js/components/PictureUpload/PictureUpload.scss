@@ -1,0 +1,13 @@
+@keyframes fadePictureOverlay{
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 0.25;
+	}
+}
+
+.picture-overlay {
+	animation: fadePictureOverlay .3s forwards;
+}
