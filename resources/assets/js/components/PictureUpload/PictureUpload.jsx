@@ -19,9 +19,12 @@ export class PictureUpload extends React.Component {
 
   async handleDrop (e) {
     e.preventDefault()
-    const { onDrop } = this.props
-    if (onDrop) {
-      await onDrop(e.target.value)
+    const { uploadHandler } = this.props
+
+    if (uploadHandler) {
+      let fileData = new FormData()
+      fileData.append('avatar', e.dataTransfer.items[0])
+      await uploadHandler(fileData)
     }
 
     this.setState({ isHovering: false })

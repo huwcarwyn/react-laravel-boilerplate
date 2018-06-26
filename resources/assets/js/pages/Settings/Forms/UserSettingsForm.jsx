@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 
 import { PositiveButton, TextFormLine, PictureUpload } from 'components'
+import { uploadUserAvatar } from 'store/action-creators/avatars'
 import { email as emailRegex } from 'constants/regexes'
 
 export class UserSettingsFormComponent extends React.Component {
   render () {
-    const { handleSubmit, className } = this.props
+    const { handleSubmit, uploadUserAvatar, className } = this.props
 
     return (
       <form className={className} onSubmit={handleSubmit}>
@@ -15,6 +16,7 @@ export class UserSettingsFormComponent extends React.Component {
           <Field
             name="avatar_url"
             component={PictureUpload}
+            uploadHandler={uploadUserAvatar}
             className="mr-10" />
           <div className="flex-grow">
             <Field
@@ -72,7 +74,11 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  uploadUserAvatar: (fileData) => dispatch(uploadUserAvatar(fileData))
+})
+
 export const UserSettingsForm = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(UserSettingsFormForm)

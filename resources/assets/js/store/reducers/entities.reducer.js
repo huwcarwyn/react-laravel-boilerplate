@@ -16,6 +16,11 @@ const addUsersToStore = (state, { user }) => {
   return mergeEntities(state, entities)
 }
 
+const setUserAvatarUrl = (state, { avatarUrl }) => {
+
+}
+
 export const entitiesReducer = createReducer(entities, {
-  [userActions.SET_CURRENT_USER_INFO]: addUsersToStore
+  [userActions.SET_CURRENT_USER_INFO]: addUsersToStore,
+  [userActions.SET_AVATAR_URL]: setUserAvatarUrl
 })
