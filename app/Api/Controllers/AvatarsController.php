@@ -3,14 +3,17 @@
 namespace App\Api\Controllers;
 
 use Illuminate\Contracts\Auth\Factory as Auth,
-    Illuminate\Http\Request;
+    Illuminate\Http\Request,
+    Input;
 
-class AvatarController {
+class AvatarsController {
   private $auth;
+  private $avatarService;
 
   public function __construct(Auth $auth)
   {
     $this->auth = $auth;
+    $this->avatarService = $avatarService;
   }
 
   public function get()
@@ -18,12 +21,14 @@ class AvatarController {
 
   }
 
-  public function upload($file)
+  public function upload()
   {
+    $file = Input::file('avatar');
 
+    $this->avatarService->upload($file);
   }
 
-  public function update($file)
+  public function update()
   {
 
   }
