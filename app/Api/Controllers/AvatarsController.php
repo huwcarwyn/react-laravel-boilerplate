@@ -8,12 +8,12 @@ use Illuminate\Contracts\Auth\Factory as Auth,
 
 class AvatarsController {
   private $auth;
-  private $avatarService;
+  private $createAvatarService;
 
   public function __construct(Auth $auth)
   {
     $this->auth = $auth;
-    $this->avatarService = $avatarService;
+    $this->createAvatarService = $createAvatarService;
   }
 
   public function get()
@@ -25,7 +25,7 @@ class AvatarsController {
   {
     $file = Input::file('avatar');
 
-    $this->avatarService->upload($file);
+    $this->createAvatarService->create($file);
   }
 
   public function update()

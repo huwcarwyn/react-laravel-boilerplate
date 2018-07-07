@@ -2,15 +2,28 @@
 
 namespace App\Services\User\Avatar;
 
-use Illuminate\Contracts\Validation\Factory as Validator;
+use Illuminate\Contracts\Routing\ResponseFactory as Response,
+    Illuminate\Contracts\Validation\Factory as Validator,
+    Illuminate\Contracts\Auth\Factory as Auth,
+    League\Flysystem\FilesystemInterface;
 
 class CreateAvatarService
 {
   private $validator;
+  private $fileSystem;
+  private $response;
+  private $auth;
 
-  public function __construct(Validator $validator)
+  public function __construct(
+    Validator $validator,
+    FilesystemInterface $fileSystem,
+    Response $response
+  )
   {
     $this->validator = $validator;
+    $this->fileSystem = $fileSystem;
+    $this->response = $response;
+    $this->auth = $auth;
   }
 
   public function makeAvatarValidator($data)
@@ -28,8 +41,13 @@ class CreateAvatarService
       return $this->response->validateError($fileValidator->failed());
     }
 
-    // Create various file sizes using some lib
+    $newFileName = uniqid('img_');
 
-    // Upload the files using flysystem
+    $this->fileSystem->put($newFileName, $file);
+
+    return $this->response->success(['data' => [
+      'fileName' => $newFileName,
+      'message' => 'Avatar successfully saved'
+    ]]);
   }
 }
