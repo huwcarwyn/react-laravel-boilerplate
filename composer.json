@@ -6,13 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "graham-campbell/flysystem": "^5.0",
         "guzzlehttp/guzzle": "^6.3",
         "intervention/image": "^2.4",
         "laravel/framework": "5.6.*",
         "laravel/passport": "^5.0",
         "laravel/tinker": "~1.0",
-        "league/flysystem-aws-s3-v3": "^1.0",
         "league/fractal": "^0.17.0",
         "nesbot/carbon": "^1.22",
         "prettus/l5-repository": "^2.6"
