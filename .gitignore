@@ -2,6 +2,7 @@
 /public/img
 /public/js
 /public/css
+/public/storage
 /tests/Browser/screenshots
 /storage/*.key
 /vendor

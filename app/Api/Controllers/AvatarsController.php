@@ -2,17 +2,15 @@
 
 namespace App\Api\Controllers;
 
-use Illuminate\Contracts\Auth\Factory as Auth,
-    Illuminate\Http\Request,
-    Input;
+use App\Services\User\Avatar\CreateAvatarService,
+    Illuminate\Http\Request;
 
 class AvatarsController {
-  private $auth;
   private $createAvatarService;
 
-  public function __construct(Auth $auth)
+  public function __construct(
+    CreateAvatarService $createAvatarService)
   {
-    $this->auth = $auth;
     $this->createAvatarService = $createAvatarService;
   }
 
@@ -21,11 +19,11 @@ class AvatarsController {
 
   }
 
-  public function upload()
+  public function upload(Request $request)
   {
-    $file = Input::file('avatar');
+    $file = $request->file('avatar');
 
-    $this->createAvatarService->create($file);
+    return $this->createAvatarService->create($file);
   }
 
   public function update()

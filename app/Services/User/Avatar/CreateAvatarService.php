@@ -2,34 +2,36 @@
 
 namespace App\Services\User\Avatar;
 
-use Illuminate\Contracts\Routing\ResponseFactory as Response,
+use Illuminate\Support\Str,
+    App\Contracts\Repository\UserRepositoryContract,
     Illuminate\Contracts\Validation\Factory as Validator,
-    Illuminate\Contracts\Auth\Factory as Auth,
-    League\Flysystem\FilesystemInterface;
+    Illuminate\Contracts\Filesystem\Factory as FileSystem,
+    Illuminate\Contracts\Routing\ResponseFactory as Response;
 
 class CreateAvatarService
 {
   private $validator;
   private $fileSystem;
   private $response;
-  private $auth;
+  private $userRepo;
 
   public function __construct(
+    Response $response,
     Validator $validator,
-    FilesystemInterface $fileSystem,
-    Response $response
+    FileSystem $fileSystem,
+    UserRepositoryContract $userRepo
   )
   {
     $this->validator = $validator;
     $this->fileSystem = $fileSystem;
     $this->response = $response;
-    $this->auth = $auth;
+    $this->userRepo = $userRepo;
   }
 
-  public function makeAvatarValidator($data)
+  public function makeValidator($data)
   {
     return $this->validator->make($data, [
-      'avatar' => 'mimetypes:image/jpeg,image/png,image/gif'
+      'avatar' => 'mimetypes:image/jpeg,image/png,image/jpg,image/gif'
     ]);
   }
 
@@ -41,13 +43,39 @@ class CreateAvatarService
       return $this->response->validateError($fileValidator->failed());
     }
 
-    $newFileName = uniqid('img_');
+    $this->removeCurrentAvatar();
 
-    $this->fileSystem->put($newFileName, $file);
+    $newFileName = $this->setNewAvatar($file);
+
+    $this->assignToCurrentUser($newFileName);
 
     return $this->response->success(['data' => [
+      'fileUrl' => $this->fileSystem->url($newFileName),
       'fileName' => $newFileName,
       'message' => 'Avatar successfully saved'
     ]]);
+  }
+
+  public function removeCurrentAvatar()
+  {
+    $currentAvatar = $this->userRepo->getCurrentAvatarFile();
+
+    $this->userRepo->removeCurrentAvatar();
+
+    $this->fileSystem->delete($currentAvatar);
+  }
+
+  public function setNewAvatar($file)
+  {
+    $newFileName = (string) Str::uuid('img_') . '.' . $file->extension();
+
+    $this->fileSystem->put($newFileName, file_get_contents($file));
+
+    return $newFileName;
+  }
+
+  public function assignToCurrentUser($newFileName)
+  {
+    $this->userRepo->setCurrentAvatar($newFileName);
   }
 }
