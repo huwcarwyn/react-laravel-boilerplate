@@ -45,7 +45,7 @@ class SignUpService {
 
     $newUser = $this->user->create($userInfo);
 
-    $apiCookie = $this->cookie->make($newUser->id, $csrfToken);
+    $apiCookie = $this->cookie->make($newUser['data']['id'], $csrfToken);
 
     return $this->response->success(['message' => 'User successfully signed up'])->withCookie($apiCookie);
   }

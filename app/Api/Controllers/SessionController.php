@@ -2,7 +2,7 @@
 
 namespace App\Api\Controllers;
 
-use Illuminate\Contracts\Auth\Factory as Auth,
+use App\Contracts\Repository\UserRepositoryContract,
     App\Services\Session\LoginService,
     App\Services\Session\LogoutService,
     Illuminate\Http\Request;
@@ -11,20 +11,20 @@ class SessionController {
 
   private $loginService;
   private $logoutService;
-  private $auth;
+  private $userRepo;
 
   public function __construct(
     LoginService $loginService,
     LogoutService $logoutService,
-    Auth $auth) {
+    UserRepositoryContract $userRepo) {
     $this->loginService = $loginService;
     $this->logoutService = $logoutService;
-    $this->auth = $auth;
+    $this->userRepo = $userRepo;
   }
 
   public function currentUser()
   {
-    return $this->auth->user()->toJson();
+    return $this->userRepo->currentUser();
   }
 
   public function login(Request $request)

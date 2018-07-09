@@ -20,18 +20,18 @@ class UpdateUserServiceTest extends TestCase
     // );
   }
 
-  public function testUpdatingUserStoresUpdatedData()
-  {
+  // public function testUpdatingUserStoresUpdatedData()
+  // {
 
-  }
+  // }
 
-  public function testInvalidDataReturnsValidationErrors()
-  {
+  // public function testInvalidDataReturnsValidationErrors()
+  // {
 
-  }
+  // }
 
-  public function testCantUpdateUserWithoutCorrectPermission()
-  {
+  // public function testCantUpdateUserWithoutCorrectPermission()
+  // {
 
-  }
+  // }
 }

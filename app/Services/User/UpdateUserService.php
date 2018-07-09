@@ -5,7 +5,7 @@ namespace App\Services\User;
 use App\Contracts\Repository\UserRepositoryContract as UserRepository,
     Illuminate\Contracts\Routing\ResponseFactory as Response,
     Illuminate\Contracts\Validation\Factory as Validator;
-    
+
 class UpdateUserService {
   private $validator;
   private $repository;
@@ -32,9 +32,9 @@ class UpdateUserService {
 
   public function updateUser($userData)
   {
-    $currentUser = $this->repository->find($userData['id']);
+    $currentUser = $this->repository->find($userData['id'])['data'];
 
-    if($userData['email'] && $currentUser->email == $userData['email']) 
+    if($userData['email'] && $currentUser['email'] == $userData['email'])
     {
       unset($userData['email']);
     }
