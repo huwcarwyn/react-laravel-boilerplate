@@ -19,11 +19,12 @@ export class PictureUpload extends React.Component {
 
   async handleDrop (e) {
     e.preventDefault()
+
     const { uploadHandler } = this.props
 
     if (uploadHandler) {
       let fileData = new FormData()
-      fileData.append('avatar', e.dataTransfer.items[0])
+      fileData.append('avatar', e.dataTransfer.items[0].getAsFile())
       await uploadHandler(fileData)
     }
 

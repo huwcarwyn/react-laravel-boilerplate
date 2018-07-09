@@ -9,7 +9,7 @@ import defaultProfileImage from 'default-profile-picture.jpeg'
 
 export const UserCardComponent = (props) => {
   const { user, colorTheme, className, logOut } = props
-  const { first_name: firstName, last_name: lastName, profileImage } = user
+  const { first_name: firstName, last_name: lastName, avatar } = user
 
   const fullName = lastName !== undefined ? [firstName, lastName].join(' ') : firstName
 
@@ -18,7 +18,7 @@ export const UserCardComponent = (props) => {
   return (
     <div className={`flex items-center ${className} ${themeTextClass}`}>
       <img
-        src={profileImage !== undefined ? profileImage : defaultProfileImage }
+        src={avatar || defaultProfileImage }
         className="w-10 h-10 rounded-full mr-4" />
 
       <div className="text-sm">

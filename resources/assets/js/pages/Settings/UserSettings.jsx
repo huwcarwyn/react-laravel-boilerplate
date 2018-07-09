@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { SubmissionError } from 'redux-form'
 
 import { userActions } from 'store/actions'
+import { uploadUserAvatar } from 'store/action-creators/avatars'
 import { flashMessage } from 'store/action-creators/flashMessages'
 import { saveUser, changePassword } from 'store/action-creators/user'
 
@@ -10,11 +11,11 @@ import { UserSettingsForm, ChangePasswordForm } from './Forms'
 
 class UserSettingsComponent extends React.Component {
   render () {
-    const { saveUserSettings, handleChangePassword } = this.props
+    const { saveUserSettings, handleChangePassword, handleAvatarDrop } = this.props
     return (
       <Fragment>
         <h3 className="text-grey-darkest font-normal">Your Details</h3>
-        <UserSettingsForm className="mb-4" onSubmit={saveUserSettings} />
+        <UserSettingsForm className="mb-4" handleAvatarDrop={handleAvatarDrop} onSubmit={saveUserSettings} />
 
         <h3 className="text-grey-darkest font-normal">Change Your Password</h3>
         <ChangePasswordForm onSubmit={handleChangePassword} />
@@ -52,8 +53,10 @@ const mapDispatchToProps = (dispatch) => ({
 
     dispatch(flashMessage('success', 'Successfully saved user info', 4000))
 
-    dispatch({ type: userActions.SET_CURRENT_USER_INFO, user: response.data.data })
+    dispatch({ type: userActions.SET_CURRENT_USER_INFO, user: response.data.data.data })
   },
+
+  uploadUserAvatar: (fileData, userId) => dispatch(uploadUserAvatar(fileData, userId)),
 
   changePassword: async (data) => {
     try {
@@ -81,6 +84,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
+  handleAvatarDrop: (fileData) => {
+    return dispatchProps.uploadUserAvatar(fileData, stateProps.currentUser.id)
+  },
   handleChangePassword: (values) => {
     const data = {
       user_id: stateProps.currentUser.id,

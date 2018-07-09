@@ -1,4 +1,4 @@
-import { merge } from 'lodash'
+import { merge, cloneDeep } from 'lodash'
 import { normalize } from 'normalizr'
 
 import { initialState } from 'store/initialState'
@@ -16,11 +16,14 @@ const addUsersToStore = (state, { user }) => {
   return mergeEntities(state, entities)
 }
 
-const setUserAvatarUrl = (state, { avatarUrl }) => {
+const setUserAvatar = (state, { avatar, userId }) => {
+  const newState = cloneDeep(state)
+  newState.users[userId].avatar = avatar
 
+  return newState
 }
 
 export const entitiesReducer = createReducer(entities, {
   [userActions.SET_CURRENT_USER_INFO]: addUsersToStore,
-  [userActions.SET_AVATAR_URL]: setUserAvatarUrl
+  [userActions.SET_AVATAR]: setUserAvatar
 })
