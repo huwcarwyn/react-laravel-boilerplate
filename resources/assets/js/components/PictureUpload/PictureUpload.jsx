@@ -13,8 +13,11 @@ export class PictureUpload extends React.Component {
       isHovering: false
     }
 
+    this.fileInputRef = React.createRef()
+
     this.handleDrop = this.handleDrop.bind(this)
     this.toggleHover = this.toggleHover.bind(this)
+    this.handleFileUpload = this.handleFileUpload.bind(this)
   }
 
   async handleDrop (e) {
@@ -31,6 +34,20 @@ export class PictureUpload extends React.Component {
     this.setState({ isHovering: false })
   }
 
+  async handleFileUpload (e) {
+    e.preventDefault()
+
+    if (!e.target.files[0]) {
+      return false
+    }
+
+    const { uploadHandler } = this.props
+
+    let fileData = new FormData()
+    fileData.append('avatar', e.target.files[0])
+    await uploadHandler(fileData)
+  }
+
   toggleHover () {
     this.setState({isHovering: !this.state.isHovering})
 
@@ -38,13 +55,15 @@ export class PictureUpload extends React.Component {
   }
 
   render () {
-    const { input: { value }, className } = this.props
+    const { input: { name, value }, className } = this.props
     const { isHovering } = this.state
 
     const currentImage = value || defaultProfileImage
 
     return (
-      <div className={`${className || ''} relative text-center`}>
+      <label
+        htmlFor={name}
+        className={`${className || ''} cursor-pointer relative text-center`}>
         <DragOverlay
           onDragOver={(e) => e.preventDefault()}
           onDragEnter={this.toggleHover}
@@ -56,7 +75,13 @@ export class PictureUpload extends React.Component {
           </div>
           <span className="block text-grey text-sm">Drag or click to update your profile picture</span>
         </DragOverlay>
-      </div>
+        <input
+          type="file"
+          id={name}
+          name={name}
+          className="hidden"
+          onChange={this.handleFileUpload} />
+      </label>
     )
   }
 }

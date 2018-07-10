@@ -7,7 +7,7 @@ import { email as emailRegex } from 'constants/regexes'
 
 export class UserSettingsFormComponent extends React.Component {
   render () {
-    const { handleSubmit, handleAvatarDrop, className } = this.props
+    const { handleSubmit, avatarUploadHandler, className } = this.props
 
     return (
       <form className={className} onSubmit={handleSubmit}>
@@ -15,7 +15,7 @@ export class UserSettingsFormComponent extends React.Component {
           <Field
             name="avatar"
             component={PictureUpload}
-            uploadHandler={handleAvatarDrop}
+            uploadHandler={avatarUploadHandler}
             className="mr-10" />
           <div className="flex-grow">
             <Field

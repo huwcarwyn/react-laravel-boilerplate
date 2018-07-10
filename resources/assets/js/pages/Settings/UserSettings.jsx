@@ -11,11 +11,14 @@ import { UserSettingsForm, ChangePasswordForm } from './Forms'
 
 class UserSettingsComponent extends React.Component {
   render () {
-    const { saveUserSettings, handleChangePassword, handleAvatarDrop } = this.props
+    const { saveUserSettings, handleChangePassword, avatarUploadHandler } = this.props
     return (
       <Fragment>
         <h3 className="text-grey-darkest font-normal">Your Details</h3>
-        <UserSettingsForm className="mb-4" handleAvatarDrop={handleAvatarDrop} onSubmit={saveUserSettings} />
+        <UserSettingsForm
+          className="mb-4"
+          onSubmit={saveUserSettings}
+          avatarUploadHandler={avatarUploadHandler} />
 
         <h3 className="text-grey-darkest font-normal">Change Your Password</h3>
         <ChangePasswordForm onSubmit={handleChangePassword} />
@@ -84,7 +87,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  handleAvatarDrop: (fileData) => {
+  avatarUploadHandler: (fileData) => {
     return dispatchProps.uploadUserAvatar(fileData, stateProps.currentUser.id)
   },
   handleChangePassword: (values) => {
