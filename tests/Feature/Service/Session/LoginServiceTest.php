@@ -32,9 +32,9 @@ class LoginServiceTest extends TestCase
       $this->loginService = new LoginService(
         $auth,
         $validation,
+        $userRepo,
         $cookie,
-        $this->response,
-        $userRepo
+        $this->response
       );
     }
 

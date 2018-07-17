@@ -3,9 +3,9 @@
 namespace Tests\Feature\Service\Session;
 
 use Tests\TestCase,
-    App\Services\Session\LogOutService;
+    App\Services\Session\LogoutService;
 
-class LogOutServiceTest extends TestCase
+class LogoutServiceTest extends TestCase
 {
     private $response;
     private $logOutService;
@@ -21,7 +21,7 @@ class LogOutServiceTest extends TestCase
 
       $this->csrfToken = str_random(10);
 
-      $this->logOutService = new LogOutService(
+      $this->logOutService = new LogoutService(
         $auth,
         $cookie,
         $this->response
