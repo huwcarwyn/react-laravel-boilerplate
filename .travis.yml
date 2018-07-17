@@ -19,9 +19,9 @@ before_install:
 
 before_script:
   - cp .env.travis .env
-  - php artisan key:generate
   - composer self-update
   - composer install --no-interaction
+  - php artisan key:generate
 
 script:
   - vendor/bin/phpunit --verbose
