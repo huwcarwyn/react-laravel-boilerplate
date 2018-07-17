@@ -12,10 +12,10 @@ addons:
       - mysql-client
 
 before_install:
-  - mysql -e 'CREATE DATABASE boilerplate_test;'
   - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('password') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
-  - sudo mysql_upgrade
+  - sudo mysql_upgrade --user='root' --password='password'
   - sudo service mysql restart
+  - mysql -e 'CREATE DATABASE boilerplate_test;'
 
 before_script:
   - cp .env.travis .env
