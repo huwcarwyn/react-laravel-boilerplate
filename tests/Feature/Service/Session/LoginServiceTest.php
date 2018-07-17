@@ -25,6 +25,7 @@ class LoginServiceTest extends TestCase
       $auth = resolve('Illuminate\Contracts\Auth\Factory');
       $validation = resolve('Illuminate\Contracts\Validation\Factory');
       $cookie = resolve('Laravel\Passport\ApiTokenCookieFactory');
+      $userRepo = resolve('App\Contracts\Repository\UserRepositoryContract');
 
       $this->csrfToken = str_random(10);
 
@@ -32,7 +33,8 @@ class LoginServiceTest extends TestCase
         $auth,
         $validation,
         $cookie,
-        $this->response
+        $this->response,
+        $userRepo
       );
     }
 
