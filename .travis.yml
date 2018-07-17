@@ -3,11 +3,23 @@ language: php
 php:
   - 7.2.0
 
+before_install:
+  - mysql -e 'CREATE DATABASE boilerplate_test;'
+
 before_script:
   - cp .env.travis .env
-  - mysql -e 'create database boilerplate_test;'
   - composer self-update
   - composer install --no-interaction
+  - npm install
+  - php artisan migrate
 
 script:
   - vendor/bin/phpunit --verbose
+
+services:
+  - mysql
+
+cache:
+  directories:
+    - node_modules
+    - vendor
