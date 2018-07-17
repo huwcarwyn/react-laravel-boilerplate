@@ -4,8 +4,8 @@
          bootstrap="bootstrap/autoload.php"
          colors="true"
          convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
+         convertNoticesToExceptions="false"
+         convertWarningsToExceptions="false"
          processIsolation="false"
          stopOnFailure="false"
          printerClass="Codedungeon\PHPUnitPrettyResultPrinter\Printer">
