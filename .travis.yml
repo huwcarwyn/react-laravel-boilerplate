@@ -1,14 +1,13 @@
 language: php
 
 php:
-  - '7.2.0'
+  - 7.2.0
 
-install:
-  - composer install --no-interaction --prefer-dist --no-suggest
-  - npm install
+before_script:
+  - cp .env.travis .env
+  - mysql -e 'create database boilerplate_test;'
+  - composer self-update
+  - composer install --no-interaction
 
-script: vendor/bin/phpunit --verbose
-
-cache:
-  directories:
-    - "node_modules"
+script:
+  - vendor/bin/phpunit --verbose
