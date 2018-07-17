@@ -2,7 +2,8 @@
 
 namespace App\Services\Session;
 
-use Illuminate\Contracts\Routing\ResponseFactory as Response,
+use App\Contracts\Repository\UserRepositoryContract as UserRepository,
+    Illuminate\Contracts\Routing\ResponseFactory as Response,
     Illuminate\Contracts\Validation\Factory as Validator,
     Illuminate\Contracts\Auth\Factory as Auth,
     Laravel\Passport\ApiTokenCookieFactory;
@@ -13,10 +14,12 @@ class LoginService
   private $validator;
   private $cookie;
   private $response;
+  private $repository;
 
   public function __construct(
     Auth $auth,
     Validator $validator,
+    UserRepository $repository,
     ApiTokenCookieFactory $cookie,
     Response $response)
   {
@@ -24,6 +27,7 @@ class LoginService
     $this->cookie = $cookie;
     $this->response = $response;
     $this->validator = $validator;
+    $this->repository = $repository;
   }
 
   public function validateLoginInfo($data)
@@ -45,7 +49,7 @@ class LoginService
     if($this->auth->attempt($loginInfo)) {
       $apiCookie = $this->cookie->make($this->auth->user()->getKey(), $csrfToken);
 
-      return $this->response->success(['data' => $this->auth->user()->toArray()])->withCookie($apiCookie);
+      return $this->response->success($this->repository->currentUser())->withCookie($apiCookie);
     }
     else {
       return $this->response->error('Incorrect login details');
