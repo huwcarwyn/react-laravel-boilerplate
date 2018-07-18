@@ -1,5 +1,7 @@
 # React Laravel Boilerplate
 
+[![Build Status](https://travis-ci.org/huwcarwyn/react-laravel-boilerplate.svg?branch=master)](https://travis-ci.org/huwcarwyn/react-laravel-boilerplate)
+
 This is the boilerplate that I personally use for getting projects off the ground quickly using my favourite stack of technologies. It uses Laravel as a backend API service, and has a React single page application in the front end.
 
 ## Features
