@@ -11,7 +11,7 @@ class ResponseMacroServiceProvider extends ServiceProvider
   {
     $response->macro('success', function($data) use ($response) {
       $responseData = array_merge($data, ['errors' => false]);
-      
+
       return $response->json($responseData, 200);
     });
 
@@ -21,6 +21,14 @@ class ResponseMacroServiceProvider extends ServiceProvider
         'messages' => $messages
       ], 422);
     });
+
+    $response->macro('unauthorized', function($message) use ($response) {
+      return $response->json([
+        'errors' => true,
+        'message' => $message
+      ], 401);
+    });
+
 
     $response->macro('error', function($message) use ($response) {
       return $response->json([

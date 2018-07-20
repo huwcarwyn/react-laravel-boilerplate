@@ -52,7 +52,7 @@ class LoginService
       return $this->response->success($this->repository->currentUser())->withCookie($apiCookie);
     }
     else {
-      return $this->response->error('Incorrect login details');
+      return $this->response->unauthorized('Incorrect login details');
     }
   }
 }

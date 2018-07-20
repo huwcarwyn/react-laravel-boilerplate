@@ -47,13 +47,13 @@ class LoginServiceTest extends TestCase
       $this->assertEquals($response->status(), 200);
     }
 
-    public function testLoginWithIncorrectDetailsErrors()
+    public function testLoginWithIncorrectDetailsGivesUnauthorized()
     {
       $loginInfo = ['email' => $this->user->email, 'password' => 'incorrect password'];
 
       $response = $this->loginService->attemptLogin($loginInfo, $this->csrfToken);
 
-      $this->assertEquals($response->status(), 400);
+      $this->assertEquals($response->status(), 401);
     }
 
     public function testInvalidLoginDetailsTriggersValidation()

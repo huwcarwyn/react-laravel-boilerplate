@@ -17,8 +17,7 @@ export const LogInComponent = (props) => {
 
 const parseValidationFromResponse = (response) => {
   let errors = {}
-
-  if (response.errors === true && response.messages === 'Incorrect login details') {
+  if (response.errors === true && response.message === 'Incorrect login details') {
     errors.email = 'Incorrect login details'
   }
 
@@ -32,9 +31,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(push('/'))
       })
       .catch((error) => {
-        if (error.response.status === 400) {
-          throw new SubmissionError(parseValidationFromResponse(error.response.data))
-        }
+        throw new SubmissionError(parseValidationFromResponse(error.response.data))
       })
   }
 })
