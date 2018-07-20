@@ -3,7 +3,7 @@ import axios from 'axios'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 
-import { App } from './App'
+import { App } from './app'
 
 /**
  * Import Axios Set-Up
