@@ -9,5 +9,6 @@ export { FormLine, PasswordFormLine, TextFormLine, TextAreaFormLine } from './Fo
 export * from './Icons'
 export { PasswordInput, TextArea, TextInput } from './Inputs'
 export { Logo } from './Logo'
+export { ModalProviderWrapper, ModalRoot } from './Modal'
 export { PictureUpload } from './PictureUpload/PictureUpload'
 export { UserCard } from './UserCard'
