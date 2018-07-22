@@ -1,4 +1,18 @@
 const path = require('path')
-const { commonConfig } = require(path.join(__dirname, 'webpack.common.js'))
+const merge = require('webpack-merge')
+const {
+  commonConfig,
+  appSCSSLoader,
+  moduleSCSSLoader
+} = require(path.join(__dirname, 'webpack.common.js'))
 
-module.exports = commonConfig
+module.exports = merge.smart(commonConfig, {
+  mode: 'development',
+
+  module: {
+    rules: [
+      {...appSCSSLoader},
+      {...moduleSCSSLoader}
+    ]
+  }
+})
