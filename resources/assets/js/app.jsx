@@ -14,7 +14,7 @@ import {
   NotFound,
   SettingsRoutes
 } from 'pages'
-import { AuthGuard, FlashMessageRoot } from 'components'
+import { AuthGuard, FlashMessageRoot, ModalProviderWrapper, ModalRoot } from 'components'
 
 import { store, browserHistory } from 'store/create-store'
 
@@ -29,23 +29,26 @@ const withDashboard = (ContentComponent) => {
 }
 
 export const App = (props) => (
-  <Provider store={store}>
-    <div>
-      <FlashMessageRoot />
-      <ConnectedRouter history={browserHistory}>
-        <Switch>
-          <Route exact path='/login' render={() => <FormPageLayout title="Log In"><LogIn /></FormPageLayout>} />
-          <Route exact path='/signup' render={() => <FormPageLayout title="Sign Up"><SignUp /></FormPageLayout>} />
-          <Route exact path='/forgot-password' render={() => <FormPageLayout title="Forgot Password"><ForgotPassword /></FormPageLayout>} />
-          <Route exact path='/reset-password/:resetToken' render={() => <FormPageLayout title="Reset Password"><PasswordReset /></FormPageLayout>} />
+  <ModalProviderWrapper>
+    <Provider store={store}>
+      <div>
+        <FlashMessageRoot />
+        <ModalRoot />
+        <ConnectedRouter history={browserHistory}>
+          <Switch>
+            <Route exact path='/login' render={() => <FormPageLayout title="Log In"><LogIn /></FormPageLayout>} />
+            <Route exact path='/signup' render={() => <FormPageLayout title="Sign Up"><SignUp /></FormPageLayout>} />
+            <Route exact path='/forgot-password' render={() => <FormPageLayout title="Forgot Password"><ForgotPassword /></FormPageLayout>} />
+            <Route exact path='/reset-password/:resetToken' render={() => <FormPageLayout title="Reset Password"><PasswordReset /></FormPageLayout>} />
 
-          {/* Dashboard routes */}
-          <Route exact path='/' component={withDashboard(Overview)} />
-          <Route path='/settings' component={withDashboard(SettingsRoutes)} />
-          {/* 404 route */}
-          <Route path="*" exact={true} component={NotFound}/>
-        </Switch>
-      </ConnectedRouter>
-    </div>
-  </Provider>
+            {/* Dashboard routes */}
+            <Route exact path='/' component={withDashboard(Overview)} />
+            <Route path='/settings' component={withDashboard(SettingsRoutes)} />
+            {/* 404 route */}
+            <Route path="*" exact={true} component={NotFound}/>
+          </Switch>
+        </ConnectedRouter>
+      </div>
+    </Provider>
+  </ModalProviderWrapper>
 )
