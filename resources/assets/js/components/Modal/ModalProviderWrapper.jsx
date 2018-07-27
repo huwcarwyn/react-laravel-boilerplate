@@ -22,7 +22,6 @@ export class ModalProviderWrapper extends React.Component {
   }
 
   showModal (component, modalProps = {}) {
-    console.log('showing modals..')
     this.setState({
       component,
       modalProps
@@ -31,11 +30,14 @@ export class ModalProviderWrapper extends React.Component {
 
   render () {
     const { children } = this.props
+    const { component } = this.state
 
     return (
-      <ModalProvider value={this.state}>
-        { children }
-      </ModalProvider>
+      <div className={`h-screen overflow-${component ? 'hidden' : 'scroll'}`}>
+        <ModalProvider value={this.state}>
+          { children }
+        </ModalProvider>
+      </div>
     )
   }
 }
