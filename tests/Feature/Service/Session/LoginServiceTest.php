@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Service\Session;
 
-use Tests\TestCase,
-    App\Services\Session\LoginService,
-    Illuminate\Foundation\Testing\WithoutMiddleware,
-    Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+use App\Services\Session\LoginService;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LoginServiceTest extends TestCase
 {
@@ -17,53 +17,53 @@ class LoginServiceTest extends TestCase
 
     public function setUp()
     {
-      parent::setUp();
+        parent::setUp();
 
-      $this->user = factory(\App\Models\User::class)->create();
-      $this->response = resolve('Illuminate\Contracts\Routing\ResponseFactory');
+        $this->user = factory(\App\Models\User::class)->create();
+        $this->response = resolve('Illuminate\Contracts\Routing\ResponseFactory');
 
-      $auth = resolve('Illuminate\Contracts\Auth\Factory');
-      $validation = resolve('Illuminate\Contracts\Validation\Factory');
-      $cookie = resolve('Laravel\Passport\ApiTokenCookieFactory');
-      $userRepo = resolve('App\Contracts\Repository\UserRepositoryContract');
+        $auth = resolve('Illuminate\Contracts\Auth\Factory');
+        $validation = resolve('Illuminate\Contracts\Validation\Factory');
+        $cookie = resolve('Laravel\Passport\ApiTokenCookieFactory');
+        $userRepo = resolve('App\Contracts\Repository\UserRepositoryContract');
 
-      $this->csrfToken = str_random(10);
+        $this->csrfToken = str_random(10);
 
-      $this->loginService = new LoginService(
-        $auth,
-        $validation,
-        $userRepo,
-        $cookie,
-        $this->response
-      );
+        $this->loginService = new LoginService(
+            $auth,
+            $validation,
+            $userRepo,
+            $cookie,
+            $this->response
+        );
     }
 
     public function testLoginWithCorrectDetailsReturnsOkWithCredentials()
     {
-      $loginInfo = ['email' => $this->user->email, 'password' => 'password'];
+        $loginInfo = ['email' => $this->user->email, 'password' => 'password'];
 
-      $response = $this->loginService->attemptLogin($loginInfo, $this->csrfToken);
+        $response = $this->loginService->attemptLogin($loginInfo, $this->csrfToken);
 
-      $this->assertEquals($response->status(), 200);
+        $this->assertEquals($response->status(), 200);
     }
 
     public function testLoginWithIncorrectDetailsGivesUnauthorized()
     {
-      $loginInfo = ['email' => $this->user->email, 'password' => 'incorrect password'];
+        $loginInfo = ['email' => $this->user->email, 'password' => 'incorrect password'];
 
-      $response = $this->loginService->attemptLogin($loginInfo, $this->csrfToken);
+        $response = $this->loginService->attemptLogin($loginInfo, $this->csrfToken);
 
-      $this->assertEquals($response->status(), 401);
+        $this->assertEquals($response->status(), 401);
     }
 
     public function testInvalidLoginDetailsTriggersValidation()
     {
-      $loginInfo = ['email' => '', 'password' => 'password'];
+        $loginInfo = ['email' => '', 'password' => 'password'];
 
-      $response = $this->loginService->attemptLogin($loginInfo, $this->csrfToken);
-      $responseContent = json_decode($response->getContent(), true);
+        $response = $this->loginService->attemptLogin($loginInfo, $this->csrfToken);
+        $responseContent = json_decode($response->getContent(), true);
 
-      $this->assertEquals($response->status(), 422);
-      $this->assertArrayHasKey('email', $responseContent['messages']);
+        $this->assertEquals($response->status(), 422);
+        $this->assertArrayHasKey('email', $responseContent['messages']);
     }
 }

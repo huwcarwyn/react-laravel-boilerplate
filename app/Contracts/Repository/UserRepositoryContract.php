@@ -6,11 +6,11 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 
 interface UserRepositoryContract extends RepositoryInterface
 {
-  public function currentUser();
+    public function currentUser();
 
-  public function setCurrentAvatar($fileUrl);
+    public function setCurrentAvatar($fileUrl);
 
-  public function getCurrentAvatarFile();
+    public function getCurrentAvatarFile();
 
-  public function removeCurrentAvatar();
+    public function removeCurrentAvatar();
 }

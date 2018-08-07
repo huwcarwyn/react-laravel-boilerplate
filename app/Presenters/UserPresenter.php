@@ -2,8 +2,8 @@
 
 namespace App\Presenters;
 
-use App\Transformers\UserTransformer,
-    Prettus\Repository\Presenter\FractalPresenter;
+use App\Transformers\UserTransformer;
+use Prettus\Repository\Presenter\FractalPresenter;
 
 /**
  * Class ContactPresenter.
@@ -12,13 +12,13 @@ use App\Transformers\UserTransformer,
  */
 class UserPresenter extends FractalPresenter
 {
-  /**
-   * Transformer
-   *
-   * @return \League\Fractal\TransformerAbstract
-   */
-  public function getTransformer()
-  {
-    return new UserTransformer();
-  }
+    /**
+     * Transformer
+     *
+     * @return \League\Fractal\TransformerAbstract
+     */
+    public function getTransformer()
+    {
+        return new UserTransformer();
+    }
 }

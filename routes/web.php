@@ -1,7 +1,7 @@
 <?php
 
-$spa = function() {
-  return view('app');
+$spa = function () {
+    return view('app');
 };
 
 /**

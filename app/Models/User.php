@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Laravel\Passport\HasApiTokens,
-    Illuminate\Notifications\Notifiable,
-    Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -20,7 +20,7 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($password)
     {
-      $hash = resolve('Illuminate\Contracts\Hashing\Hasher');
-      $this->attributes['password'] = $hash->make($password);
+        $hash = resolve('Illuminate\Contracts\Hashing\Hasher');
+        $this->attributes['password'] = $hash->make($password);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Service\Session;
 
-use Tests\TestCase,
-    App\Services\Session\LogoutService;
+use Tests\TestCase;
+use App\Services\Session\LogoutService;
 
 class LogoutServiceTest extends TestCase
 {
@@ -12,26 +12,26 @@ class LogoutServiceTest extends TestCase
 
     public function setUp()
     {
-      parent::setUp();
+        parent::setUp();
 
-      $this->response = resolve('Illuminate\Contracts\Routing\ResponseFactory');
+        $this->response = resolve('Illuminate\Contracts\Routing\ResponseFactory');
 
-      $auth = resolve('Illuminate\Contracts\Auth\Factory');
-      $cookie = resolve('Illuminate\Contracts\Cookie\Factory');
+        $auth = resolve('Illuminate\Contracts\Auth\Factory');
+        $cookie = resolve('Illuminate\Contracts\Cookie\Factory');
 
-      $this->csrfToken = str_random(10);
+        $this->csrfToken = str_random(10);
 
-      $this->logOutService = new LogoutService(
-        $auth,
-        $cookie,
-        $this->response
-      );
+        $this->logOutService = new LogoutService(
+            $auth,
+            $cookie,
+            $this->response
+        );
     }
 
     public function testLoggingOutReturnsOKResponseAndForgetsCookie()
     {
-      $response = $this->logOutService->logout();
+        $response = $this->logOutService->logout();
 
-      $this->assertEquals($response->status(), 200);
+        $this->assertEquals($response->status(), 200);
     }
 }

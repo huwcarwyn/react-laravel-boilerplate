@@ -2,80 +2,79 @@
 
 namespace App\Services\User\Avatar;
 
-use Illuminate\Support\Str,
-    App\Contracts\Repository\UserRepositoryContract,
-    Illuminate\Contracts\Validation\Factory as Validator,
-    Illuminate\Contracts\Filesystem\Factory as FileSystem,
-    Illuminate\Contracts\Routing\ResponseFactory as Response;
+use Illuminate\Support\Str;
+use App\Contracts\Repository\UserRepositoryContract;
+use Illuminate\Contracts\Validation\Factory as Validator;
+use Illuminate\Contracts\Filesystem\Factory as FileSystem;
+use Illuminate\Contracts\Routing\ResponseFactory as Response;
 
 class CreateAvatarService
 {
-  private $validator;
-  private $fileSystem;
-  private $response;
-  private $userRepo;
+    private $validator;
+    private $fileSystem;
+    private $response;
+    private $userRepo;
 
-  public function __construct(
-    Response $response,
-    Validator $validator,
-    FileSystem $fileSystem,
-    UserRepositoryContract $userRepo
-  )
-  {
-    $this->validator = $validator;
-    $this->fileSystem = $fileSystem;
-    $this->response = $response;
-    $this->userRepo = $userRepo;
-  }
-
-  public function makeValidator($data)
-  {
-    return $this->validator->make($data, [
-      'avatar' => 'mimetypes:image/jpeg,image/png,image/jpg,image/gif'
-    ]);
-  }
-
-  public function create($file)
-  {
-    $fileValidator = $this->makeValidator(['avatar' => $file]);
-
-    if ($fileValidator->fails()) {
-      return $this->response->validateError($fileValidator->failed());
+    public function __construct(
+        Response $response,
+        Validator $validator,
+        FileSystem $fileSystem,
+        UserRepositoryContract $userRepo
+    ) {
+        $this->validator = $validator;
+        $this->fileSystem = $fileSystem;
+        $this->response = $response;
+        $this->userRepo = $userRepo;
     }
 
-    $this->removeCurrentAvatar();
+    public function makeValidator($data)
+    {
+        return $this->validator->make($data, [
+            'avatar' => 'mimetypes:image/jpeg,image/png,image/jpg,image/gif'
+        ]);
+    }
 
-    $newFileName = $this->setNewAvatar($file);
+    public function create($file)
+    {
+        $fileValidator = $this->makeValidator(['avatar' => $file]);
 
-    $this->assignToCurrentUser($newFileName);
+        if ($fileValidator->fails()) {
+            return $this->response->validateError($fileValidator->failed());
+        }
 
-    return $this->response->success(['data' => [
-      'fileUrl' => $this->fileSystem->url($newFileName),
-      'fileName' => $newFileName,
-      'message' => 'Avatar successfully saved'
-    ]]);
-  }
+        $this->removeCurrentAvatar();
 
-  public function removeCurrentAvatar()
-  {
-    $currentAvatar = $this->userRepo->getCurrentAvatarFile();
+        $newFileName = $this->setNewAvatar($file);
 
-    $this->userRepo->removeCurrentAvatar();
+        $this->assignToCurrentUser($newFileName);
 
-    $this->fileSystem->delete($currentAvatar);
-  }
+        return $this->response->success(['data' => [
+            'fileUrl' => $this->fileSystem->url($newFileName),
+            'fileName' => $newFileName,
+            'message' => 'Avatar successfully saved'
+        ]]);
+    }
 
-  public function setNewAvatar($file)
-  {
-    $newFileName = (string) Str::uuid('img_') . '.' . $file->extension();
+    public function removeCurrentAvatar()
+    {
+        $currentAvatar = $this->userRepo->getCurrentAvatarFile();
 
-    $this->fileSystem->put($newFileName, file_get_contents($file));
+        $this->userRepo->removeCurrentAvatar();
 
-    return $newFileName;
-  }
+        $this->fileSystem->delete($currentAvatar);
+    }
 
-  public function assignToCurrentUser($newFileName)
-  {
-    $this->userRepo->setCurrentAvatar($newFileName);
-  }
+    public function setNewAvatar($file)
+    {
+        $newFileName = (string) Str::uuid('img_') . '.' . $file->extension();
+
+        $this->fileSystem->put($newFileName, file_get_contents($file));
+
+        return $newFileName;
+    }
+
+    public function assignToCurrentUser($newFileName)
+    {
+        $this->userRepo->setCurrentAvatar($newFileName);
+    }
 }

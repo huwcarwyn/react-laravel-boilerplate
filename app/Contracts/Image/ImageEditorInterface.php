@@ -1,9 +1,12 @@
 <?php
 
-interface ImageEditorInterface {
-  public function open();
+namespace App\Contracts\Image;
 
-  public function resize();
+interface ImageEditorInterface
+{
+    public function open();
 
-  public function save();
+    public function resize();
+
+    public function save();
 }

@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Routing\Registrar as RouteRegistrar,
-  Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Contracts\Routing\Registrar as RouteRegistrar;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {

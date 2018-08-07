@@ -2,6 +2,6 @@
 
 namespace App\Contracts\Http;
 
-interface HttpClientContract {
-  
+interface HttpClientContract
+{
 }
