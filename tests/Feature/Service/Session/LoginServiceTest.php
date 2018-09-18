@@ -42,7 +42,7 @@ class LoginServiceTest extends TestCase
     {
         $loginInfo = ['email' => $this->user->email, 'password' => 'password'];
 
-        $response = $this->loginService->attemptLogin($loginInfo, $this->csrfToken);
+        $response = $this->loginService->attemptLoginResponse($loginInfo, $this->csrfToken);
 
         $this->assertEquals($response->status(), 200);
     }
@@ -51,7 +51,7 @@ class LoginServiceTest extends TestCase
     {
         $loginInfo = ['email' => $this->user->email, 'password' => 'incorrect password'];
 
-        $response = $this->loginService->attemptLogin($loginInfo, $this->csrfToken);
+        $response = $this->loginService->attemptLoginResponse($loginInfo, $this->csrfToken);
 
         $this->assertEquals($response->status(), 401);
     }
@@ -60,7 +60,7 @@ class LoginServiceTest extends TestCase
     {
         $loginInfo = ['email' => '', 'password' => 'password'];
 
-        $response = $this->loginService->attemptLogin($loginInfo, $this->csrfToken);
+        $response = $this->loginService->attemptLoginResponse($loginInfo, $this->csrfToken);
         $responseContent = json_decode($response->getContent(), true);
 
         $this->assertEquals($response->status(), 422);

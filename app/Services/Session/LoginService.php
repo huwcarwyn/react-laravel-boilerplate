@@ -6,6 +6,7 @@ use App\Contracts\Repository\UserRepositoryContract as UserRepository;
 use Illuminate\Contracts\Routing\ResponseFactory as Response;
 use Illuminate\Contracts\Validation\Factory as Validator;
 use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Validation\ValidationException;
 use Laravel\Passport\ApiTokenCookieFactory;
 
 class LoginService
@@ -38,20 +39,31 @@ class LoginService
         ]);
     }
 
+    public function attemptLoginResponse($loginInfo, $csrfToken)
+    {
+        try {
+            $attempt = $this->attemptLogin($loginInfo, $csrfToken);
+
+            if ($attempt) {
+                $apiCookie = $this->cookie->make($this->auth->user()->getKey(), $csrfToken);
+
+                return $this->response->success($this->repository->currentUser())->withCookie($apiCookie);
+            } else {
+                return $this->response->unauthorized('Incorrect login details');
+            }
+        } catch (ValidationException $e) {
+            return $this->response->validateError($e->errors());
+        }
+    }
+
     public function attemptLogin($loginInfo, $csrfToken)
     {
-        $validateLoginInfo = $this->validateLoginInfo($loginInfo);
+        $validator = $this->validateLoginInfo($loginInfo);
 
-        if ($validateLoginInfo->fails()) {
-            return $this->response->validateError($validateLoginInfo->failed());
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
         }
 
-        if ($this->auth->attempt($loginInfo)) {
-            $apiCookie = $this->cookie->make($this->auth->user()->getKey(), $csrfToken);
-
-            return $this->response->success($this->repository->currentUser())->withCookie($apiCookie);
-        } else {
-            return $this->response->unauthorized('Incorrect login details');
-        }
+        return $this->auth->attempt($loginInfo);
     }
 }

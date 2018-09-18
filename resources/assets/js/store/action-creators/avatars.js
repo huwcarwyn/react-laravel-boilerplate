@@ -12,5 +12,5 @@ export const uploadUserAvatar = (fileData, userId) => async (dispatch) => {
   dispatch({
     type: actions.SET_AVATAR,
     userId,
-    avatar: response.data.data.fileUrl})
+    avatar: response.data.fileUrl})
 }

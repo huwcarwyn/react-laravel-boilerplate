@@ -33,11 +33,11 @@ class SessionController
         $loginInfo = $request->only(['email', 'password']);
         $csrfToken = $request->header('X-CSRF-TOKEN');
 
-        return $this->loginService->attemptLogin($loginInfo, $csrfToken);
+        return $this->loginService->attemptLoginResponse($loginInfo, $csrfToken);
     }
 
     public function logOut()
     {
-        return $this->logoutService->logOut();
+        return $this->logoutService->logoutResponse();
     }
 }

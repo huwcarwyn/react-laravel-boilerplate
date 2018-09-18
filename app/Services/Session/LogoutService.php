@@ -19,7 +19,7 @@ class LogoutService
         $this->response = $response;
     }
 
-    public function logout()
+    public function logoutResponse()
     {
         return $this->response->success(['message' => 'Successfully logged out'])
                           ->withCookie($this->cookie->forget('laravel_token'));

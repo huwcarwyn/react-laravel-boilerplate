@@ -3,6 +3,7 @@
 namespace App\Services\User\Avatar;
 
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use App\Contracts\Repository\UserRepositoryContract;
 use Illuminate\Contracts\Validation\Factory as Validator;
 use Illuminate\Contracts\Filesystem\Factory as FileSystem;
@@ -34,12 +35,23 @@ class CreateAvatarService
         ]);
     }
 
+    public function createWithResponse($file)
+    {
+        try {
+            $avatarData = $this->create($file);
+
+            return $this->response->success(['data' => $avatarData]);
+        } catch (ValidationException $e) {
+            return $this->response->validateError($e->errors());
+        }
+    }
+
     public function create($file)
     {
         $fileValidator = $this->makeValidator(['avatar' => $file]);
 
         if ($fileValidator->fails()) {
-            return $this->response->validateError($fileValidator->failed());
+            throw new ValidationException($fileValidator);
         }
 
         $this->removeCurrentAvatar();
@@ -48,11 +60,11 @@ class CreateAvatarService
 
         $this->assignToCurrentUser($newFileName);
 
-        return $this->response->success(['data' => [
+        return [
             'fileUrl' => $this->fileSystem->url($newFileName),
             'fileName' => $newFileName,
             'message' => 'Avatar successfully saved'
-        ]]);
+        ];
     }
 
     public function removeCurrentAvatar()

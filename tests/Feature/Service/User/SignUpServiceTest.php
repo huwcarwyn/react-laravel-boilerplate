@@ -58,7 +58,7 @@ class SignUpServiceTest extends TestCase
         $this->oAuthService->shouldReceive('passwordGrantWithResponse->withCookie')
                             ->andReturn($this->response->json($oAuthCredentials));
 
-        $this->signUpService->signUp($userInfo, $this->csrfToken);
+        $this->signUpService->signUpResponse($userInfo, $this->csrfToken);
 
         $this->assertDatabaseHas('users', ['email' => $userInfo['email']]);
     }
@@ -72,7 +72,7 @@ class SignUpServiceTest extends TestCase
             'password' => str_random(10)
         ];
 
-        $response = $this->signUpService->signUp($userInfo, $this->csrfToken);
+        $response = $this->signUpService->signUpResponse($userInfo, $this->csrfToken);
         $responseContent = json_decode($response->getContent(), true);
 
         $this->assertEquals($response->status(), 422);

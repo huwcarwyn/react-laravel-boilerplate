@@ -5,6 +5,7 @@ namespace App\Services\User;
 use App\Contracts\Repository\UserRepositoryContract as UserRepository;
 use Illuminate\Contracts\Routing\ResponseFactory as Response;
 use Illuminate\Contracts\Validation\Factory as Validator;
+use Illuminate\Validation\ValidationException;
 
 class UpdateUserService
 {
@@ -31,6 +32,17 @@ class UpdateUserService
         ]);
     }
 
+    public function updateUserWithResponse($userData)
+    {
+        try {
+            $updatedUser = $this->updateUser($userData);
+
+            return $this->response->success(['data' => $updatedUser]);
+        } catch (ValidationException $e) {
+            return $this->response->validateError($e->errors());
+        }
+    }
+
     public function updateUser($userData)
     {
         $currentUser = $this->repository->find($userData['id'])['data'];
@@ -42,11 +54,9 @@ class UpdateUserService
         $validator = $this->makeUserUpdateValidator($userData);
 
         if ($validator->fails()) {
-            return $this->response->validateError($validator->failed());
+            throw new ValidationException($validator);
         }
 
-        $updatedUser = $this->repository->update($userData, $userData['id']);
-
-        return $this->response->success(['data' => $updatedUser]);
+        return $this->repository->update($userData, $userData['id']);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Services\User;
 use App\Contracts\Repository\UserRepositoryContract as UserRepository;
 use Illuminate\Contracts\Routing\ResponseFactory as Response;
 use Illuminate\Contracts\Validation\Factory as Validator;
+use Illuminate\Validation\ValidationException;
 use Laravel\Passport\ApiTokenCookieFactory;
 
 class SignUpService
@@ -36,18 +37,26 @@ class SignUpService
         ]);
     }
 
+    public function signUpResponse($userInfo, $csrfToken)
+    {
+        try {
+            $apiCookie = $this->signUp($userInfo, $csrfToken);
+            return $this->response->success(['message' => 'User successfully signed up'])->withCookie($apiCookie);
+        } catch (ValidationException $e) {
+            return $this->response->validateError($e->errors());
+        }
+    }
+
     public function signUp($userInfo, $csrfToken)
     {
-        $dataValidator = $this->validateUserData($userInfo);
+        $validator = $this->validateUserData($userInfo);
 
-        if ($dataValidator->fails()) {
-            return $this->response->validateError($dataValidator->failed());
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
         }
 
         $newUser = $this->user->create($userInfo);
 
-        $apiCookie = $this->cookie->make($newUser['data']['id'], $csrfToken);
-
-        return $this->response->success(['message' => 'User successfully signed up'])->withCookie($apiCookie);
+        return $this->cookie->make($newUser['data']['id'], $csrfToken);
     }
 }

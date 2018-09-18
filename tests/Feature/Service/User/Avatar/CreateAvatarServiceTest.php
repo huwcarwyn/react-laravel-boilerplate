@@ -33,7 +33,7 @@ class CreateAvatarServiceTest extends TestCase
     {
         $file = UploadedFile::fake('public')->image('image.xyz');
 
-        $response = $this->createAvatarService->create($file);
+        $response = $this->createAvatarService->createWithResponse($file);
         $responseContent = json_decode($response->getContent(), true);
 
         Storage::disk('public')->assertMissing('image.xyz');
@@ -45,7 +45,7 @@ class CreateAvatarServiceTest extends TestCase
     {
         $file = UploadedFile::fake('public')->image('image.png');
 
-        $response = $this->createAvatarService->create($file);
+        $response = $this->createAvatarService->createWithResponse($file);
         $responseContent = json_decode($response->getContent(), true);
         $newFileName = $responseContent['data']['fileName'];
 

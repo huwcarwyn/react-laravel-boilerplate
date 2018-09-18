@@ -56,7 +56,7 @@ const mapDispatchToProps = (dispatch) => ({
 
     dispatch(flashMessage('success', 'Successfully saved user info', 4000))
 
-    dispatch({ type: userActions.SET_CURRENT_USER_INFO, user: response.data.data.data })
+    dispatch({ type: userActions.SET_CURRENT_USER_INFO, user: response.data.data })
   },
 
   uploadUserAvatar: (fileData, userId) => dispatch(uploadUserAvatar(fileData, userId)),

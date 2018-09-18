@@ -5,6 +5,8 @@ namespace App\Services\User;
 use App\Contracts\Repository\UserRepositoryContract as UserRepository;
 use Illuminate\Contracts\Routing\ResponseFactory as Response;
 use Illuminate\Contracts\Validation\Factory as Validator;
+use App\Exceptions\PasswordMismatchException;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Hashing\Hasher;
 
 class ChangePasswordService
@@ -36,12 +38,25 @@ class ChangePasswordService
         ]);
     }
 
+    public function changePasswordResponse($data)
+    {
+        try {
+            $this->changePassword($data);
+
+            return $this->response->success(['message' => 'User password successfully updated']);
+        } catch (PasswordMismatchException $e) {
+            return $this->response->error($e->getMessage());
+        } catch (ValidationException $e) {
+            return $this->response->validateError($e->errors());
+        }
+    }
+
     public function changePassword($data)
     {
         $validator = $this->makeValidator($data);
 
         if ($validator->fails()) {
-            return $this->response->validateError($validator->failed());
+            throw new ValidationException($validator);
         }
 
         $this->user = $this->repository->find($data['user_id']);
@@ -49,10 +64,8 @@ class ChangePasswordService
         if ($this->hasher->check($data['old_password'], $this->user->password)) {
             $this->user->password = $data['new_password'];
             $this->user->save();
-
-            return $this->response->success(['message' => 'User password successfully updated']);
         } else {
-            return $this->response->error("Old Password is incorrect");
+            throw new PasswordMismatchException('The two passwords provided don\'t match up');
         }
     }
 }

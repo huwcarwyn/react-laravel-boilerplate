@@ -30,7 +30,7 @@ class LogoutServiceTest extends TestCase
 
     public function testLoggingOutReturnsOKResponseAndForgetsCookie()
     {
-        $response = $this->logOutService->logout();
+        $response = $this->logOutService->logoutResponse();
 
         $this->assertEquals($response->status(), 200);
     }
