@@ -19,7 +19,9 @@
   <div id="app">
 
   </div>
-  <script charset="utf8" src="/js/vendor.js"></script>
+  @if (env('APP_ENV') === 'production')
+    <script charset="utf8" src="/js/vendor.js"></script>
+  @endif
   <script charset="utf8" src="/js/app.js"></script>
 </body>
 </html>
