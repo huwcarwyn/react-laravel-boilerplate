@@ -1,18 +1,14 @@
 import React from 'react'
 
-export const Card = (props) => {
-  const { title, children, className } = props
+export const Card = ({ title, children, className = '' }) => (
+  <div className={`rounded overflow-hidden shadow border border-grey-light bg-white text-grey-darker ${className}`}>
+    {title && (<div className="text-lg font-bold py-3 px-4 border-b border-grey-light">{title}</div>)}
+    {children}
+  </div>
+)
 
-  return (
-    <div className={`rounded overflow-hidden shadow border border-grey-light bg-white text-grey-darker ${className || ''}`}>
-      {title && (<div className="text-lg font-bold py-3 px-4 border-b border-grey-light">{title}</div>)}
-      {children}
-    </div>
-  )
-}
-
-export const CardContent = ({className, children}) => (
-  <div className={`p-8 ${className || ''}`}>
+export const CardContent = ({className = '', children}) => (
+  <div className={`p-8 ${className}`}>
     {children}
   </div>
 )

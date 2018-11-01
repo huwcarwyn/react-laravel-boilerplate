@@ -1,38 +1,34 @@
 import React from 'react'
 
-export const BaseFlashMessage = (props) => {
-  const { className, handleDeleteClick } = props
+export const BaseFlashMessage = ({ className = '', handleDeleteClick, children }) => (
+  <div className={`fixed w-screen flex text-white slide-down p-2 ${className}`}>
+    {children}
+    <span className="ml-auto" onClick={handleDeleteClick}>
+      X
+    </span>
+  </div>
+)
 
-  return (
-    <div className={`fixed w-screen flex text-white slide-down p-2 ${className || ''}`}>
-      {props.children}
-      <span className="ml-auto" onClick={handleDeleteClick}>
-        X
-      </span>
-    </div>
-  )
-}
-
-export const NeutralFlashMessage = (props) => (
-  <BaseFlashMessage {...props} className="bg-blue">
-    {props.message}
+export const NeutralFlashMessage = ({ message, ...wrapperProps }) => (
+  <BaseFlashMessage {...wrapperProps} className="bg-blue">
+    { message }
   </BaseFlashMessage>
 )
 
-export const NegativeFlashMessage = (props) => (
-  <BaseFlashMessage {...props} className="bg-red">
-    {props.message}
+export const NegativeFlashMessage = ({ message, ...wrapperProps }) => (
+  <BaseFlashMessage {...wrapperProps} className="bg-red">
+    { message }
   </BaseFlashMessage>
 )
 
-export const WarningFlashMessage = (props) => (
-  <BaseFlashMessage {...props} className="bg-yellow-dark">
-    {props.message}
+export const WarningFlashMessage = ({ message, ...wrapperProps }) => (
+  <BaseFlashMessage {...wrapperProps} className="bg-yellow-dark">
+    { message }
   </BaseFlashMessage>
 )
 
-export const PositiveFlashMessage = (props) => (
-  <BaseFlashMessage {...props} className="bg-green">
-    {props.message}
+export const PositiveFlashMessage = ({ message, ...wrapperProps }) => (
+  <BaseFlashMessage {...wrapperProps} className="bg-green">
+    { message }
   </BaseFlashMessage>
 )

@@ -55,7 +55,7 @@ export class PictureUpload extends React.Component {
   }
 
   render () {
-    const { input: { name, value }, className } = this.props
+    const { input: { name, value }, className = '' } = this.props
     const { isHovering } = this.state
 
     const currentImage = value || defaultProfileImage
@@ -63,7 +63,7 @@ export class PictureUpload extends React.Component {
     return (
       <label
         htmlFor={name}
-        className={`${className || ''} cursor-pointer relative text-center`}>
+        className={`cursor-pointer relative text-center ${className} `}>
         <DragOverlay
           onDragOver={(e) => e.preventDefault()}
           onDragEnter={this.toggleHover}

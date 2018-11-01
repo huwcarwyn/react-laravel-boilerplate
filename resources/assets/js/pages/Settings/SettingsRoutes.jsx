@@ -9,12 +9,12 @@ import { UserSettings } from './UserSettings'
 import { AppSettingsForm } from './Forms/AppSettingsForm'
 import { BillingSettingsForm } from './Forms/BillingSettingsForm'
 
-const CardLink = ({to, className, children}) => {
+const CardLink = ({to, className = '', children}) => {
   return (
     <NavLink
       to={to}
       activeClassName="bg-blue-lightest"
-      className={`block border-b border-grey-light p-4 ${linkStyle} ${className || ''}`}>
+      className={`block border-b border-grey-light p-4 ${linkStyle} ${className}`}>
       { children }
     </NavLink>
   )
