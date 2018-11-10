@@ -53,6 +53,6 @@ class UserController
             'new_password_confirmation'
         ]);
 
-        return $this->changePasswordService->changePassword($data);
+        return $this->changePasswordService->changePasswordResponse($data);
     }
 }

@@ -59,6 +59,7 @@ class ChangePasswordService
             throw new ValidationException($validator);
         }
 
+        $this->repository->skipPresenter();
         $this->user = $this->repository->find($data['user_id']);
 
         if ($this->hasher->check($data['old_password'], $this->user->password)) {
