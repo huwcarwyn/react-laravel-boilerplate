@@ -1,15 +1,28 @@
 const path = require('path')
 const webpack = require('webpack')
 const tailwindcss = require('tailwindcss')
+const purgecss = require('@fullhuman/postcss-purgecss')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+const devMode = process.env.NODE_ENV !== 'production'
+
+class TailwindExtractor {
+  static extract (content) {
+    return content.match(/[A-Za-z0-9:/_-]+/g) || []
+  }
+}
 
 const appSCSSLoader = {
   test: /app.scss/,
   use: [
     {
-      loader: 'style-loader'
+      loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader
     },
     {
-      loader: 'css-loader'
+      loader: 'css-loader',
+      options: {
+        minimize: true
+      }
     }, {
       loader: 'sass-loader',
       options: {
@@ -22,7 +35,18 @@ const appSCSSLoader = {
       loader: 'postcss-loader',
       options: {
         plugins: [
-          tailwindcss('./tailwind.config.js')
+          tailwindcss('./tailwind.config.js'),
+          purgecss({
+            content: [
+              './resources/assets/js/**/*.jsx'
+            ],
+            extractors: [
+              {
+                extractor: TailwindExtractor,
+                extensions: ['html', 'js', 'php', 'jsx']
+              }
+            ]
+          })
         ]
       }
     }
@@ -34,7 +58,7 @@ const moduleSCSSLoader = {
   exclude: /app.scss/,
   use: [
     {
-      loader: 'style-loader'
+      loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader
     },
     {
       loader: 'css-loader',
