@@ -5,8 +5,8 @@ import { MemoryRouter } from 'react-router'
 import { UserCardComponent as UserCard } from 'components/UserCard'
 
 const user = {
-  firstName: 'Test',
-  lastName: 'Testington',
+  first_name: 'Test',
+  last_name: 'Testington',
   profilePicture: undefined
 }
 

@@ -2,8 +2,6 @@ const path = require('path')
 const {
   appSCSSLoader,
   moduleSCSSLoader,
-  moduleResolvePaths,
-  moduleExtensions,
   fileLoader
 } = require(path.join(__dirname, '../webpack.common.js'))
 
