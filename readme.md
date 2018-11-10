@@ -6,6 +6,7 @@ This is the boilerplate that I personally use for getting projects off the groun
 
 ## Features
 - Laravel Passport API authentication
+- Route level code splitting using React Lazy/Suspense
 - Login/signup functionality implemented and tested
 - Webpack configuration for development and production
 - React/Redux single page application using React Router
