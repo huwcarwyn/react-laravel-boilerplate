@@ -1,5 +1,6 @@
-import { merge, cloneDeep } from 'lodash'
+import merge from 'lodash.merge'
 import { normalize } from 'normalizr'
+import cloneDeep from 'lodash.clonedeep'
 
 import { initialState } from 'store/initialState'
 import { userActions } from 'store/actions'

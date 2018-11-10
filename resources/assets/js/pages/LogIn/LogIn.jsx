@@ -36,7 +36,7 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-export const LogIn = connect(
+export default connect(
   null,
   mapDispatchToProps
 )(LogInComponent)

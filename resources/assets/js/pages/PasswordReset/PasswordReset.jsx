@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   }
 })
 
-export const PasswordReset = connect(
+export default connect(
   null,
   mapDispatchToProps
 )(PasswordResetComponent)

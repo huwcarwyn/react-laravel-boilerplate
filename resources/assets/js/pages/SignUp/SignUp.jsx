@@ -42,7 +42,7 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-export const SignUp = connect(
+export default connect(
   null,
   mapDispatchToProps
 )(SignUpComponent)

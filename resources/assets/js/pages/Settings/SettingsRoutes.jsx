@@ -48,4 +48,4 @@ export class SettingsRoutesComponent extends React.Component {
   }
 }
 
-export const SettingsRoutes = connect()(SettingsRoutesComponent)
+export default connect()(SettingsRoutesComponent)

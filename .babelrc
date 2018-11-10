@@ -3,13 +3,18 @@
 		"@babel/preset-react", 
 		["@babel/preset-env", {
       "targets": {
-        "browsers": ["last 2 versions"]
+				"browsers": [
+					">0.25%",
+					"not ie 11",
+					"not op_mini all"
+				]
       }
     }]
 	],
 
 	"plugins": [
 		"@babel/plugin-proposal-object-rest-spread",
+		"@babel/plugin-syntax-dynamic-import",
 		["react-css-modules", {
 		  "filetypes": {
 		    ".scss": {

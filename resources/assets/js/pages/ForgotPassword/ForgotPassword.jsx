@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-export const ForgotPassword = connect(
+export default connect(
   null,
   mapDispatchToProps
 )(ForgotPasswordComponent)

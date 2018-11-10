@@ -23,4 +23,4 @@ const OverviewComponent = (props) => {
   )
 }
 
-export const Overview = OverviewComponent
+export default OverviewComponent
