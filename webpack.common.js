@@ -38,6 +38,7 @@ const appSCSSLoader = {
           tailwindcss('./tailwind.config.js'),
           purgecss({
             content: [
+              './resources/views/**/*.blade.php',
               './resources/assets/js/**/*.jsx'
             ],
             extractors: [

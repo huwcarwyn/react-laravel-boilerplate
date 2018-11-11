@@ -49,7 +49,7 @@ export const App = (props) => (
               <Route exact path='/' component={withDashboard(Overview)} />
               <Route path='/settings' component={withDashboard(SettingsRoutes)} />
               {/* 404 route */}
-              <Route path="*" exact={true} component={NotFound}/>
+              <Route path="*" exact={true} render={() => <NotFound />}/>
             </Switch>
           </Fragment>
         </ConnectedRouter>
