@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, Fragment } from 'react'
+import React, { lazy, Suspense } from 'react'
 import { Provider } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
@@ -32,28 +32,26 @@ const Loading = () => (
 )
 
 export const App = (props) => (
-  <ModalProviderWrapper>
-    <Provider store={store}>
-      <Suspense fallback={<Loading />}>
-        <FlashMessageRoot />
-        <ConnectedRouter history={browserHistory}>
-          <Fragment>
-            <ModalRoot />
-            <Switch>
-              <Route exact path='/login' render={() => <FormPageLayout title="Log In"><LogIn /></FormPageLayout>} />
-              <Route exact path='/signup' render={() => <FormPageLayout title="Sign Up"><SignUp /></FormPageLayout>} />
-              <Route exact path='/forgot-password' render={() => <FormPageLayout title="Forgot Password"><ForgotPassword /></FormPageLayout>} />
-              <Route exact path='/reset-password/:resetToken' render={() => <FormPageLayout title="Reset Password"><PasswordReset /></FormPageLayout>} />
+  <Provider store={store}>
+    <Suspense fallback={<Loading />}>
+      <FlashMessageRoot />
+      <ConnectedRouter history={browserHistory}>
+        <ModalProviderWrapper>
+          <ModalRoot />
+          <Switch>
+            <Route exact path='/login' render={() => <FormPageLayout title="Log In"><LogIn /></FormPageLayout>} />
+            <Route exact path='/signup' render={() => <FormPageLayout title="Sign Up"><SignUp /></FormPageLayout>} />
+            <Route exact path='/forgot-password' render={() => <FormPageLayout title="Forgot Password"><ForgotPassword /></FormPageLayout>} />
+            <Route exact path='/reset-password/:resetToken' render={() => <FormPageLayout title="Reset Password"><PasswordReset /></FormPageLayout>} />
 
-              {/* Dashboard routes */}
-              <Route exact path='/' component={withDashboard(Overview)} />
-              <Route path='/settings' component={withDashboard(SettingsRoutes)} />
-              {/* 404 route */}
-              <Route path="*" exact={true} render={() => <NotFound />}/>
-            </Switch>
-          </Fragment>
-        </ConnectedRouter>
-      </Suspense>
-    </Provider>
-  </ModalProviderWrapper>
+            {/* Dashboard routes */}
+            <Route exact path='/' component={withDashboard(Overview)} />
+            <Route path='/settings' component={withDashboard(SettingsRoutes)} />
+            {/* 404 route */}
+            <Route path="*" exact={true} render={() => <NotFound />}/>
+          </Switch>
+        </ModalProviderWrapper>
+      </ConnectedRouter>
+    </Suspense>
+  </Provider>
 )

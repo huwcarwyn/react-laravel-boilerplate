@@ -15,7 +15,7 @@ class ChangePasswordFormComponent extends React.Component {
           labelText="Enter your old password"
           className="mb-2" />
 
-        <div className="flex items-center mb-4">
+        <div className="flex items-start mb-4">
           <Field
             name="new_password"
             component={PasswordFormLine}
