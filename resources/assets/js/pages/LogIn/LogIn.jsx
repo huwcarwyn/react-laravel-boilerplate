@@ -25,14 +25,13 @@ const parseValidationFromResponse = (response) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  attemptLogin: (loginDetails) => {
-    return dispatch(logIn(loginDetails))
-      .then((response) => {
-        dispatch(push('/'))
-      })
-      .catch((error) => {
-        throw new SubmissionError(parseValidationFromResponse(error.response.data))
-      })
+  attemptLogin: async (loginDetails) => {
+    try {
+      await dispatch(logIn(loginDetails))
+      dispatch(push('/'))
+    } catch (error) {
+      throw new SubmissionError(parseValidationFromResponse(error.response.data))
+    }
   }
 })
 

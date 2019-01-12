@@ -7,8 +7,7 @@ import { push } from 'react-router-redux'
 import { currentUserSelector } from 'store/selectors/session'
 import defaultProfileImage from 'default-profile-picture.jpeg'
 
-export const UserCardComponent = (props) => {
-  const { user, colorTheme, className, logOut } = props
+export const UserCardComponent = ({ user, colorTheme, className = '', logOut }) => {
   const { first_name: firstName, last_name: lastName, avatar } = user
 
   const fullName = lastName !== undefined ? [firstName, lastName].join(' ') : firstName
@@ -41,11 +40,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  logOut: () => {
-    axios.get('/api/logout')
-      .then((response) => {
-        dispatch(push('/login'))
-      })
+  logOut: async () => {
+    console.log('inhere')
+    await axios.get('/api/logout')
+    dispatch(push('/login'))
   }
 })
 

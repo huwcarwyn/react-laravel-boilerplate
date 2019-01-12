@@ -12,18 +12,17 @@ export class AuthGuardComponent extends React.Component {
     }
   }
 
-  componentWillMount () {
+  async componentWillMount () {
     const { authOrRedirect, currentUserId } = this.props
 
     if (!currentUserId) {
-      authOrRedirect()
-        .then((response) => {
-          if (response && response.status === 200) {
-            this.setState({
-              loading: false
-            })
-          }
+      const response = await authOrRedirect()
+
+      if (response && response.status === 200) {
+        this.setState({
+          loading: false
         })
+      }
     } else {
       this.setState({
         loading: false
