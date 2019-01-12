@@ -36,7 +36,7 @@ const appSCSSLoader = {
       options: {
         plugins: [
           tailwindcss('./tailwind.config.js'),
-          purgecss({
+          ...(devMode ? [] : [purgecss({
             content: [
               './resources/views/**/*.blade.php',
               './resources/assets/js/**/*.jsx'
@@ -47,7 +47,7 @@ const appSCSSLoader = {
                 extensions: ['html', 'js', 'php', 'jsx']
               }
             ]
-          })
+          })])
         ]
       }
     }
