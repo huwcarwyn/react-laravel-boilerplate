@@ -1,8 +1,9 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 
 import { ModalProvider } from 'contexts'
 
-export class ModalProviderWrapper extends React.Component {
+export class ModalProviderWrapperComponent extends React.Component {
   constructor (props) {
     super(props)
 
@@ -12,6 +13,21 @@ export class ModalProviderWrapper extends React.Component {
       hideModal: this.hideModal.bind(this),
       showModal: this.showModal.bind(this)
     }
+  }
+
+  componentDidMount () {
+    const { history } = this.props
+
+    this.unlisten = history.listen(() => {
+      this.setState({
+        component: null,
+        modalProps: {}
+      })
+    })
+  }
+
+  componentWillUnmount () {
+    this.unlisten()
   }
 
   hideModal () {
@@ -41,3 +57,7 @@ export class ModalProviderWrapper extends React.Component {
     )
   }
 }
+
+export const ModalProviderWrapper = withRouter(
+  ModalProviderWrapperComponent
+)
