@@ -11,3 +11,12 @@
 .picture-overlay {
 	animation: fadePictureOverlay .3s forwards;
 }
+
+.uploaded-picture {
+	left: 50%;
+	top: 50%;
+	width: 150%;
+	max-width: 150%;
+	position: absolute;
+	transform: translate(-50%, -50%);
+}

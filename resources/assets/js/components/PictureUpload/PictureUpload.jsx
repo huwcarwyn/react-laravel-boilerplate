@@ -69,9 +69,9 @@ export class PictureUpload extends React.Component {
           onDragEnter={this.toggleHover}
           onDragLeave={this.toggleHover}
           onDrop={this.handleDrop}>
-          <div className="w-48 rounded-full mb-4 mx-auto relative overflow-hidden pointer-events-none">
+          <div className="w-48 h-48 rounded-full mb-4 mx-auto relative overflow-hidden pointer-events-none">
             { isHovering && <div styleName="picture-overlay" className="bg-black absolute pin"></div> }
-            <img src={currentImage} className="block w-64" alt="user avatar picture" />
+            <img src={currentImage} styleName="uploaded-picture" className="block" alt="user avatar picture" />
           </div>
           <span className="block text-grey text-sm">Drag or click to update your profile picture</span>
         </DragOverlay>
