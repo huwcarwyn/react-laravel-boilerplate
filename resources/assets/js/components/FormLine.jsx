@@ -5,9 +5,9 @@ import { PasswordInput, TextArea, TextInput } from 'components'
 export const FormLine = ({ labelText, name, children, className = '', meta: { touched, error } }) => (
   <div className={`block py-4 ${className}`}>
     <label className="block text-grey-dark text-md" htmlFor={name}>
-      <span className="inline-block pb-2">{labelText}</span>
-      {touched && (error && <div className="text-red text-sm">{error}</div>)}
+      <span className="inline-block mb-2">{labelText}</span>
       {children}
+      {touched && (error && <div className="text-red text-sm mt-2">{error}</div>)}
     </label>
   </div>
 )
