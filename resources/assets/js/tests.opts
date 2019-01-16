@@ -1,0 +1,2 @@
+--require @babel/register
+--require resources/assets/js/test-setup.js

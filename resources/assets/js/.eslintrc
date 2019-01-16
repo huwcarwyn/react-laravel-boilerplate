@@ -5,11 +5,7 @@
   },
   "globals": {
     "sinon": true,
-    "expect": true,
     "shallow": true,
     "mount": true
   },
-  "rules": {
-      "no-unused-expressions": "off",
-  }
 }
