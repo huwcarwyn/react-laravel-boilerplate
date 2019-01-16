@@ -1,6 +1,6 @@
 import { initialState } from 'store/initialState'
 import { requestActions as actions } from 'store/actions'
-import { requestReducer as reducer } from 'store/reducers/requests.reducer'
+import { requestReducer as reducer } from 'store/reducers/requests/requests.reducer'
 
 describe('requests reducer', () => {
   const { requests } = initialState

@@ -6,7 +6,7 @@ import {
   NegativeFlashMessage,
   WarningFlashMessage,
   PositiveFlashMessage
-} from 'components/FlashMessages'
+} from './FlashMessages'
 import { hideMessage } from 'store/action-creators/flashMessages'
 
 export const FlashMessageComponent = (props) => {

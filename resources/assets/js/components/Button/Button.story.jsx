@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { NeutralButton, NegativeButton, PositiveButton } from 'components/Button'
+import { NeutralButton, NegativeButton, PositiveButton } from './Button'
 
 storiesOf('Button', module)
   .add('All Buttons', () => {

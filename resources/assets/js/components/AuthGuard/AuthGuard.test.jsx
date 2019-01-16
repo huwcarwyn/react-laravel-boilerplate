@@ -1,4 +1,4 @@
-import { AuthGuardComponent as AuthGuard } from 'components/AuthGuard'
+import { AuthGuardComponent as AuthGuard } from 'components/AuthGuard/AuthGuard'
 
 describe('AuthGuard', () => {
   const baseProps = {

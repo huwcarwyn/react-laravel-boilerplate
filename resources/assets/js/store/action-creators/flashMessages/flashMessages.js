@@ -1,6 +1,6 @@
 import { sleep } from 'utility-functions'
 
-import { flashMessageActions as actions } from '../actions'
+import { flashMessageActions as actions } from 'store/actions'
 
 export const flashMessage = (type, message, timeOut = 5000) => async (dispatch) => {
   const uid = Date.now()

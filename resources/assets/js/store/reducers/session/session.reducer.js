@@ -1,5 +1,4 @@
-import { initialState } from '../initialState'
-
+import { initialState } from 'store/initialState'
 import { userActions } from 'store/actions'
 import { createReducer } from 'store/reducers/utilities'
 

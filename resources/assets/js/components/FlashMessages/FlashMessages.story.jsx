@@ -6,7 +6,7 @@ import {
   NegativeFlashMessage,
   WarningFlashMessage,
   PositiveFlashMessage
-} from 'components/FlashMessages'
+} from './FlashMessages'
 
 storiesOf('Flash Messages', module)
   .add('Neutral', () => (

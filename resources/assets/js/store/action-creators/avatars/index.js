@@ -1,0 +1,1 @@
+export { uploadUserAvatar } from './avatars'

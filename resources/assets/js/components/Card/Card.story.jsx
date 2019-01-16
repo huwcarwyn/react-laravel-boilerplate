@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { Card, CardContent, CardListItem } from 'components/Card'
+import { Card, CardContent, CardListItem } from './Card'
 
 storiesOf('Card', module)
   .addDecorator((story) => (<div className="p-6">{story()}</div>))

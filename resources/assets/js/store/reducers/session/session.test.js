@@ -1,6 +1,6 @@
 import { initialState } from 'store/initialState'
 import { userActions as actions } from 'store/actions'
-import { sessionReducer as reducer } from 'store/reducers/session.reducer'
+import { sessionReducer as reducer } from 'store/reducers/session/session.reducer'
 
 describe('session reducer', () => {
   const { session } = initialState

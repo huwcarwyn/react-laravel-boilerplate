@@ -1,4 +1,4 @@
-import { mockStore } from 'tests/store/mock-store'
+import { mockStore } from 'store/test-utils/mock-store'
 import { flashMessage, hideMessage } from 'store/action-creators/flashMessages'
 
 import { flashMessageActions as actions } from 'store/actions'
