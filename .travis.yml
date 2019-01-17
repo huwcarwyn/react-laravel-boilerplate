@@ -27,7 +27,8 @@ before_script:
 script:
   - vendor/bin/phpunit --verbose
   - npm run test
-  - npm run lintjs
+  - npm run lint:js
+  - npm run lint:tests
 
 cache:
   directories:

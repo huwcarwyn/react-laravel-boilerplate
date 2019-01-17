@@ -10,7 +10,8 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.production.js",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "test": "cross-env NODE_ENV=development mocha-webpack --webpack-config webpack.test.js \"resources/assets/js/**/*.test.{js,jsx}\" --opts resources/assets/js/tests.opts",
-    "lintjs": "node_modules/.bin/eslint resources/assets/js/**/*.{jsx,js}"
+    "lint:js": "npx eslint -c .eslintrc --ignore-pattern \"*.test.*\" resources/assets/js/**/*.{jsx,js} ",
+    "lint:tests": "npx eslint -c .eslinttestrc --ignore-pattern \"!*.test.*\" resources/assets/js/**/*.{jsx,js} "
   },
   "devDependencies": {
     "@babel/core": "^7.1.5",
