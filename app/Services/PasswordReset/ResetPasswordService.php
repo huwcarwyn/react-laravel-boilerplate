@@ -31,7 +31,7 @@ class ResetPasswordService
         $user->save();
     }
 
-    public function sendResetResponse($message)
+    public function sendResetResponse(Request $request, $message)
     {
         return $this->response->success(['message' => $message]);
     }
