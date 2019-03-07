@@ -1,18 +1,18 @@
-const path = require("path");
-const merge = require("webpack-merge");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path')
+const merge = require('webpack-merge')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const { commonConfig, appSCSSLoader, moduleSCSSLoader } = require(path.join(
   __dirname,
-  "webpack.common.js"
-));
+  'webpack.common.js'
+))
 
 module.exports = merge.smart(commonConfig, {
-  mode: "production",
+  mode: 'production',
 
   entry: {
-    app: path.join(__dirname, "resources/assets/js/main.jsx")
+    app: path.join(__dirname, 'resources/assets/js/main.jsx')
   },
 
   module: {
@@ -25,15 +25,15 @@ module.exports = merge.smart(commonConfig, {
 
   optimization: {
     splitChunks: {
-      chunks: "all"
+      chunks: 'all'
     }
   },
 
   plugins: [
     // new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
-      filename: "./css/[name].css",
-      chunkFilename: "./css/[id].css"
+      filename: './css/[name].css',
+      chunkFilename: './css/[id].css'
     })
   ]
-});
+})

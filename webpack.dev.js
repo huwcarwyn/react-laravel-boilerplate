@@ -1,25 +1,25 @@
-const path = require("path");
-const webpack = require("webpack");
-const merge = require("webpack-merge");
+const path = require('path')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
 const { commonConfig, appSCSSLoader, moduleSCSSLoader } = require(path.join(
   __dirname,
-  "webpack.common.js"
-));
+  'webpack.common.js'
+))
 
 module.exports = merge.smart(commonConfig, {
-  mode: "development",
+  mode: 'development',
 
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
 
   devServer: {
-    host: "localhost",
+    host: 'localhost',
     port: 9000,
     historyApiFallback: true,
     hot: true,
-    contentBase: path.join(__dirname, "public"),
+    contentBase: path.join(__dirname, 'public'),
     proxy: {
-      "*": {
-        target: "http://boilerplate.test/",
+      '*': {
+        target: 'http://boilerplate.test/',
         changeOrigin: true
       }
     }
@@ -38,4 +38,4 @@ module.exports = merge.smart(commonConfig, {
   },
 
   plugins: [new webpack.NamedModulesPlugin()]
-});
+})
