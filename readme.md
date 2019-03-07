@@ -24,8 +24,8 @@ I personally use Vagrant and [Homestead](https://laravel.com/docs/5.5/homestead 
 - Clone the repository using `git clone https://github.com/huwcarwyn/react-laravel-boilerplate`
 - Fill out a .env file in the project root using the .env.example file as a template
 - Install composer dependencies using `composer install`
-- Run `php artisan key:generate` and `php artisan passport:install` and `php artisan storage:link` as well as `php artisan migrate`
+- Run `php artisan key:generate` and `php artisan passport:install` and `php artisan storage:link`
 - Install NPM dependencies using `npm install`
-- Make sure to create two databases, one main and one for running the tests
+- Make sure to create two databases, one main and one for running the tests, then run `php artisan migrate`
 - If you want to use the webpack dev server, make sure that the proxy entry in the weback.dev.js points to the server that's running your Laravel installation.
 
