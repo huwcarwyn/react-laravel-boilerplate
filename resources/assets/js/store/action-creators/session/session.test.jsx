@@ -21,9 +21,7 @@ describe('session action creators', () => {
 
     it('dispatches the correct action with the response data', async () => {
       const expectedActions = [
-        { type: actions.SET_CURRENT_USER_INFO,
-          user: userData
-        }
+        { type: actions.SET_CURRENT_USER_INFO, user: userData }
       ]
 
       await store.dispatch(getCurrentUserInfo())

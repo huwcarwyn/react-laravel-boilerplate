@@ -7,8 +7,8 @@ const { flashMessages } = initialState
 const showMessage = (state, action) => ({
   ...state,
   [action.uid]: {
-    'type': action.messageType,
-    'message': action.message
+    type: action.messageType,
+    message: action.message
   }
 })
 

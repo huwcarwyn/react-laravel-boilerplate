@@ -7,20 +7,23 @@ import { flashMessage } from 'store/action-creators/flashMessages'
 
 import { ForgotPasswordForm } from './ForgotPasswordForm'
 
-export const ForgotPasswordComponent = (props) => {
+export const ForgotPasswordComponent = props => {
   const { submitForgotPassword } = props
-  return (
-    <ForgotPasswordForm onSubmit={submitForgotPassword} />
-  )
+  return <ForgotPasswordForm onSubmit={submitForgotPassword} />
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  submitForgotPassword: async (values) => {
+const mapDispatchToProps = dispatch => ({
+  submitForgotPassword: async values => {
     try {
       await axios.post('/api/forgot-password', values)
 
       dispatch(push('/login'))
-      dispatch(flashMessage('success', 'The password reset request has been sent to your Email inbox.'))
+      dispatch(
+        flashMessage(
+          'success',
+          'The password reset request has been sent to your Email inbox.'
+        )
+      )
     } catch (error) {
       throw new SubmissionError(error.response.data)
     }

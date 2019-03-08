@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
 
 export class DragOverlay extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
-    this.eventNames = [
-      'onDragEnter',
-      'onDragLeave',
-      'onDragOver',
-      'onDrop'
-    ]
+    this.eventNames = ['onDragEnter', 'onDragLeave', 'onDragOver', 'onDrop']
 
     this.eventHandlersFromProps = this.eventHandlersFromProps.bind(this)
   }
 
-  eventHandlersFromProps (props) {
+  eventHandlersFromProps(props) {
     return this.eventNames.reduce((acc, eventName) => {
       if (props[eventName]) {
         acc[eventName] = props[eventName]
@@ -24,12 +19,8 @@ export class DragOverlay extends Component {
     }, {})
   }
 
-  render () {
+  render() {
     const { children } = this.props
-    return (
-      <div {...this.eventHandlersFromProps(this.props)}>
-        { children }
-      </div>
-    )
+    return <div {...this.eventHandlersFromProps(this.props)}>{children}</div>
   }
 }

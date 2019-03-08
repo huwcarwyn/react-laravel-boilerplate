@@ -6,7 +6,7 @@ import { PasswordFormLine, TextFormLine, NeutralButton } from 'components'
 import { email as emailRegex } from 'constants/regexes'
 import { linkStyle } from 'constants/styles'
 
-const validateSignUp = (values) => {
+const validateSignUp = values => {
   let errors = {}
 
   if (!values.first_name) {
@@ -30,18 +30,42 @@ const validateSignUp = (values) => {
   return errors
 }
 
-const SignUpForm = (props) => {
+const SignUpForm = props => {
   const { handleSubmit } = props
 
   return (
     <form onSubmit={handleSubmit}>
-      <Field component={TextFormLine} type="text" name="first_name" labelText="First Name" />
-      <Field component={TextFormLine} type="text" name="last_name" labelText="Last Name" />
-      <Field component={TextFormLine} type="text" name="email" labelText="Email" />
-      <Field component={PasswordFormLine} type="password" name="password" labelText="Password" />
+      <Field
+        component={TextFormLine}
+        type="text"
+        name="first_name"
+        labelText="First Name"
+      />
+      <Field
+        component={TextFormLine}
+        type="text"
+        name="last_name"
+        labelText="Last Name"
+      />
+      <Field
+        component={TextFormLine}
+        type="text"
+        name="email"
+        labelText="Email"
+      />
+      <Field
+        component={PasswordFormLine}
+        type="password"
+        name="password"
+        labelText="Password"
+      />
       <div className="flex items-center">
-        <Link className={linkStyle} to="/login">Or Login</Link>
-        <NeutralButton className="ml-auto" type="submit">Sign Up</NeutralButton>
+        <Link className={linkStyle} to="/login">
+          Or Login
+        </Link>
+        <NeutralButton className="ml-auto" type="submit">
+          Sign Up
+        </NeutralButton>
       </div>
     </form>
   )

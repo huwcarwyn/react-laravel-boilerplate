@@ -6,7 +6,7 @@ import { PasswordFormLine, TextFormLine, NeutralButton } from 'components'
 import { email as emailRegex } from 'constants/regexes'
 import { linkStyle } from 'constants/styles'
 
-const validateLogin = (values) => {
+const validateLogin = values => {
   let errors = {}
 
   if (!values.email) {
@@ -22,18 +22,34 @@ const validateLogin = (values) => {
   return errors
 }
 
-const LoginForm = (props) => {
+const LoginForm = props => {
   const { handleSubmit } = props
 
   return (
     <form onSubmit={handleSubmit}>
-      <Field component={TextFormLine} type="text" name="email" labelText="Email" />
-      <Field component={PasswordFormLine} type="password" name="password" labelText="Password" />
+      <Field
+        component={TextFormLine}
+        type="text"
+        name="email"
+        labelText="Email"
+      />
+      <Field
+        component={PasswordFormLine}
+        type="password"
+        name="password"
+        labelText="Password"
+      />
       <div className="flex items-center">
-        <Link className={linkStyle} to="/signup">Or Signup</Link>
+        <Link className={linkStyle} to="/signup">
+          Or Signup
+        </Link>
         <span className="inline-block px-2">|</span>
-        <Link className={linkStyle} to="/forgot-password">Forgot Password?</Link>
-        <NeutralButton className="ml-auto" type="submit">Log In</NeutralButton>
+        <Link className={linkStyle} to="/forgot-password">
+          Forgot Password?
+        </Link>
+        <NeutralButton className="ml-auto" type="submit">
+          Log In
+        </NeutralButton>
       </div>
     </form>
   )

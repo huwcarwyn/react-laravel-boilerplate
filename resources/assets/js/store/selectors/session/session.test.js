@@ -14,7 +14,7 @@ describe('session selector', () => {
         },
         entities: {
           users: {
-            1: {...userObject}
+            1: { ...userObject }
           }
         }
       }

@@ -7,7 +7,7 @@ import { linkStyle } from 'constants/styles'
 
 import { email as emailRegex } from 'constants/regexes'
 
-const validate = (values) => {
+const validate = values => {
   let errors = {}
 
   if (!values.email) {
@@ -19,7 +19,7 @@ const validate = (values) => {
   return errors
 }
 
-export const ForgotPasswordFormComponent = (props) => {
+export const ForgotPasswordFormComponent = props => {
   const { handleSubmit } = props
 
   return (
@@ -28,11 +28,16 @@ export const ForgotPasswordFormComponent = (props) => {
         type="text"
         name="email"
         labelText="Enter Your Email Address"
-        component={TextFormLine} />
+        component={TextFormLine}
+      />
 
       <div className="flex items-center">
-        <Link className={linkStyle} to="/login">Back to Login</Link>
-        <NeutralButton className="ml-auto" type="submit">Request</NeutralButton>
+        <Link className={linkStyle} to="/login">
+          Back to Login
+        </Link>
+        <NeutralButton className="ml-auto" type="submit">
+          Request
+        </NeutralButton>
       </div>
     </form>
   )

@@ -6,15 +6,13 @@ import { SubmissionError } from 'redux-form'
 
 import SignUpForm from './SignUpForm'
 
-export const SignUpComponent = (props) => {
+export const SignUpComponent = props => {
   const { submitSignup } = props
 
-  return (
-    <SignUpForm onSubmit={submitSignup} />
-  )
+  return <SignUpForm onSubmit={submitSignup} />
 }
 
-const parseValidationErrorResponse = (response) => {
+const parseValidationErrorResponse = response => {
   let errors = {}
 
   if (response.email && response.email.Unique) {
@@ -24,19 +22,22 @@ const parseValidationErrorResponse = (response) => {
   return errors
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  submitSignup: (signUpData) => {
-    return axios.post('/api/signup', signUpData)
-      .then((response) => {
+const mapDispatchToProps = dispatch => ({
+  submitSignup: signUpData => {
+    return axios
+      .post('/api/signup', signUpData)
+      .then(response => {
         if (response.status === 200) {
           // Successful signup, move on to dashboard/overview.
           dispatch(push('/'))
         }
       })
-      .catch((error) => {
+      .catch(error => {
         if (error.response.status === 422) {
           // Invalid data was supplied to the API, show validation errors
-          throw new SubmissionError(parseValidationErrorResponse(error.response.data.messages))
+          throw new SubmissionError(
+            parseValidationErrorResponse(error.response.data.messages)
+          )
         }
       })
   }

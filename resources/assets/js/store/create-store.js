@@ -10,7 +10,7 @@ export const browserHistory = createHistory()
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const configureStore = (initialState) => {
+const configureStore = initialState => {
   const store = createStore(
     rootReducer,
     composeEnhancers(applyMiddleware(thunk, routerMiddleware(browserHistory)))

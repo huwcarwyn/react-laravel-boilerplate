@@ -4,9 +4,9 @@ export const flashMessageActions = {
 }
 
 export const requestActions = {
-  'REQUEST': 'REQUEST/REQUEST',
-  'FAILED': 'REQUEST/FAILED',
-  'SUCCESS': 'REQUEST/SUCCESS'
+  REQUEST: 'REQUEST/REQUEST',
+  FAILED: 'REQUEST/FAILED',
+  SUCCESS: 'REQUEST/SUCCESS'
 }
 
 export const userActions = {

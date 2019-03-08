@@ -9,15 +9,7 @@ import {
 } from './FlashMessages'
 
 storiesOf('Flash Messages', module)
-  .add('Neutral', () => (
-    <NeutralFlashMessage message="I'm a message!" />
-  ))
-  .add('Negative', () => (
-    <NegativeFlashMessage message="I'm a message!" />
-  ))
-  .add('Warning', () => (
-    <WarningFlashMessage message="I'm a message!" />
-  ))
-  .add('Positive', () => (
-    <PositiveFlashMessage message="I'm a message!" />
-  ))
+  .add('Neutral', () => <NeutralFlashMessage message="I'm a message!" />)
+  .add('Negative', () => <NegativeFlashMessage message="I'm a message!" />)
+  .add('Warning', () => <WarningFlashMessage message="I'm a message!" />)
+  .add('Positive', () => <PositiveFlashMessage message="I'm a message!" />)

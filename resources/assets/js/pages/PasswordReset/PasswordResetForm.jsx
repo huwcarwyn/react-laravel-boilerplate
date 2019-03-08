@@ -3,7 +3,7 @@ import { reduxForm, Field } from 'redux-form'
 
 import { TextFormLine, PasswordFormLine, NeutralButton } from 'components'
 
-const validate = (values) => {
+const validate = values => {
   let errors = {}
 
   if (!values.email) {
@@ -17,13 +17,13 @@ const validate = (values) => {
   if (!values.password_confirmation) {
     errors.password_confirmation = 'This field is required'
   } else if (values.password !== values.password_confirmation) {
-    errors.password_confirmation = 'The two passwords don\'t match'
+    errors.password_confirmation = "The two passwords don't match"
   }
 
   return errors
 }
 
-export const PasswordResetFormComponent = (props) => {
+export const PasswordResetFormComponent = props => {
   const { handleSubmit } = props
 
   return (
@@ -32,21 +32,26 @@ export const PasswordResetFormComponent = (props) => {
         type="text"
         name="email"
         labelText="Enter your Email"
-        component={TextFormLine} />
+        component={TextFormLine}
+      />
 
       <Field
         type="password"
         name="password"
         labelText="Enter a New Password"
-        component={PasswordFormLine} />
+        component={PasswordFormLine}
+      />
 
       <Field
         type="password"
         name="password_confirmation"
         labelText="Confirm Your New Password"
-        component={PasswordFormLine} />
+        component={PasswordFormLine}
+      />
 
-      <NeutralButton className="float-right" type="submit">Set New Password</NeutralButton>
+      <NeutralButton className="float-right" type="submit">
+        Set New Password
+      </NeutralButton>
     </form>
   )
 }

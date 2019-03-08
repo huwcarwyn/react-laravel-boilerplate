@@ -18,8 +18,10 @@ const changeRequestState = (state, actionType, offset) => {
   return newState
 }
 
-const incrementRequestState = (state, { actionType }) => changeRequestState(state, actionType, 1)
-const decrementRequestState = (state, { actionType }) => changeRequestState(state, actionType, -1)
+const incrementRequestState = (state, { actionType }) =>
+  changeRequestState(state, actionType, 1)
+const decrementRequestState = (state, { actionType }) =>
+  changeRequestState(state, actionType, -1)
 
 export const requestReducer = createReducer(requests, {
   [requestActions.REQUEST]: incrementRequestState,

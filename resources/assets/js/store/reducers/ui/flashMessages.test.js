@@ -28,10 +28,12 @@ describe('flash messages reducer', () => {
       }
     }
 
-    expect(reducer(flashMessages, {
-      type: actions.SHOW_MESSAGE,
-      ...message
-    })).to.deep.equal(expectedState)
+    expect(
+      reducer(flashMessages, {
+        type: actions.SHOW_MESSAGE,
+        ...message
+      })
+    ).to.deep.equal(expectedState)
   })
 
   it('correctly handles HIDE_MESSAGE', () => {
@@ -43,9 +45,11 @@ describe('flash messages reducer', () => {
       }
     }
 
-    expect(reducer(state, {
-      type: actions.HIDE_MESSAGE,
-      uid: message.uid
-    })).to.deep.equal(flashMessages)
+    expect(
+      reducer(state, {
+        type: actions.HIDE_MESSAGE,
+        uid: message.uid
+      })
+    ).to.deep.equal(flashMessages)
   })
 })

@@ -28,9 +28,11 @@ describe('session reducer', () => {
       currentUser: user.id
     }
 
-    expect(reducer(session, {
-      type: actions.SET_CURRENT_USER_INFO,
-      user
-    })).to.deep.equal(expectedState)
+    expect(
+      reducer(session, {
+        type: actions.SET_CURRENT_USER_INFO,
+        user
+      })
+    ).to.deep.equal(expectedState)
   })
 })

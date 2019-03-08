@@ -6,7 +6,7 @@ import './PictureUpload.scss'
 import defaultProfileImage from 'default-profile-picture.jpeg'
 
 export class PictureUpload extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -20,7 +20,7 @@ export class PictureUpload extends React.Component {
     this.handleFileUpload = this.handleFileUpload.bind(this)
   }
 
-  async handleDrop (e) {
+  async handleDrop(e) {
     e.preventDefault()
 
     const { uploadHandler } = this.props
@@ -34,7 +34,7 @@ export class PictureUpload extends React.Component {
     this.setState({ isHovering: false })
   }
 
-  async handleFileUpload (e) {
+  async handleFileUpload(e) {
     e.preventDefault()
 
     if (!e.target.files[0]) {
@@ -48,14 +48,17 @@ export class PictureUpload extends React.Component {
     await uploadHandler(fileData)
   }
 
-  toggleHover () {
-    this.setState({isHovering: !this.state.isHovering})
+  toggleHover() {
+    this.setState({ isHovering: !this.state.isHovering })
 
     return false
   }
 
-  render () {
-    const { input: { name, value }, className = '' } = this.props
+  render() {
+    const {
+      input: { name, value },
+      className = ''
+    } = this.props
     const { isHovering } = this.state
 
     const currentImage = value || defaultProfileImage
@@ -63,24 +66,39 @@ export class PictureUpload extends React.Component {
     return (
       <label
         htmlFor={name}
-        className={`cursor-pointer relative text-center ${className} `}>
+        className={`cursor-pointer relative text-center ${className} `}
+      >
         <DragOverlay
-          onDragOver={(e) => e.preventDefault()}
+          onDragOver={e => e.preventDefault()}
           onDragEnter={this.toggleHover}
           onDragLeave={this.toggleHover}
-          onDrop={this.handleDrop}>
+          onDrop={this.handleDrop}
+        >
           <div className="w-48 h-48 rounded-full mb-4 mx-auto relative overflow-hidden pointer-events-none">
-            { isHovering && <div styleName="picture-overlay" className="bg-black absolute pin"></div> }
-            <img src={currentImage} styleName="uploaded-picture" className="block" alt="user avatar picture" />
+            {isHovering && (
+              <div
+                styleName="picture-overlay"
+                className="bg-black absolute pin"
+              />
+            )}
+            <img
+              src={currentImage}
+              styleName="uploaded-picture"
+              className="block"
+              alt="user avatar picture"
+            />
           </div>
-          <span className="block text-grey text-sm">Drag or click to update your profile picture</span>
+          <span className="block text-grey text-sm">
+            Drag or click to update your profile picture
+          </span>
         </DragOverlay>
         <input
           type="file"
           id={name}
           name={name}
           className="hidden"
-          onChange={this.handleFileUpload} />
+          onChange={this.handleFileUpload}
+        />
       </label>
     )
   }

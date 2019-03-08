@@ -6,7 +6,7 @@ import { PositiveButton, TextFormLine, PictureUpload } from 'components'
 import { email as emailRegex } from 'constants/regexes'
 
 export class UserSettingsFormComponent extends React.Component {
-  render () {
+  render() {
     const { handleSubmit, avatarUploadHandler, className } = this.props
 
     return (
@@ -16,32 +16,34 @@ export class UserSettingsFormComponent extends React.Component {
             name="avatar"
             component={PictureUpload}
             uploadHandler={avatarUploadHandler}
-            className="mr-10" />
+            className="mr-10"
+          />
           <div className="flex-grow">
             <Field
               name="first_name"
               component={TextFormLine}
-              labelText="First Name" />
+              labelText="First Name"
+            />
             <Field
               name="last_name"
               component={TextFormLine}
-              labelText="Last Name" />
-            <Field
-              name="email"
-              component={TextFormLine}
-              labelText="Email" />
+              labelText="Last Name"
+            />
+            <Field name="email" component={TextFormLine} labelText="Email" />
           </div>
         </div>
 
         <div className="flex border-grey-light">
-          <PositiveButton type="submit" className="ml-auto">Save User Details</PositiveButton>
+          <PositiveButton type="submit" className="ml-auto">
+            Save User Details
+          </PositiveButton>
         </div>
       </form>
     )
   }
 }
 
-const validateUserSettings = (values) => {
+const validateUserSettings = values => {
   let errors = {}
 
   if (!values.first_name) {
@@ -67,8 +69,10 @@ const UserSettingsFormForm = reduxForm({
   validate: validateUserSettings
 })(UserSettingsFormComponent)
 
-const mapStateToProps = (state) => {
-  const { session: { currentUser } } = state
+const mapStateToProps = state => {
+  const {
+    session: { currentUser }
+  } = state
   return {
     initialValues: state.entities.users[currentUser]
   }

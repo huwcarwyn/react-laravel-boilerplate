@@ -9,17 +9,18 @@ import { SubmissionError } from 'redux-form'
 import { flashMessage } from 'store/action-creators/flashMessages'
 import { PasswordResetForm } from './PasswordResetForm'
 
-export const PasswordResetComponent = (props) => {
+export const PasswordResetComponent = props => {
   const { submitPasswordReset } = props
-  return (
-    <PasswordResetForm onSubmit={submitPasswordReset} />
-  )
+  return <PasswordResetForm onSubmit={submitPasswordReset} />
 }
 
-const parseValidationFromResponse = (data) => {
+const parseValidationFromResponse = data => {
   const errors = {}
 
-  if (data.errors.password && data.errors.password.includes('The password must be at least 6 characters.')) {
+  if (
+    data.errors.password &&
+    data.errors.password.includes('The password must be at least 6 characters.')
+  ) {
     errors.password = 'The password must be at least 6 characters.'
   }
 
@@ -27,7 +28,7 @@ const parseValidationFromResponse = (data) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  submitPasswordReset: async (values) => {
+  submitPasswordReset: async values => {
     const { match } = ownProps
 
     try {
@@ -39,7 +40,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       dispatch(push('/login'))
       dispatch(flashMessage('success', 'Password successfully reset'))
     } catch (error) {
-      throw new SubmissionError(parseValidationFromResponse(error.response.data))
+      throw new SubmissionError(
+        parseValidationFromResponse(error.response.data)
+      )
     }
   }
 })

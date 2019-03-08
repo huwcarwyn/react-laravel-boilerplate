@@ -4,7 +4,7 @@ import { withRouter } from 'react-router'
 import { ModalProvider } from 'contexts'
 
 export class ModalProviderWrapperComponent extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -15,7 +15,7 @@ export class ModalProviderWrapperComponent extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { history } = this.props
 
     this.unlisten = history.listen(() => {
@@ -26,38 +26,34 @@ export class ModalProviderWrapperComponent extends React.Component {
     })
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.unlisten()
   }
 
-  hideModal () {
+  hideModal() {
     this.setState({
       component: null,
       modalProps: {}
     })
   }
 
-  showModal (component, modalProps = {}) {
+  showModal(component, modalProps = {}) {
     this.setState({
       component,
       modalProps
     })
   }
 
-  render () {
+  render() {
     const { children } = this.props
     const { component } = this.state
 
     return (
       <div className={`h-screen overflow-${component ? 'hidden' : 'scroll'}`}>
-        <ModalProvider value={this.state}>
-          { children }
-        </ModalProvider>
+        <ModalProvider value={this.state}>{children}</ModalProvider>
       </div>
     )
   }
 }
 
-export const ModalProviderWrapper = withRouter(
-  ModalProviderWrapperComponent
-)
+export const ModalProviderWrapper = withRouter(ModalProviderWrapperComponent)

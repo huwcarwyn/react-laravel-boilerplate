@@ -32,12 +32,8 @@ describe('flashMessages action creators', () => {
   describe('flashMessage', () => {
     it('dispatches the correct actions', async () => {
       const expectedActions = [
-        { type: actions.SHOW_MESSAGE,
-          ...message
-        },
-        { type: actions.HIDE_MESSAGE,
-          uid: message.uid
-        }
+        { type: actions.SHOW_MESSAGE, ...message },
+        { type: actions.HIDE_MESSAGE, uid: message.uid }
       ]
 
       await store.dispatch(flashMessage('success', 'test message', 1))
@@ -48,11 +44,7 @@ describe('flashMessages action creators', () => {
 
   describe('hideMessage', () => {
     it('dispatches the correct action', () => {
-      const expectedActions = [
-        { type: actions.HIDE_MESSAGE,
-          uid: message.uid
-        }
-      ]
+      const expectedActions = [{ type: actions.HIDE_MESSAGE, uid: message.uid }]
 
       store.dispatch(hideMessage(message.uid))
 

@@ -14,10 +14,12 @@ describe('requests reducer', () => {
       test: 1
     }
 
-    expect(reducer(requests, {
-      type: actions.REQUEST,
-      actionType: 'test'
-    })).to.deep.equal(expectedState)
+    expect(
+      reducer(requests, {
+        type: actions.REQUEST,
+        actionType: 'test'
+      })
+    ).to.deep.equal(expectedState)
   })
 
   it('handles success correctly', () => {
@@ -29,9 +31,11 @@ describe('requests reducer', () => {
       test: 0
     }
 
-    expect(reducer(initialFetch, {
-      type: actions.SUCCESS,
-      actionType: 'test'
-    })).to.deep.equal(expectedState)
+    expect(
+      reducer(initialFetch, {
+        type: actions.SUCCESS,
+        actionType: 'test'
+      })
+    ).to.deep.equal(expectedState)
   })
 })

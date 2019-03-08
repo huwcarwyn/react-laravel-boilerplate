@@ -4,7 +4,7 @@ import { replace } from 'react-router-redux'
 import { getCurrentUserInfo } from 'store/action-creators/session'
 
 export class AuthGuardComponent extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -12,7 +12,7 @@ export class AuthGuardComponent extends React.Component {
     }
   }
 
-  async componentWillMount () {
+  async componentWillMount() {
     const { authOrRedirect, currentUserId } = this.props
 
     if (!currentUserId) {
@@ -30,34 +30,33 @@ export class AuthGuardComponent extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const { children } = this.props
     const { loading } = this.state
 
     if (loading) {
       return (
         <div className="flex h-screen items-center">
-          <div className="w-screen text-3xl text-center text-grey">Loading...</div>
+          <div className="w-screen text-3xl text-center text-grey">
+            Loading...
+          </div>
         </div>
       )
     }
 
-    return (
-      <div>{children}</div>
-    )
+    return <div>{children}</div>
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   currentUserId: state.session.currentUser
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   authOrRedirect: () => {
-    return dispatch(getCurrentUserInfo())
-      .catch(() => {
-        dispatch(replace('/login'))
-      })
+    return dispatch(getCurrentUserInfo()).catch(() => {
+      dispatch(replace('/login'))
+    })
   }
 })
 
