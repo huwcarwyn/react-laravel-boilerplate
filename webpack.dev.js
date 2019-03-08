@@ -25,6 +25,12 @@ module.exports = merge.smart(commonConfig, {
     }
   },
 
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
+
   module: {
     rules: [
       { ...appSCSSLoader },
