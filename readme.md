@@ -17,6 +17,7 @@ This is the boilerplate that I personally use for getting projects off the groun
 - Tailwind CSS for utility class styling (see [https://tailwindcss.com](https://tailwindcss.com))
 - Support for scoped styling using React CSS modules using  [Gajus React CSS Modules](https://github.com/gajus/react-css-modules "Gajus React CSS Modules")
 - Continous build integration via [Travis CI](https://travis-ci.org/ "Travis CI")
+- Automatic code style fixing with [Prettier](https://prettier.io/) 
 
 ## Installation
 I personally use Vagrant and [Homestead](https://laravel.com/docs/5.5/homestead "Homestead"), so these installation instructions assume that you use Homestead as well, but the project's dependencies are very similar to the base Laravel installation, so if you use something else to develop locally, the instructions shouldn't change too much.
