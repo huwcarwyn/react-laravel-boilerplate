@@ -100,10 +100,7 @@ const commonConfig = {
   mode: 'development',
 
   entry: {
-    app: [
-      'babel-polyfill',
-      path.join(__dirname, 'resources/assets/js/main.jsx')
-    ]
+    app: [path.join(__dirname, 'resources/assets/js/main.jsx')]
   },
 
   output: {
