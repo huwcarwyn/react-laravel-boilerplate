@@ -36,6 +36,9 @@ const Loading = () => (
   </div>
 )
 
+const OverviewWithDashboard = withDashboard(Overview)
+const SettingsWithDashboard = withDashboard(SettingsRoutes)
+
 export const App = props => (
   <Provider store={store}>
     <Suspense fallback={<Loading />}>
@@ -82,8 +85,8 @@ export const App = props => (
             />
 
             {/* Dashboard routes */}
-            <Route exact path="/" component={withDashboard(Overview)} />
-            <Route path="/settings" component={withDashboard(SettingsRoutes)} />
+            <Route exact path="/" component={OverviewWithDashboard} />
+            <Route path="/settings" component={SettingsWithDashboard} />
             {/* 404 route */}
             <Route path="*" exact={true} render={() => <NotFound />} />
           </Switch>
