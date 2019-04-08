@@ -1,3 +1,7 @@
+export const sessionActions = {
+  LOGOUT: 'SESSION/LOGOUT'
+}
+
 export const flashMessageActions = {
   SHOW_MESSAGE: 'FLASH_MESSAGE/SHOW',
   HIDE_MESSAGE: 'FLASH_MESSAGE/HIDE'

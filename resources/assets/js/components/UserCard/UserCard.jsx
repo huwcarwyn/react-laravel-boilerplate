@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { push } from 'react-router-redux'
 
+import { sessionActions } from 'store/actions'
 import { currentUserSelector } from 'store/selectors/session'
 import defaultProfileImage from 'default-profile-picture.jpeg'
 
@@ -13,6 +14,10 @@ export const UserCardComponent = ({
   className = '',
   logOut
 }) => {
+  if (!user) {
+    return null
+  }
+
   const { first_name: firstName, last_name: lastName, avatar } = user
 
   const fullName =
@@ -57,6 +62,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   logOut: async () => {
     await axios.get('/api/logout')
+
+    dispatch({ type: sessionActions.LOGOUT })
+
     dispatch(push('/login'))
   }
 })
