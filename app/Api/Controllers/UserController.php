@@ -2,11 +2,11 @@
 
 namespace App\Api\Controllers;
 
-use Illuminate\Validation\ValidationException;
-use App\Services\User\UpdateUserService;
-use App\Services\User\SignUpService;
-use App\Services\User\ChangePasswordService;
 use Illuminate\Http\Request;
+use App\Services\User\SignUpService;
+use App\Services\User\UpdateUserService;
+use App\Services\User\ChangePasswordService;
+use Illuminate\Validation\ValidationException;
 
 class UserController
 {
@@ -29,7 +29,7 @@ class UserController
         $userInfo = $request->only(['first_name', 'last_name', 'email', 'password']);
         $csrfToken = $request->header('X-CSRF-TOKEN');
 
-        return $this->signUpService->signUp($userInfo, $csrfToken);
+        return $this->signUpService->signUpResponse($userInfo, $csrfToken);
     }
 
     public function update(Request $request)
