@@ -33,7 +33,7 @@ class SignUpService
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required'
+            'password' => 'required|min:8'
         ]);
     }
 
