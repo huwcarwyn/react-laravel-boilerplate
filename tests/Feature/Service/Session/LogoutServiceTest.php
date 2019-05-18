@@ -10,7 +10,7 @@ class LogoutServiceTest extends TestCase
     private $response;
     private $logOutService;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

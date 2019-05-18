@@ -16,7 +16,7 @@ class SignUpServiceTest extends TestCase
     private $signUpService;
     private $csrfToken;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

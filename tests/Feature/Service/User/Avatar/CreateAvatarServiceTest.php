@@ -11,7 +11,7 @@ class CreateAvatarServiceTest extends TestCase
 {
     private $createAvatarService;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

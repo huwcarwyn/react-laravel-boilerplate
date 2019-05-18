@@ -11,7 +11,7 @@ abstract class TestCase extends BaseTestCase
 
     protected $faker;
 
-    public function setUp() 
+    protected function setUp(): void 
     {
         parent::setUp();
 
@@ -19,5 +19,7 @@ abstract class TestCase extends BaseTestCase
 
         $kernel = resolve('Illuminate\Contracts\Console\Kernel');
         $kernel->call('migrate');
+
+        return;
     }
 }

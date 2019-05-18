@@ -9,7 +9,7 @@ class UpdateUserServiceTest extends TestCase
 {
     private $updateUserService;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
