@@ -80,5 +80,6 @@
     "redux-form": "^7.4.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1"
-  }
+  },
+  "license": "MIT"
 }
