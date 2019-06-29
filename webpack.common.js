@@ -126,6 +126,7 @@ const commonConfig = {
       path.join(__dirname, 'resources/assets/js'),
       path.join(__dirname, 'resources/assets/img')
     ],
+    alias: {'react-dom': '@hot-loader/react-dom'},
     extensions: ['.js', '.jsx', '.json']
   },
 
