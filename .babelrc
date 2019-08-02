@@ -9,8 +9,8 @@
 					"not op_mini all"
 				]
 			},
-			"useBuiltIns": "usage",
-			"corejs": 3
+      "useBuiltIns": "usage",
+      "corejs": 3
     }]
 	],
 
