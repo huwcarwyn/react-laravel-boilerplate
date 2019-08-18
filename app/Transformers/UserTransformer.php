@@ -19,7 +19,7 @@ class UserTransformer extends TransformerAbstract
     }
 
     /**
-     * Transform the Contact entity.
+     * Transform the User entity.
      *
      * @param \App\Models\User $model
      *

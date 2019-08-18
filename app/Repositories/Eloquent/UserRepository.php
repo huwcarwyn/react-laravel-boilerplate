@@ -5,10 +5,10 @@ namespace App\Repositories\Eloquent;
 use App\Models\User;
 use App\Presenters\UserPresenter;
 use App\Criterias\OnlyOwnUserCriteria;
-use Prettus\Repository\Eloquent\BaseRepository;
+use App\Repositories\Eloquent\BaseRepoWithSlugs;
 use App\Contracts\Repository\UserRepositoryContract;
 
-class UserRepository extends BaseRepository implements UserRepositoryContract
+class UserRepository extends BaseRepoWithSlugs implements UserRepositoryContract
 {
     private $auth;
 
