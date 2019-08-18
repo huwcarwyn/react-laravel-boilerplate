@@ -18,7 +18,7 @@ export const ModalRoot = () => (
                 onClick={hideModal}
               />
             </div>
-            <Component {...modalProps} />
+            <Component {...modalProps} hideModal={hideModal} />
           </ModalWrapper>
         </Fragment>
       ) : null

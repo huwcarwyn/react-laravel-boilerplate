@@ -1,29 +1,34 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 
 import { ModalProvider } from 'contexts'
 
-export class ModalProviderWrapperComponent extends React.Component {
+export class ModalProviderWrapperComponent extends Component {
   constructor(props) {
     super(props)
+
+    this.onKeyDown = this.onKeyDown.bind(this)
+    this.hideModal = this.hideModal.bind(this)
+    this.showModal = this.showModal.bind(this)
 
     this.state = {
       component: null,
       modalProps: {},
-      hideModal: this.hideModal.bind(this),
-      showModal: this.showModal.bind(this)
+      hideModal: this.hideModal,
+      showModal: this.showModal
+    }
+  }
+
+  onKeyDown(e) {
+    if (e.key === 'Escape') {
+      this.hideModal()
     }
   }
 
   componentDidMount() {
     const { history } = this.props
 
-    this.unlisten = history.listen(() => {
-      this.setState({
-        component: null,
-        modalProps: {}
-      })
-    })
+    this.unlisten = history.listen(this.hideModal)
   }
 
   componentWillUnmount() {
@@ -31,25 +36,28 @@ export class ModalProviderWrapperComponent extends React.Component {
   }
 
   hideModal() {
-    this.setState({
+    document.body.classList.remove('overflow-hidden')
+    document.body.classList.remove('relative')
+    this.setState(() => ({
       component: null,
       modalProps: {}
-    })
+    }))
   }
 
   showModal(component, modalProps = {}) {
-    this.setState({
+    document.body.classList.add('overflow-hidden')
+    document.body.classList.add('relative')
+    this.setState(() => ({
       component,
       modalProps
-    })
+    }))
   }
 
   render() {
     const { children } = this.props
-    const { component } = this.state
 
     return (
-      <div className={`h-screen overflow-${component ? 'hidden' : 'scroll'}`}>
+      <div onKeyDown={this.onKeyDown}>
         <ModalProvider value={this.state}>{children}</ModalProvider>
       </div>
     )
