@@ -18,5 +18,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Contracts\Repository\UserRepositoryContract',
             'App\Repositories\Eloquent\UserRepository'
         );
+
+        $this->app->bind(
+            'App\Contracts\Repository\PostRepositoryContract',
+            'App\Repositories\Eloquent\PostRepository'
+        );
     }
 }
