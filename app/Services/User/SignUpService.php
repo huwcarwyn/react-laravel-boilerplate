@@ -41,7 +41,7 @@ class SignUpService
     {
         try {
             $newUser = $this->signUp($userInfo);
-            $apiCookie = $this->cookie->make($newUser['data']['id'], $csrfToken);
+            $apiCookie = $this->cookie->make($newUser->id, $csrfToken);
 
             return $this->response->success(['message' => 'User successfully signed up'])->withCookie($apiCookie);
         } catch (ValidationException $e) {

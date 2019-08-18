@@ -32,7 +32,7 @@ class ChangePasswordService
     public function makeValidator($data)
     {
         return $this->validator->make($data, [
-            'user_id'      => 'required|numeric',
+            'slug'      => 'required',
             'old_password' => 'required',
             'new_password' => 'required|confirmed'
         ]);
@@ -59,8 +59,9 @@ class ChangePasswordService
             throw new ValidationException($validator);
         }
 
-        $this->repository->skipPresenter();
-        $this->user = $this->repository->find($data['user_id']);
+        $userId = $this->repository->decodeSlug($data['slug']);
+
+        $this->user = $this->repository->find($userId);
 
         if ($this->hasher->check($data['old_password'], $this->user->password)) {
             $this->user->password = $data['new_password'];

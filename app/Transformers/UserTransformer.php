@@ -28,7 +28,7 @@ class UserTransformer extends TransformerAbstract
     public function transform(User $model)
     {
         return [
-            'id' => (int) $model->id,
+            'slug' => $model->slug(),
             'first_name' => $model->first_name,
             'last_name' => $model->last_name,
             'email' => $model->email,

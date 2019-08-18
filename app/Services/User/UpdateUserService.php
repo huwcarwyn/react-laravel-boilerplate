@@ -23,7 +23,7 @@ class UpdateUserService
         $this->validator = $validator;
     }
 
-    public function makeUserUpdateValidator($data)
+    public function makeValidator($data)
     {
         return $this->validator->make($data, [
             'first_name' => 'required',
@@ -32,12 +32,12 @@ class UpdateUserService
         ]);
     }
 
-    public function updateUserWithResponse($userData)
+    public function updateUserResponse($userData)
     {
         try {
             $updatedUser = $this->updateUser($userData);
 
-            return $this->response->success(['data' => $updatedUser]);
+            return $this->response->success($this->repository->skipPresenter(false)->parserResult($updatedUser));
         } catch (ValidationException $e) {
             return $this->response->validateError($e->errors());
         }
@@ -45,18 +45,20 @@ class UpdateUserService
 
     public function updateUser($userData)
     {
-        $currentUser = $this->repository->find($userData['id'])['data'];
+        $currentUser = $this->repository->currentUser();
 
-        if ($userData['email'] && $currentUser['email'] == $userData['email']) {
+        if ($userData['email'] && $currentUser->email == $userData['email']) {
             unset($userData['email']);
         }
 
-        $validator = $this->makeUserUpdateValidator($userData);
+        $validator = $this->makeValidator($userData);
 
         if ($validator->fails()) {
             throw new ValidationException($validator);
         }
 
-        return $this->repository->update($userData, $userData['id']);
+        $userId = $this->repository->decodeSlug($userData['slug']);
+
+        return $this->repository->update($userData, $userId);
     }
 }

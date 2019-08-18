@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect'
 
-const currentUserIdSelector = state => state.session.currentUser
+const currentUserSlugSelector = state => state.session.currentUser
 const userEntitiesSelector = state => state.entities.users
 
 export const currentUserSelector = createSelector(
-  currentUserIdSelector,
+  currentUserSlugSelector,
   userEntitiesSelector,
-  (currentUserId, userEntities) => userEntities[currentUserId]
+  (currentUserSlug, userEntities) => userEntities[currentUserSlug]
 )

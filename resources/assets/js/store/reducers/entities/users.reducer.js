@@ -9,9 +9,9 @@ const {
   entities: { users: usersState }
 } = initialState
 
-const setUserAvatar = (state, { avatar, userId }) => {
+const setUserAvatar = (state, { avatar, userSlug }) => {
   const newState = cloneDeep(state)
-  newState[userId].avatar = avatar
+  newState[userSlug].avatar = avatar
 
   return newState
 }

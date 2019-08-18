@@ -12,6 +12,8 @@ class UserRepository extends BaseRepoWithSlugs implements UserRepositoryContract
 {
     private $auth;
 
+    protected $skipPresenter = true;
+
     public function boot()
     {
         $this->auth = resolve('Illuminate\Contracts\Auth\Factory');

@@ -35,19 +35,19 @@ class UserController
     public function update(Request $request)
     {
         $userData = $request->only([
-            'id',
+            'slug',
             'first_name',
             'last_name',
             'email'
         ]);
 
-        return $this->updateUserService->updateUser($userData);
+        return $this->updateUserService->updateUserResponse($userData);
     }
 
     public function changePassword(Request $request)
     {
         $data = $request->only([
-            'user_id',
+            'slug',
             'old_password',
             'new_password',
             'new_password_confirmation'

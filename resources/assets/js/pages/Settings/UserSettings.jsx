@@ -63,12 +63,12 @@ const mapDispatchToProps = dispatch => ({
 
     dispatch({
       type: userActions.SET_CURRENT_USER_INFO,
-      user: response.data.data
+      users: response.data.data
     })
   },
 
-  uploadUserAvatar: (fileData, userId) =>
-    dispatch(uploadUserAvatar(fileData, userId)),
+  uploadUserAvatar: (fileData, userSlug) =>
+    dispatch(uploadUserAvatar(fileData, userSlug)),
 
   changePassword: async data => {
     try {
@@ -97,11 +97,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...dispatchProps,
   ...ownProps,
   avatarUploadHandler: fileData => {
-    return dispatchProps.uploadUserAvatar(fileData, stateProps.currentUser.id)
+    return dispatchProps.uploadUserAvatar(fileData, stateProps.currentUser.slug)
   },
   handleChangePassword: values => {
     const data = {
-      user_id: stateProps.currentUser.id,
+      slug: stateProps.currentUser.slug,
       ...values
     }
 

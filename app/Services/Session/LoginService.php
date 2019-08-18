@@ -47,7 +47,9 @@ class LoginService
             if ($attempt) {
                 $apiCookie = $this->cookie->make($this->auth->user()->getKey(), $csrfToken);
 
-                return $this->response->success($this->repository->currentUser())->withCookie($apiCookie);
+                return $this->response->success(
+                    $this->repository->skipPresenter(false)->currentUser()
+                )->withCookie($apiCookie);
             } else {
                 return $this->response->unauthorized('Incorrect login details');
             }

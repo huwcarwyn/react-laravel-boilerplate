@@ -3,11 +3,11 @@ import axios from 'axios'
 import { makeRequest } from 'store/action-creators/requests'
 
 export const saveUser = userData => async dispatch => {
-  const { id } = userData
+  const { slug } = userData
 
   const response = await dispatch(
     makeRequest('save-user-settings', () =>
-      axios.put(`/api/users/${id}`, userData)
+      axios.put(`/api/users/${slug}`, userData)
     )
   )
 
@@ -15,11 +15,11 @@ export const saveUser = userData => async dispatch => {
 }
 
 export const changePassword = data => async dispatch => {
-  const { user_id: userId } = data
+  const { slug } = data
 
   const response = await dispatch(
     makeRequest('change-user-password', () =>
-      axios.put(`/api/users/${userId}/update-password`, data)
+      axios.put(`/api/users/${slug}/update-password`, data)
     )
   )
 

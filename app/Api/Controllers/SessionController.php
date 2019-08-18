@@ -25,7 +25,7 @@ class SessionController
 
     public function currentUser()
     {
-        return $this->userRepo->currentUser()['data'];
+        return $this->userRepo->skipPresenter(false)->currentUser();
     }
 
     public function login(Request $request)

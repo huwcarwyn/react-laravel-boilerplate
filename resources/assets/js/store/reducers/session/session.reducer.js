@@ -7,7 +7,7 @@ const { session } = initialState
 const setCurrentUser = (state, { users }) => {
   return {
     ...state,
-    currentUser: users.id
+    currentUser: users.slug
   }
 }
 
