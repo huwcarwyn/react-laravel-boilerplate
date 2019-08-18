@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
-class PasswordMimatchExteption extends Exception
+use Exception;
+
+class PasswordMismatchException extends Exception
 {
     public function __construct($message, $code = 0, Exception $previous = null)
     {
