@@ -4,10 +4,10 @@ import { createReducer } from 'store/reducers/utilities'
 
 const { session } = initialState
 
-const setCurrentUser = (state, { user }) => {
+const setCurrentUser = (state, { users }) => {
   return {
     ...state,
-    currentUser: user.id
+    currentUser: users.id
   }
 }
 
