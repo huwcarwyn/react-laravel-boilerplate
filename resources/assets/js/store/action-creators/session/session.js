@@ -7,10 +7,10 @@ export const getCurrentUserInfo = () => async dispatch => {
 
   dispatch({
     type: userActions.SET_CURRENT_USER_INFO,
-    users: response.data
+    users: response.data.data
   })
 
-  return response.data
+  return response.data.data
 }
 
 export const logIn = loginDetails => async dispatch => {
