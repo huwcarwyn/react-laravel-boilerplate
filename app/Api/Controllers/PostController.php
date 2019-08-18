@@ -107,8 +107,10 @@ class PostController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
+        $id = $this->repository->decodeSlug($slug);
+
         $deletedPost = $this->repository->skipPresenter(false)->delete($id);
 
         return $this->response->success(['message' => 'post deleted']);

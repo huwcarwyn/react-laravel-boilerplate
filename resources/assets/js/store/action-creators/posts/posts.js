@@ -27,8 +27,8 @@ export const createPost = data => async dispatch => {
 
 export const updatePost = data => async dispatch => {
   const response = await dispatch(
-    makeRequest(`update-post-${data.id}`, () =>
-      axios.put(`/api/posts/${data.id}`, data)
+    makeRequest(`update-post-${data.slug}`, () =>
+      axios.put(`/api/posts/${data.slug}`, data)
     )
   )
 

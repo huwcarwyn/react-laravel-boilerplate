@@ -97,21 +97,21 @@ const OverviewComponent = ({ getPosts, deletePost, posts }) => {
           <table className="w-full text-left mb-4">
             <thead>
               <tr>
-                <th>id</th>
+                <th>slug</th>
                 <th>title</th>
                 <th>body</th>
               </tr>
             </thead>
             <tbody>
-              {posts.map(({ id, title, body }) => (
-                <tr key={id}>
-                  <td>{id}</td>
+              {posts.map(({ slug, title, body }) => (
+                <tr key={slug}>
+                  <td>{slug}</td>
                   <td>{title}</td>
                   <td>{body}</td>
                   <td>
                     <span
                       className="text-red inline-block mr-6"
-                      onClick={() => deletePost(id)}
+                      onClick={() => deletePost(slug)}
                     >
                       delete
                     </span>
@@ -119,7 +119,7 @@ const OverviewComponent = ({ getPosts, deletePost, posts }) => {
                       {({ showModal }) => (
                         <span
                           onClick={() =>
-                            showModal(UpdatePostModal, { id, title, body })
+                            showModal(UpdatePostModal, { slug, title, body })
                           }
                           className="text-green"
                         >
