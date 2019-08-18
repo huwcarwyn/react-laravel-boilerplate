@@ -69,7 +69,7 @@ class PostController
     /**
      * Display the specified resource.
      *
-     * @param string  $slug
+     * @param string $slug
      * @return \Illuminate\Http\Response
      */
     public function show($slug)
@@ -84,13 +84,15 @@ class PostController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string $slug
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
         try {
             $data = $request->only(['title', 'body']);
+            $id = $this->repository->decodeSlug($slug);
+
             $updatedPost = $this->repository->skipPresenter(false)->update($data, $id);
     
             return $this->response->success($updatedPost);
