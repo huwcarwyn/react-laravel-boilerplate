@@ -1,9 +1,9 @@
-import { JSDOM } from 'jsdom'
-import React from 'react'
 import chai from 'chai'
+import React from 'react'
 import sinon from 'sinon'
-import sinonChai from 'sinon-chai'
 import Enzyme from 'enzyme'
+import { JSDOM } from 'jsdom'
+import sinonChai from 'sinon-chai'
 import Adapter from 'enzyme-adapter-react-16'
 
 // Set up enzyme adapter

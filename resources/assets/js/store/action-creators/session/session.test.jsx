@@ -8,6 +8,7 @@ describe('session action creators', () => {
     const store = mockStore({})
 
     const userData = {
+      slug: 'xVdQ2',
       first_name: 'Carwyn',
       last_name: 'Stephen'
     }
@@ -15,13 +16,13 @@ describe('session action creators', () => {
     beforeEach(() => {
       sinon.stub(axios, 'get').resolves({
         status: 200,
-        data: userData
+        data: { data: { ...userData } }
       })
     })
 
     it('dispatches the correct action with the response data', async () => {
       const expectedActions = [
-        { type: actions.SET_CURRENT_USER_INFO, user: userData }
+        { type: actions.SET_CURRENT_USER_INFO, users: userData }
       ]
 
       await store.dispatch(getCurrentUserInfo())

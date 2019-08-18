@@ -3,11 +3,15 @@ import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
 import { getCurrentUserInfo } from 'store/action-creators/session'
 
-const AuthGuardComponent = ({ currentUserId, children, authOrRedirect }) => {
+export const AuthGuardComponent = ({
+  currentUserSlug,
+  children,
+  authOrRedirect
+}) => {
   const [loading, setLoading] = useState(true)
 
   const attemptAuth = async () => {
-    if (!currentUserId) {
+    if (!currentUserSlug) {
       await authOrRedirect()
     }
 
@@ -33,7 +37,7 @@ const AuthGuardComponent = ({ currentUserId, children, authOrRedirect }) => {
 
 export const AuthGuard = connect(
   state => ({
-    currentUserId: state.session.currentUser
+    currentUserSlug: state.session.currentUser
   }),
   dispatch => ({
     authOrRedirect: () => {

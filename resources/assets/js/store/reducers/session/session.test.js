@@ -6,7 +6,7 @@ describe('session reducer', () => {
   const { session } = initialState
 
   const mockUser = {
-    id: 1,
+    slug: 'xVd2Q',
     firstName: 'Carwyn',
     lastName: 'Stephen',
     email: 'test@test.com'
@@ -18,20 +18,20 @@ describe('session reducer', () => {
 
   it('correctly handles SET_CURRENT_USER_INFO', () => {
     const user = {
-      id: mockUser.id,
+      slug: mockUser.slug,
       first_name: mockUser.firstName,
       last_name: mockUser.lastName,
       email: mockUser.email
     }
 
     const expectedState = {
-      currentUser: user.id
+      currentUser: user.slug
     }
 
     expect(
       reducer(session, {
         type: actions.SET_CURRENT_USER_INFO,
-        user
+        users: user
       })
     ).to.deep.equal(expectedState)
   })

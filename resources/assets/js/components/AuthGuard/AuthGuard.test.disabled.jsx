@@ -22,8 +22,7 @@ describe('AuthGuard', () => {
 
   it('calls authOrRedirect on component mount', () => {
     let props = {
-      ...baseProps,
-      authOrRedirect: sinon.stub().resolves({ status: 200 })
+      ...baseProps
     }
 
     makeWrapper(props)
@@ -33,8 +32,7 @@ describe('AuthGuard', () => {
 
   it('sets loading to false if the response from authOrRedirect is OK', () => {
     let props = {
-      ...baseProps,
-      authOrRedirect: sinon.stub().resolves({ status: 200 })
+      ...baseProps
     }
 
     let instance = makeWrapper(props)
