@@ -1,26 +1,20 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 
-export class DragOverlay extends Component {
-  constructor(props) {
-    super(props)
+const dragEvents = ['onDragEnter', 'onDragLeave', 'onDragOver', 'onDrop']
 
-    this.eventNames = ['onDragEnter', 'onDragLeave', 'onDragOver', 'onDrop']
+export const DragOverlay = ({ children, ...props }) => {
+  const [eventHandlers, setEventHandlers] = useState({})
 
-    this.eventHandlersFromProps = this.eventHandlersFromProps.bind(this)
-  }
-
-  eventHandlersFromProps(props) {
-    return this.eventNames.reduce((acc, eventName) => {
+  useEffect(() => {
+    setEventHandlers(dragEvents.reduce((acc, eventName) => {
       if (props[eventName]) {
         acc[eventName] = props[eventName]
       }
 
       return acc
     }, {})
-  }
+    )
+  }, [])
 
-  render() {
-    const { children } = this.props
-    return <div {...this.eventHandlersFromProps(this.props)}>{children}</div>
-  }
+  return <div {...eventHandlers}>{children}</div>
 }
