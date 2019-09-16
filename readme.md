@@ -30,3 +30,9 @@ I personally use Vagrant and [Homestead](https://laravel.com/docs/5.5/homestead 
 - Make sure to create two databases, one main and one for running the tests, then run `php artisan migrate`
 - If you want to use the webpack dev server, make sure that the proxy entry in the weback.dev.js points to the server that's running your Laravel installation.
 
+## Important note about development
+Since this application takes advantage of webpack hashes to bust caches in production, the asset() and mix() helpers are used when loading front end assets. This means that it is important to set a correct value for `ASSET_URL` in your `.env` file. Otherwise Laravel will load assets from the wrong place.
+
+If you are developing using `npm run hot` - make sure to set `ASSET_URL` to `http://localhost:9000`, otherwise for development set it to the root URL of your app.
+
+In production you will need to set this value to the public root, that will usually be the same as your domain name.
