@@ -2,14 +2,12 @@
   "private": true,
   "scripts": {
     "dev": "npm run development",
-    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.dev.js",
-    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=webpack.dev.js",
-    "watch-poll": "npm run watch -- --watch-poll",
-    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=webpack.dev.js",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules",
     "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.production.js",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "test": "cross-env NODE_ENV=development mocha-webpack --webpack-config webpack.test.js \"resources/assets/js/**/*.test.{js,jsx}\" --opts resources/assets/js/tests.opts",
+    "test": "cross-env NODE_ENV=development mocha-webpack \"resources/assets/js/**/*.test.{js,jsx}\" --opts resources/assets/js/tests.opts",
     "lint:js": "npx eslint -c .eslintrc --ignore-pattern \"*.test.*\" resources/assets/js/**/*.{jsx,js} ",
     "lint:tests": "npx eslint -c .eslinttestrc --ignore-pattern \"!*.test.*\" resources/assets/js/**/*.{jsx,js} "
   },

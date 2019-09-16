@@ -3,7 +3,7 @@ const {
   appSCSSLoader,
   moduleSCSSLoader,
   fileLoader
-} = require(path.join(__dirname, '../webpack.common.js'))
+} = require(path.join(__dirname, '../webpack.config.js'))
 
 module.exports = baseConfig => {
 
@@ -13,9 +13,9 @@ module.exports = baseConfig => {
       exclude: /node_modules/,
       loader: 'babel-loader'
     },
-    {...appSCSSLoader},
-    {...moduleSCSSLoader},
-    {...fileLoader}
+    { ...appSCSSLoader },
+    { ...moduleSCSSLoader },
+    { ...fileLoader }
   ]
 
   baseConfig.resolve.modules.push('node_modules', path.join(__dirname, '../resources/assets/js'), path.join(__dirname, '../resources/assets/img'))
