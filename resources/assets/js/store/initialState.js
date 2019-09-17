@@ -1,6 +1,7 @@
 export const initialState = {
   entities: {
-    users: {}
+    users: {},
+    posts: {}
   },
   session: {
     currentUser: null

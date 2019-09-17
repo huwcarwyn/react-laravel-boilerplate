@@ -17,3 +17,10 @@ export const userActions = {
   SET_CURRENT_USER_INFO: 'USER/SET_CURRENT_USER_INFO',
   SET_AVATAR: 'USER/SET_AVATAR'
 }
+
+export const postActions = {
+  ADD_POST: 'ADD_POST',
+  UPDATE_POST: 'UPDATE_POST',
+  DELETE_POST: 'DELETE_POST',
+  ADD_POSTS: 'ADD_POSTS'
+}

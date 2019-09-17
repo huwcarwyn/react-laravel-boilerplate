@@ -5,11 +5,13 @@ import { initialState } from 'store/initialState'
 import { createReducer } from 'store/reducers/utilities'
 
 import { usersReducer } from './users.reducer'
+import { postsReducer } from './posts.reducer'
 
 const { entities } = initialState
 
 const singleEntitiesReducer = combineReducers({
-  users: usersReducer
+  users: usersReducer,
+  posts: postsReducer
 })
 
 const wholeEntitiesReducer = createReducer(entities, {})
