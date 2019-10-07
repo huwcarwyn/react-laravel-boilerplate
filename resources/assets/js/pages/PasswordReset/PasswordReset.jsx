@@ -3,7 +3,7 @@ import axios from 'axios'
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { push } from 'react-router-redux'
+import { push } from 'connected-react-router'
 import { SubmissionError } from 'redux-form'
 
 import { flashMessage } from 'store/action-creators/flashMessages'

@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { push } from 'react-router-redux'
+import { push } from 'connected-react-router'
 
 import { sessionActions } from 'store/actions'
 import { currentUserSelector } from 'store/selectors/session'
@@ -55,21 +55,17 @@ export const UserCardComponent = ({
   )
 }
 
-const mapStateToProps = state => ({
-  user: currentUserSelector(state)
-})
-
-const mapDispatchToProps = dispatch => ({
-  logOut: async () => {
-    await axios.get('/api/logout')
-
-    dispatch({ type: sessionActions.LOGOUT })
-
-    dispatch(push('/login'))
-  }
-})
-
 export const UserCard = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  state => ({
+    user: currentUserSelector(state)
+  }),
+  dispatch => ({
+    logOut: async () => {
+      await axios.get('/api/logout')
+
+      dispatch({ type: sessionActions.LOGOUT })
+
+      dispatch(push('/login'))
+    }
+  })
 )(UserCardComponent)

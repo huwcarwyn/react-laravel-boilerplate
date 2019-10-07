@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { replace } from 'react-router-redux'
+import { replace } from 'connected-react-router'
 import { getCurrentUserInfo } from 'store/action-creators/session'
 
 export const AuthGuardComponent = ({

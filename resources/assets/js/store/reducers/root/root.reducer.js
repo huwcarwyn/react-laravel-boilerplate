@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux'
 import reduceReducers from 'reduce-reducers'
-import { routerReducer } from 'react-router-redux'
+import { connectRouter } from 'connected-react-router'
 import { reducer as formReducer } from 'redux-form'
 
+import { browserHistory } from 'store/history'
 import { sessionActions } from 'store/actions'
 import { initialState } from 'store/initialState'
 import { createReducer } from 'store/reducers/utilities'
@@ -16,7 +17,7 @@ const rootReducer = combineReducers({
   entities: entitiesReducer,
   session: sessionReducer,
   form: formReducer,
-  routing: routerReducer,
+  router: connectRouter(browserHistory),
   flashMessages: flashMessagesReducer,
   requests: requestReducer
 })

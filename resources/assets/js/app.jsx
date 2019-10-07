@@ -1,24 +1,25 @@
-import React, { lazy, Suspense } from 'react'
 import { Provider } from 'react-redux'
+import React, { lazy, Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { ConnectedRouter } from 'react-router-redux'
+import { ConnectedRouter } from 'connected-react-router'
 
-import { DashboardLayout, FormPageLayout } from 'layouts'
-import { store, browserHistory } from 'store/create-store'
 import {
+  ModalRoot,
   AuthGuard,
   FlashMessageRoot,
-  ModalProviderWrapper,
-  ModalRoot
+  ModalProviderWrapper
 } from 'components'
+import { store } from 'store/create-store'
+import { browserHistory } from 'store/history'
+import { DashboardLayout, FormPageLayout } from 'layouts'
 
 const LogIn = lazy(() => import('pages/LogIn/LogIn'))
 const SignUp = lazy(() => import('pages/SignUp/SignUp'))
 const Overview = lazy(() => import('pages/Overview/Overview'))
-const PasswordReset = lazy(() => import('pages/PasswordReset/PasswordReset'))
-const ForgotPassword = lazy(() => import('pages/ForgotPassword/ForgotPassword'))
 const NotFound = lazy(() => import('pages/NotFound/NotFound'))
 const SettingsRoutes = lazy(() => import('pages/Settings/SettingsRoutes'))
+const PasswordReset = lazy(() => import('pages/PasswordReset/PasswordReset'))
+const ForgotPassword = lazy(() => import('pages/ForgotPassword/ForgotPassword'))
 
 const withDashboard = ContentComponent => {
   return props => (
@@ -39,7 +40,7 @@ const Loading = () => (
 const OverviewWithDashboard = withDashboard(Overview)
 const SettingsWithDashboard = withDashboard(SettingsRoutes)
 
-export const App = props => (
+export const App = () => (
   <Provider store={store}>
     <Suspense fallback={<Loading />}>
       <FlashMessageRoot />

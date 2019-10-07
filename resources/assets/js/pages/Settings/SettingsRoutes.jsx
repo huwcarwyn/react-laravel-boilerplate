@@ -55,3 +55,5 @@ export const SettingsRoutes = ({ match: { url: currentUrl } }) => {
     </Fragment>
   )
 }
+
+export default SettingsRoutes

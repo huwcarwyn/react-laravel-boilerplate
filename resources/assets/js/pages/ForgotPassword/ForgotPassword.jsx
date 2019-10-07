@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { push } from 'connected-react-router'
 import { SubmissionError } from 'redux-form'
 import { flashMessage } from 'store/action-creators/flashMessages'
 
