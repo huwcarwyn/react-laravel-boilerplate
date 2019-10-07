@@ -9,27 +9,24 @@ import { saveUser, changePassword } from 'store/action-creators/user'
 
 import { UserSettingsForm, ChangePasswordForm } from './Forms'
 
-class UserSettingsComponent extends React.Component {
-  render() {
-    const {
-      saveUserSettings,
-      handleChangePassword,
-      avatarUploadHandler
-    } = this.props
-    return (
-      <Fragment>
-        <h3 className="text-grey-darkest font-normal">Your Details</h3>
-        <UserSettingsForm
-          className="mb-4"
-          onSubmit={saveUserSettings}
-          avatarUploadHandler={avatarUploadHandler}
-        />
+const UserSettingsComponent = ({
+  saveUserSettings,
+  handleChangePassword,
+  avatarUploadHandler
+}) => {
+  return (
+    <Fragment>
+      <h3 className="text-grey-darkest font-normal">Your Details</h3>
+      <UserSettingsForm
+        className="mb-4"
+        onSubmit={saveUserSettings}
+        avatarUploadHandler={avatarUploadHandler}
+      />
 
-        <h3 className="text-grey-darkest font-normal">Change Your Password</h3>
-        <ChangePasswordForm onSubmit={handleChangePassword} />
-      </Fragment>
-    )
-  }
+      <h3 className="text-grey-darkest font-normal">Change Your Password</h3>
+      <ChangePasswordForm onSubmit={handleChangePassword} />
+    </Fragment>
+  )
 }
 
 const userValidationFromResponse = values => {
