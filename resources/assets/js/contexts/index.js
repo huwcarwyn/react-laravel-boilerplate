@@ -1,1 +1,1 @@
-export { ModalProvider, ModalConsumer } from './Modal'
+export * from './Modal'
