@@ -3,6 +3,7 @@
 namespace Tests\Feature\Service\Session;
 
 use Tests\TestCase;
+use Illuminate\Support\Str;
 use App\Services\Session\LogoutService;
 
 class LogoutServiceTest extends TestCase
@@ -19,7 +20,7 @@ class LogoutServiceTest extends TestCase
         $auth = resolve('Illuminate\Contracts\Auth\Factory');
         $cookie = resolve('Illuminate\Contracts\Cookie\Factory');
 
-        $this->csrfToken = str_random(10);
+        $this->csrfToken = Str::random(10);
 
         $this->logOutService = new LogoutService(
             $auth,

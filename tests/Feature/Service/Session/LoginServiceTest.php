@@ -3,6 +3,7 @@
 namespace Tests\Feature\Service\Session;
 
 use Tests\TestCase;
+use Illuminate\Support\Str;
 use App\Services\Session\LoginService;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -27,7 +28,7 @@ class LoginServiceTest extends TestCase
         $cookie = resolve('Laravel\Passport\ApiTokenCookieFactory');
         $userRepo = resolve('App\Contracts\Repository\UserRepositoryContract');
 
-        $this->csrfToken = str_random(10);
+        $this->csrfToken = Str::random(10);
 
         $this->loginService = new LoginService(
             $auth,

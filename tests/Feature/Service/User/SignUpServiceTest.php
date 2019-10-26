@@ -4,6 +4,7 @@ namespace Tests\Feature\Service\User;
 
 use Carbon\Carbon;
 use Tests\TestCase;
+use Illuminate\Support\Str;
 use App\Services\User\SignUpService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -29,7 +30,7 @@ class SignUpServiceTest extends TestCase
          * by individual test cases.
          */
         $this->response = resolve('Illuminate\Contracts\Routing\ResponseFactory');
-        $this->csrfToken = str_random(10);
+        $this->csrfToken = Str::random(10);
         $this->oAuthService = \Mockery::mock('App\Services\OauthService');
 
         $this->signUpService = new SignUpService(
@@ -47,12 +48,12 @@ class SignUpServiceTest extends TestCase
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'email' => $this->faker->safeEmail,
-            'password' => str_random(10)
+            'password' => Str::random(10)
         ];
 
         $oAuthCredentials = [
-            'access_token' => str_random(12),
-            'refresh_token' => str_random(12)
+            'access_token' => Str::random(12),
+            'refresh_token' => Str::random(12)
         ];
 
         $this->oAuthService->shouldReceive('passwordGrantWithResponse->withCookie')
@@ -69,7 +70,7 @@ class SignUpServiceTest extends TestCase
             'first_name' => '',
             'last_name' => $this->faker->lastName,
             'email' => 'invalidemail',
-            'password' => str_random(10)
+            'password' => Str::random(10)
         ];
 
         $response = $this->signUpService->signUpResponse($userInfo, $this->csrfToken);
