@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 import reduceReducers from 'reduce-reducers'
-import { reducer as formReducer } from 'redux-form'
 
 import { sessionActions } from 'store/actions'
 import { initialState } from 'store/initialState'
@@ -14,7 +13,6 @@ import { flashMessagesReducer } from '../ui/flashMessages.reducer'
 const rootReducer = combineReducers({
   entities: entitiesReducer,
   session: sessionReducer,
-  form: formReducer,
   flashMessages: flashMessagesReducer,
   requests: requestReducer
 })

@@ -3,7 +3,6 @@ import axios from 'axios'
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { SubmissionError } from 'redux-form'
 
 import { history } from 'utils/history'
 import { flashMessage } from 'store/action-creators/flashMessages'
@@ -31,7 +30,7 @@ const parseValidationFromResponse = data => {
 export default compose(
   withRouter,
   connect(null, (dispatch, ownProps) => ({
-    submitPasswordReset: async values => {
+    submitPasswordReset: async (values, { setErrors }) => {
       const { match } = ownProps
 
       try {
@@ -43,9 +42,7 @@ export default compose(
         history.push('/login')
         dispatch(flashMessage('success', 'Password successfully reset'))
       } catch (error) {
-        throw new SubmissionError(
-          parseValidationFromResponse(error.response.data)
-        )
+        setErrors(parseValidationFromResponse(error.response.data))
       }
     }
   }))

@@ -1,47 +1,9 @@
 import React from 'react'
-import { reduxForm, Field } from 'redux-form'
+import { Formik, Form, Field } from 'formik'
 
 import { PasswordFormLine, PositiveButton } from 'components'
 
-class ChangePasswordFormComponent extends React.Component {
-  render() {
-    const { handleSubmit } = this.props
-
-    return (
-      <form onSubmit={handleSubmit}>
-        <Field
-          name="old_password"
-          component={PasswordFormLine}
-          labelText="Enter your old password"
-          className="mb-2"
-        />
-
-        <div className="flex items-start mb-4">
-          <Field
-            name="new_password"
-            component={PasswordFormLine}
-            labelText="New Password"
-            className="flex-grow"
-          />
-          <Field
-            name="new_password_confirmation"
-            component={PasswordFormLine}
-            labelText="Repeat your new password"
-            className="flex-grow pl-4"
-          />
-        </div>
-
-        <div className="flex border-grey-light">
-          <PositiveButton type="submit" className="ml-auto">
-            Change Password
-          </PositiveButton>
-        </div>
-      </form>
-    )
-  }
-}
-
-const validatePasswordForm = values => {
+const validate = (values = {}) => {
   let errors = {}
 
   const nonEmptyFieldNames = [
@@ -67,7 +29,46 @@ const validatePasswordForm = values => {
   return errors
 }
 
-export const ChangePasswordForm = reduxForm({
-  form: 'changePassword',
-  validate: validatePasswordForm
-})(ChangePasswordFormComponent)
+export const ChangePasswordForm = ({ onSubmit }) => (
+  <Formik
+    validate={validate}
+    onSubmit={onSubmit}
+    initialValues={{
+      old_password: '',
+      new_password: '',
+      new_password_confirmation: ''
+    }}
+  >
+    {props => (
+      <Form>
+        <Field
+          className="mb-2"
+          name="old_password"
+          component={PasswordFormLine}
+          labelText="Enter your old password"
+        />
+
+        <div className="flex items-start mb-4">
+          <Field
+            name="new_password"
+            className="flex-grow"
+            labelText="New Password"
+            component={PasswordFormLine}
+          />
+          <Field
+            className="flex-grow pl-4"
+            component={PasswordFormLine}
+            name="new_password_confirmation"
+            labelText="Repeat your new password"
+          />
+        </div>
+
+        <div className="flex border-grey-light">
+          <PositiveButton type="submit" className="ml-auto">
+            Change Password
+          </PositiveButton>
+        </div>
+      </Form>
+    )}
+  </Formik>
+)

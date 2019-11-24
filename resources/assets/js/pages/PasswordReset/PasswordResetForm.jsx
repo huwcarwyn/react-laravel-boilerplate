@@ -1,9 +1,9 @@
 import React from 'react'
-import { reduxForm, Field } from 'redux-form'
+import { Formik, Form, Field } from 'formik'
 
 import { TextFormLine, PasswordFormLine, NeutralButton } from 'components'
 
-const validate = values => {
+const validate = (values = {}) => {
   let errors = {}
 
   if (!values.email) {
@@ -23,40 +23,37 @@ const validate = values => {
   return errors
 }
 
-export const PasswordResetFormComponent = props => {
-  const { handleSubmit } = props
-
+export const PasswordResetForm = ({ onSubmit }) => {
   return (
-    <form onSubmit={handleSubmit}>
-      <Field
-        type="text"
-        name="email"
-        labelText="Enter your Email"
-        component={TextFormLine}
-      />
+    <Formik validate={validate} onSubmit={onSubmit}>
+      {props => (
+        <Form>
+          <Field
+            type="text"
+            name="email"
+            labelText="Enter your Email"
+            component={TextFormLine}
+          />
 
-      <Field
-        type="password"
-        name="password"
-        labelText="Enter a New Password"
-        component={PasswordFormLine}
-      />
+          <Field
+            type="password"
+            name="password"
+            labelText="Enter a New Password"
+            component={PasswordFormLine}
+          />
 
-      <Field
-        type="password"
-        name="password_confirmation"
-        labelText="Confirm Your New Password"
-        component={PasswordFormLine}
-      />
+          <Field
+            type="password"
+            name="password_confirmation"
+            labelText="Confirm Your New Password"
+            component={PasswordFormLine}
+          />
 
-      <NeutralButton className="float-right" type="submit">
-        Set New Password
-      </NeutralButton>
-    </form>
+          <NeutralButton className="float-right" type="submit">
+            Set New Password
+          </NeutralButton>
+        </Form>
+      )}
+    </Formik>
   )
 }
-
-export const PasswordResetForm = reduxForm({
-  form: 'passwordReset',
-  validate
-})(PasswordResetFormComponent)

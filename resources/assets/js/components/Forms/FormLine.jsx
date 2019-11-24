@@ -3,36 +3,37 @@ import React from 'react'
 import { PasswordInput, TextArea, TextInput } from 'components'
 
 export const FormLine = ({
-  labelText,
   name,
   children,
+  labelText,
   className = '',
-  meta: { touched, error }
+  form: { touched, errors } = {}
 }) => (
   <div className={`block py-4 ${className}`}>
     <label className="block text-grey-dark text-md" htmlFor={name}>
       <span className="inline-block mb-2">{labelText}</span>
       {children}
-      {touched &&
-        (error && <div className="text-red text-sm mt-2">{error}</div>)}
+      {touched && errors[name] && (
+        <div className="text-red text-sm mt-2">{errors[name]}</div>
+      )}
     </label>
   </div>
 )
 
-export const TextFormLine = ({ input, ...wrapperProps }) => (
-  <FormLine {...wrapperProps}>
-    <TextInput {...input} />
+export const TextFormLine = ({ field, ...wrapperProps }) => (
+  <FormLine {...field} {...wrapperProps}>
+    <TextInput {...field} />
   </FormLine>
 )
 
-export const PasswordFormLine = ({ input, ...wrapperProps }) => (
-  <FormLine {...wrapperProps}>
-    <PasswordInput {...input} />
+export const PasswordFormLine = ({ field, ...wrapperProps }) => (
+  <FormLine {...field} {...wrapperProps}>
+    <PasswordInput {...field} />
   </FormLine>
 )
 
-export const TextAreaFormLine = ({ input, ...wrapperProps }) => (
-  <FormLine {...wrapperProps}>
-    <TextArea {...input} />
+export const TextAreaFormLine = ({ field, ...wrapperProps }) => (
+  <FormLine {...field} {...wrapperProps}>
+    <TextArea {...field} />
   </FormLine>
 )

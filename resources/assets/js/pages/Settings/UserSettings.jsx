@@ -1,6 +1,5 @@
-import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
-import { SubmissionError } from 'redux-form'
+import React, { Fragment } from 'react'
 
 import { userActions } from 'store/actions'
 import { uploadUserAvatar } from 'store/action-creators/avatars'
@@ -11,8 +10,8 @@ import { UserSettingsForm, ChangePasswordForm } from './Forms'
 
 const UserSettingsComponent = ({
   saveUserSettings,
-  handleChangePassword,
-  avatarUploadHandler
+  avatarUploadHandler,
+  handleChangePassword
 }) => {
   return (
     <Fragment>
@@ -46,14 +45,11 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  saveUserSettings: async userData => {
+  saveUserSettings: async (userData, { setErrors }) => {
     const response = await dispatch(saveUser(userData))
 
     if (response.status === 400) {
-      throw new SubmissionError(
-        'accountSettings',
-        userValidationFromResponse(response.data.data)
-      )
+      setErrors(userValidationFromResponse(response.data.data))
     }
 
     dispatch(flashMessage('success', 'Successfully saved user info', 4000))
@@ -67,7 +63,7 @@ const mapDispatchToProps = dispatch => ({
   uploadUserAvatar: (fileData, userSlug) =>
     dispatch(uploadUserAvatar(fileData, userSlug)),
 
-  changePassword: async data => {
+  changePassword: async (data, { setErrors }) => {
     try {
       await dispatch(changePassword(data))
       dispatch(
@@ -75,13 +71,11 @@ const mapDispatchToProps = dispatch => ({
       )
     } catch (error) {
       if (error.response.status === 422) {
-        throw new SubmissionError(
-          passwordValidationFromResponse(error.response.data.data)
-        )
+        setErrors(passwordValidationFromResponse(error.response.data.data))
       }
 
       if (error.response.status === 400) {
-        throw new SubmissionError({
+        setErrors({
           old_password: 'The current password was incorrect'
         })
       }

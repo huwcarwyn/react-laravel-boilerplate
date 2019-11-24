@@ -1,16 +1,44 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { reduxForm, Field } from 'redux-form'
+import { Formik, Form, Field } from 'formik'
 
-import { PositiveButton, TextFormLine, PictureUpload } from 'components'
 import { email as emailRegex } from 'constants/regexes'
+import { PositiveButton, TextFormLine, PictureUpload } from 'components'
 
-export class UserSettingsFormComponent extends React.Component {
-  render() {
-    const { handleSubmit, avatarUploadHandler, className } = this.props
+const validate = (values = {}) => {
+  let errors = {}
 
-    return (
-      <form className={className} onSubmit={handleSubmit}>
+  if (!values.first_name) {
+    errors.first_name = 'This field is required'
+  }
+
+  if (!values.last_name) {
+    errors.last_name = 'This field is required'
+  }
+
+  if (!values.email) {
+    errors.email = 'This field is required'
+  } else if (!emailRegex.test(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+
+  return errors
+}
+
+const UserSettingsFormComponent = ({
+  user,
+  onSubmit,
+  className = '',
+  avatarUploadHandler
+}) => (
+  <Formik
+    validate={validate}
+    onSubmit={onSubmit}
+    initialValues={user}
+    validateOnChange={false}
+  >
+    {() => (
+      <Form className={className}>
         <div className="flex items-center my-4">
           <Field
             name="avatar"
@@ -38,47 +66,16 @@ export class UserSettingsFormComponent extends React.Component {
             Save User Details
           </PositiveButton>
         </div>
-      </form>
-    )
-  }
-}
+      </Form>
+    )}
+  </Formik>
+)
 
-const validateUserSettings = values => {
-  let errors = {}
-
-  if (!values.first_name) {
-    errors.first_name = 'This field is required'
-  }
-
-  if (!values.last_name) {
-    errors.last_name = 'This field is required'
-  }
-
-  if (!values.email) {
-    errors.email = 'This field is required'
-  } else if (!emailRegex.test(values.email)) {
-    errors.email = 'Invalid email address'
-  }
-
-  return errors
-}
-
-const UserSettingsFormForm = reduxForm({
-  form: 'accountSettings',
-  enableReinitialize: true,
-  validate: validateUserSettings
-})(UserSettingsFormComponent)
-
-const mapStateToProps = state => {
+export const UserSettingsForm = connect(state => {
   const {
     session: { currentUser }
   } = state
   return {
-    initialValues: state.entities.users[currentUser]
+    user: state.entities.users[currentUser]
   }
-}
-
-export const UserSettingsForm = connect(
-  mapStateToProps,
-  null
-)(UserSettingsFormForm)
+}, null)(UserSettingsFormComponent)

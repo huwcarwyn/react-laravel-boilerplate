@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { SubmissionError } from 'redux-form'
 
 import { history } from 'utils/history'
 import { logIn } from 'store/action-creators/session'
@@ -25,17 +24,13 @@ const parseValidationFromResponse = response => {
   return errors
 }
 
-const mapDispatchToProps = dispatch => ({
-  attemptLogin: async loginDetails => {
+export default connect(null, dispatch => ({
+  attemptLogin: async (loginDetails, { setErrors }) => {
     try {
       await dispatch(logIn(loginDetails))
       history.push('/')
     } catch (error) {
-      throw new SubmissionError(
-        parseValidationFromResponse(error.response.data)
-      )
+      setErrors(parseValidationFromResponse(error.response.data))
     }
   }
-})
-
-export default connect(null, mapDispatchToProps)(LogInComponent)
+}))(LogInComponent)

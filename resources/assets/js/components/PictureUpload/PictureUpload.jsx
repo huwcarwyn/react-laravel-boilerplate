@@ -56,7 +56,7 @@ export class PictureUpload extends React.Component {
 
   render() {
     const {
-      input: { name, value },
+      field: { name, value },
       className = ''
     } = this.props
     const { isHovering } = this.state

@@ -1,10 +1,9 @@
 import React from 'react'
 import axios from 'axios'
-import { SubmissionError } from 'redux-form'
 
 import { history } from 'utils/history'
 
-import SignUpForm from './SignUpForm'
+import { SignUpForm } from './SignUpForm'
 
 const parseValidationErrorResponse = response => {
   let errors = {}
@@ -17,7 +16,7 @@ const parseValidationErrorResponse = response => {
 }
 
 export const SignUp = () => {
-  const submitSignup = signUpData => {
+  const onSubmit = signUpData => {
     return axios
       .post('/api/signup', signUpData)
       .then(response => {
@@ -27,14 +26,14 @@ export const SignUp = () => {
       })
       .catch(error => {
         if (error.response.status === 422) {
-          throw new SubmissionError(
-            parseValidationErrorResponse(error.response.data.messages)
-          )
+          // throw new SubmissionError(
+          //   parseValidationErrorResponse(error.response.data.messages)
+          // )
         }
       })
   }
 
-  return <SignUpForm onSubmit={submitSignup} />
+  return <SignUpForm onSubmit={onSubmit} />
 }
 
 export default SignUp

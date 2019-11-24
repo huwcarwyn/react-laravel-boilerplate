@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { SubmissionError } from 'redux-form'
 
 import { history } from 'utils/history'
 import { flashMessage } from 'store/action-creators/flashMessages'
@@ -14,7 +13,7 @@ export const ForgotPasswordComponent = props => {
 }
 
 export default connect(null, dispatch => ({
-  submitForgotPassword: async values => {
+  submitForgotPassword: async (values, { setErrors }) => {
     try {
       await axios.post('/api/forgot-password', values)
 
@@ -26,7 +25,7 @@ export default connect(null, dispatch => ({
         )
       )
     } catch (error) {
-      throw new SubmissionError(error.response.data)
+      setErrors(error.response.data)
     }
   }
 }))(ForgotPasswordComponent)
