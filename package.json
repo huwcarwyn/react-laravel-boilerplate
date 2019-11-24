@@ -67,6 +67,7 @@
     "lodash.merge": "^4.6.2",
     "normalizr": "^3.4.1",
     "react": "^16.11.0",
+    "react-context-modals": "^1.0.7",
     "react-helmet": "^5.2.1",
     "react-hot-loader": "^4.12.15",
     "react-redux": "^7.1.1",

@@ -1,13 +1,13 @@
 import Helmet from 'react-helmet'
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment } from 'react'
+import { useModal } from 'react-context-modals'
 
 import { NeutralButton } from 'components'
-import { ModalContext } from 'contexts'
 
 const OverviewComponent = () => {
-  const ModalExample = props => <div>{props.message}</div>
+  const ModalExample = props => <div className="p-12">{props.message}</div>
 
-  const { showModal } = useContext(ModalContext)
+  const { showModal } = useModal()
 
   return (
     <Fragment>

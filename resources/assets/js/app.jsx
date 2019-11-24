@@ -1,13 +1,9 @@
 import { Provider } from 'react-redux'
 import React, { lazy, Suspense } from 'react'
+import { ModalProvider } from 'react-context-modals'
 import { Router, Route, Switch } from 'react-router-dom'
 
-import {
-  ModalRoot,
-  AuthGuard,
-  FlashMessageRoot,
-  ModalProviderWrapper
-} from 'components'
+import { AuthGuard, FlashMessageRoot } from 'components'
 import { history } from 'utils/history'
 import { store } from 'store/create-store'
 import { DashboardLayout, FormPageLayout } from 'layouts'
@@ -44,8 +40,7 @@ export const App = () => (
     <Suspense fallback={<Loading />}>
       <FlashMessageRoot />
       <Router history={history}>
-        <ModalProviderWrapper>
-          <ModalRoot />
+        <ModalProvider>
           <Switch>
             <Route
               exact
@@ -90,7 +85,7 @@ export const App = () => (
             {/* 404 route */}
             <Route path="*" exact={true} render={() => <NotFound />} />
           </Switch>
-        </ModalProviderWrapper>
+        </ModalProvider>
       </Router>
     </Suspense>
   </Provider>
