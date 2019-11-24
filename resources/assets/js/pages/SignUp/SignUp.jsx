@@ -1,16 +1,10 @@
 import React from 'react'
 import axios from 'axios'
-import { connect } from 'react-redux'
-import { push } from 'connected-react-router'
 import { SubmissionError } from 'redux-form'
 
+import { history } from 'utils/history'
+
 import SignUpForm from './SignUpForm'
-
-export const SignUpComponent = props => {
-  const { submitSignup } = props
-
-  return <SignUpForm onSubmit={submitSignup} />
-}
 
 const parseValidationErrorResponse = response => {
   let errors = {}
@@ -22,28 +16,25 @@ const parseValidationErrorResponse = response => {
   return errors
 }
 
-const mapDispatchToProps = dispatch => ({
-  submitSignup: signUpData => {
+export const SignUp = () => {
+  const submitSignup = signUpData => {
     return axios
       .post('/api/signup', signUpData)
       .then(response => {
         if (response.status === 200) {
-          // Successful signup, move on to dashboard/overview.
-          dispatch(push('/'))
+          history.push('/')
         }
       })
       .catch(error => {
         if (error.response.status === 422) {
-          // Invalid data was supplied to the API, show validation errors
           throw new SubmissionError(
             parseValidationErrorResponse(error.response.data.messages)
           )
         }
       })
   }
-})
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(SignUpComponent)
+  return <SignUpForm onSubmit={submitSignup} />
+}
+
+export default SignUp

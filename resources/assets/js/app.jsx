@@ -1,7 +1,6 @@
 import { Provider } from 'react-redux'
 import React, { lazy, Suspense } from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { ConnectedRouter } from 'connected-react-router'
+import { Router, Route, Switch } from 'react-router-dom'
 
 import {
   ModalRoot,
@@ -9,8 +8,8 @@ import {
   FlashMessageRoot,
   ModalProviderWrapper
 } from 'components'
+import { history } from 'utils/history'
 import { store } from 'store/create-store'
-import { browserHistory } from 'store/history'
 import { DashboardLayout, FormPageLayout } from 'layouts'
 
 const LogIn = lazy(() => import('pages/LogIn/LogIn'))
@@ -44,7 +43,7 @@ export const App = () => (
   <Provider store={store}>
     <Suspense fallback={<Loading />}>
       <FlashMessageRoot />
-      <ConnectedRouter history={browserHistory}>
+      <Router history={history}>
         <ModalProviderWrapper>
           <ModalRoot />
           <Switch>
@@ -92,7 +91,7 @@ export const App = () => (
             <Route path="*" exact={true} render={() => <NotFound />} />
           </Switch>
         </ModalProviderWrapper>
-      </ConnectedRouter>
+      </Router>
     </Suspense>
   </Provider>
 )

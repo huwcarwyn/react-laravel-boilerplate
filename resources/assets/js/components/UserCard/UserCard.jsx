@@ -2,8 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { push } from 'connected-react-router'
 
+import { history } from 'utils/history'
 import { sessionActions } from 'store/actions'
 import { currentUserSelector } from 'store/selectors/session'
 import defaultProfileImage from 'default-profile-picture.jpeg'
@@ -65,7 +65,7 @@ export const UserCard = connect(
 
       dispatch({ type: sessionActions.LOGOUT })
 
-      dispatch(push('/login'))
+      history.push('/login')
     }
   })
 )(UserCardComponent)

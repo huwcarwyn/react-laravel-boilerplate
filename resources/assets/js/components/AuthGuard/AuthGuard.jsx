@@ -1,6 +1,7 @@
-import React, { Fragment, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { replace } from 'connected-react-router'
+import React, { Fragment, useState, useEffect } from 'react'
+
+import { history } from 'utils/history'
 import { getCurrentUserInfo } from 'store/action-creators/session'
 
 export const AuthGuardComponent = ({
@@ -42,7 +43,7 @@ export const AuthGuard = connect(
   dispatch => ({
     authOrRedirect: () => {
       return dispatch(getCurrentUserInfo()).catch(() => {
-        dispatch(replace('/login'))
+        history.replace('/login')
       })
     }
   })

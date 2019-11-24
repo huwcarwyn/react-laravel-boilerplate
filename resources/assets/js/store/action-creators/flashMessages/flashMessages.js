@@ -1,4 +1,4 @@
-import { sleep } from 'utility-functions'
+import { sleep } from 'utils/async'
 
 import { flashMessageActions as actions } from 'store/actions'
 

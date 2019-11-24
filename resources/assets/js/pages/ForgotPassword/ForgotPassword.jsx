@@ -1,8 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { push } from 'connected-react-router'
 import { SubmissionError } from 'redux-form'
+
+import { history } from 'utils/history'
 import { flashMessage } from 'store/action-creators/flashMessages'
 
 import { ForgotPasswordForm } from './ForgotPasswordForm'
@@ -12,12 +13,12 @@ export const ForgotPasswordComponent = props => {
   return <ForgotPasswordForm onSubmit={submitForgotPassword} />
 }
 
-const mapDispatchToProps = dispatch => ({
+export default connect(null, dispatch => ({
   submitForgotPassword: async values => {
     try {
       await axios.post('/api/forgot-password', values)
 
-      dispatch(push('/login'))
+      history.push('/login')
       dispatch(
         flashMessage(
           'success',
@@ -28,9 +29,4 @@ const mapDispatchToProps = dispatch => ({
       throw new SubmissionError(error.response.data)
     }
   }
-})
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(ForgotPasswordComponent)
+}))(ForgotPasswordComponent)

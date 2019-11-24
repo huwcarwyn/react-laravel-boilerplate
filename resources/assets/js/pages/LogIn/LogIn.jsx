@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { push } from 'connected-react-router'
 import { SubmissionError } from 'redux-form'
 
+import { history } from 'utils/history'
 import { logIn } from 'store/action-creators/session'
 
 import LogInForm from './LogInForm'
@@ -29,7 +29,7 @@ const mapDispatchToProps = dispatch => ({
   attemptLogin: async loginDetails => {
     try {
       await dispatch(logIn(loginDetails))
-      dispatch(push('/'))
+      history.push('/')
     } catch (error) {
       throw new SubmissionError(
         parseValidationFromResponse(error.response.data)
@@ -38,7 +38,4 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(LogInComponent)
+export default connect(null, mapDispatchToProps)(LogInComponent)
