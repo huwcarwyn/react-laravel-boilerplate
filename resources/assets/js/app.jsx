@@ -40,7 +40,7 @@ export const App = () => (
     <Suspense fallback={<Loading />}>
       <FlashMessageRoot />
       <Router history={history}>
-        <ModalProvider>
+        <ModalProvider animated>
           <Switch>
             <Route
               exact

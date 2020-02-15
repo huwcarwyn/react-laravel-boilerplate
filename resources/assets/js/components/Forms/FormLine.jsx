@@ -7,18 +7,21 @@ export const FormLine = ({
   children,
   labelText,
   className = '',
-  form: { touched, errors } = {}
-}) => (
-  <div className={`block py-4 ${className}`}>
-    <label className="block text-grey-dark text-md" htmlFor={name}>
-      <span className="inline-block mb-2">{labelText}</span>
-      {children}
-      {touched && errors[name] && (
-        <div className="text-red text-sm mt-2">{errors[name]}</div>
-      )}
-    </label>
-  </div>
-)
+  form: { touched, errors, submitCount } = {}
+}) => {
+  const showError = touched && errors[name] && submitCount > 0
+
+  return (
+    <div className={`block py-4 ${className}`}>
+      <label className="block text-grey-dark text-md" htmlFor={name}>
+        <span
+          className={`inline-block mb-2 ${showError ? 'text-red' : ''}`}
+        >{`${labelText}${showError ? ` - ${errors[name]}` : ''}`}</span>
+        {children}
+      </label>
+    </div>
+  )
+}
 
 export const TextFormLine = ({ field, ...wrapperProps }) => (
   <FormLine {...field} {...wrapperProps}>

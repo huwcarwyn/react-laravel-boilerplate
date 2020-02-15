@@ -14,7 +14,7 @@ class TailwindExtractor {
 }
 
 const appSCSSLoader = {
-  test: /app.scss/,
+  test: [/app.scss/, /main.css/],
   use: [
     {
       loader: isProd ? MiniCssExtractPlugin.loader : 'style-loader'
@@ -39,19 +39,20 @@ const appSCSSLoader = {
           tailwindcss('./tailwind.config.js'),
           ...(isProd
             ? [
-              purgecss({
-                content: [
-                  './resources/views/**/*.blade.php',
-                  './resources/assets/js/**/*.jsx'
-                ],
-                extractors: [
-                  {
-                    extractor: TailwindExtractor,
-                    extensions: ['html', 'js', 'php', 'jsx']
-                  }
-                ]
-              })
-            ]
+                purgecss({
+                  content: [
+                    './resources/views/**/*.blade.php',
+                    './resources/assets/js/**/*.jsx'
+                  ],
+                  whitelistPatterns: [/[srm-]/],
+                  extractors: [
+                    {
+                      extractor: TailwindExtractor,
+                      extensions: ['html', 'js', 'php', 'jsx']
+                    }
+                  ]
+                })
+              ]
             : [])
         ]
       }
@@ -135,25 +136,25 @@ module.exports = {
   devServer: isProd
     ? undefined
     : {
-      host: 'localhost',
-      port: 9000,
-      historyApiFallback: true,
-      hot: true,
-      inline: true,
-      contentBase: path.join(__dirname, 'public'),
+        host: 'localhost',
+        port: 9000,
+        historyApiFallback: true,
+        hot: true,
+        inline: true,
+        contentBase: path.join(__dirname, 'public'),
 
-      proxy: {
-        '*': {
-          target: 'http://boilerplate.test/',
-          changeOrigin: true
+        proxy: {
+          '*': {
+            target: 'http://boilerplate.test/',
+            changeOrigin: true
+          }
+        },
+
+        watchOptions: {
+          aggregateTimeout: 300,
+          poll: 2000
         }
       },
-
-      watchOptions: {
-        aggregateTimeout: 300,
-        poll: 2000
-      }
-    },
 
   resolve: {
     alias: { 'react-dom': '@hot-loader/react-dom' },

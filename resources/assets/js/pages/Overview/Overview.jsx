@@ -5,7 +5,7 @@ import { useModal } from 'react-context-modals'
 import { NeutralButton } from 'components'
 
 const OverviewComponent = () => {
-  const ModalExample = props => <div className="p-12">{props.message}</div>
+  const ModalExample = props => <div className="p-16">{props.message}</div>
 
   const { showModal } = useModal()
 

@@ -5,6 +5,9 @@ import { AppContainer } from 'react-hot-loader'
 
 import { App } from './app'
 
+import '../styles/app.scss'
+import 'react-context-modals/dist/main.css'
+
 /**
  * Import Axios Set-Up
  */
@@ -15,12 +18,6 @@ axios.defaults.headers.common = {
   'X-CSRF-TOKEN': token.content,
   'X-Requested-With': 'XMLHttpRequest'
 }
-
-/**
- * Import the global styling here, override the webpack CSS loaders since we don't want
- * modules enabled here.
- */
-require('../styles/app.scss')
 
 render(
   <AppContainer warnings={false}>
