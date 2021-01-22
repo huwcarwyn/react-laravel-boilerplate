@@ -12,7 +12,7 @@
     "balping/laravel-hashslug": "^2.1",
     "guzzlehttp/guzzle": "^6.3",
     "intervention/image": "^2.4",
-    "laravel/framework": "6.6.*",
+    "laravel/framework": "6.20.*",
     "laravel/passport": "8.0.*",
     "laravel/tinker": "~2.0",
     "league/fractal": "^0.18.0",
