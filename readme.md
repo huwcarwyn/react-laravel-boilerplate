@@ -1,3 +1,17 @@
+# !!! This repository is very out of date and not maintained or recommended! !!!
+
+When I made this repository years ago, other tools were in their infancy and I applied the practices I deemed to make the most sense back then to this boilerplate.
+
+Since then, many new tools have come out and have changed the way I think about creating new projects.
+
+If I were to create a project consisting of an API based back-end and a front-end today, I would do so this way:
+
+- One repository for front-end using NextJS
+- No Redux if at all possible, rely on react-query or SWR to handle state coming from the server, and use context if something is needed on a global level.
+
+- Another Laravel repository for the back-end
+- Use Sanctum for authorization with your SPA front-end, possibly use Laravel Fortify for your logic set-up or roll your own.
+
 # React Laravel Boilerplate
 
 [![Build Status](https://travis-ci.org/huwcarwyn/react-laravel-boilerplate.svg?branch=master)](https://travis-ci.org/huwcarwyn/react-laravel-boilerplate)
